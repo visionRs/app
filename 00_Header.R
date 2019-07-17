@@ -2,11 +2,8 @@
 library(shinydashboard)
 library(htmltools)
 library(shiny)
+
 header <- dashboardHeader(title = tags$div(id="preloader4",tags$span(),tags$span(),tags$span(),tags$span(),"GGEasyPlot"),
-                          # tags$div(class="logocss",tags$a(href='http://www.vnsny.org',
-                          #                tags$img(id="logocss",src='vnsnylogo.png')),"Model Evaluation Tool"),
-                          # 
-                         
                           tags$li(a(onclick = "openTab('Home')",
                                     href = NULL,
                                     #icon("info-circle"),"Home",

@@ -5,18 +5,9 @@ library(shiny)
 library(shinydashboard)
 library(shinyFiles)
 library(ggplot2)
-library(plotly)
 library(shinycssloaders)
 library(shinyWidgets)
-library(pROC)
-library(caret)
-library(PRROC)
-library(data.table)
-library(highcharter)
-library(dplyr)
-library(purrr)
-library(ggthemes)
-library(ggthemr)
+
 body <- dashboardBody(
   includeCSS("template.css"),
   
