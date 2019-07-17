@@ -78,7 +78,6 @@ server <- function(input, output,session) {
   
   
   # PLOTS CODE: 
-  
   output$basic_barplot <- renderPlot({
     dt <- data()
     if(is.null(dt)){return()}
@@ -92,7 +91,8 @@ server <- function(input, output,session) {
            "Line" =    ggplot(dt, aes_string(input$selectX, input$selectY)) +
                        geom_line()
     )
-       
+    print(input$interact)
+    
     
 
 
