@@ -5,14 +5,24 @@
 bar_plot <- function(data=NULL,x=NULL,y=NULL) {
   p <- ggplot(data, aes_string(x,y)) +
   geom_bar(stat="identity")
-  return(p)
+  code <- paste0('ggplot(data, aes_string(',x,',',y,')) +
+            geom_bar(stat="identity")')
+  ls <- list()
+  ls[['plot']] <- p
+  ls[['code']] <- code
+  return(ls)
 }
 
 #1.2 PLOTS CODE: Scatter Plot---------------------
 scatter_plot <- function(data=dt,x=NULL,y=NULL) {
   p <- ggplot(data, aes_string(x,y)) +
     geom_point()
-  return(p)
+  code <- paste0('ggplot(data, aes_string(',x,',',y,')) +
+    geom_point()')
+  ls <- list()
+  ls[['plot']] <- p
+  ls[['code']] <- code
+  return(ls)
 }
 
 
@@ -20,5 +30,10 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL) {
 line_plot <- function(data=dt,x=NULL,y=NULL) {
   p <-  ggplot(data, aes_string(x,y)) +
     geom_line()
-  return(p)
+  code <- paste0('ggplot(data, aes_string(',x,',',y,')) +
+    geom_line()')
+  ls <- list()
+  ls[['plot']] <- p
+  ls[['code']] <- code
+  return(ls)
 }

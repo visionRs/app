@@ -53,8 +53,11 @@ body <- dashboardBody(
    ),
     div(class="output_plot", style="width=60%;",
      box("Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
-    )
-    )
+    ),
+    div(class="output_code", style="width=10%;",
+       box("Output Code", withSpinner(verbatimTextOutput('return_code'),color = '#3c8dbc'),value = 'return_code')
+   )
+  )
      
      
    

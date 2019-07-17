@@ -1,9 +1,8 @@
 #1. Sourcing all useful scripts------------------------
-source('~/working_dir/projects/Easy-Plot/00_Header.R', echo=F)
-source('~/working_dir/projects/Easy-Plot/01_Sidebar.R', echo=F)
-source('~/working_dir/projects/Easy-Plot/02_Body.R', echo=F)
-source('~/working_dir/projects/Easy-Plot/03_server.R', echo=F)
-source('~/working_dir/projects/Easy-Plot/plots/00_Plots-R-Code.R', echo=F)
+source('00_Header.R', echo=F)
+source('01_Sidebar.R', echo=F)
+source('02_Body.R', echo=F)
+source('plots/00_Plots-R-Code.R', echo=F)
 
 #2. Importing all useful libraries------------------------
 
@@ -72,9 +71,9 @@ server = function(input, output, session) {
     if(is.null(input$radioPlot)){return()}
     
     switch(input$radioPlot,
-           "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY),
-           "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY),
-           "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)
+           "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY)$plot,
+           "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY)$plot,
+           "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)$plot
     )
     
     
@@ -82,6 +81,26 @@ server = function(input, output, session) {
     
     
   })
+  
+  
+  #5 RETURN CODE BLOCK: -------------
+  output$return_code <- renderText({
+    dt <- data()
+    if(is.null(dt)){return()}
+    if(is.null(input$radioPlot)){return()}
+    
+    switch(input$radioPlot,
+           "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY)$code,
+           "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY)$code,
+           "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)$code
+    )
+    
+    
+    
+    
+    
+  })
+  
 }
 
 )
