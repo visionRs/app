@@ -1,0 +1,14 @@
+---
+title: "lineplotCode.rmd"
+runtime: shiny
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+
+ggplot(data, aes_string(x,y)) +
+    geom_line()
+```
+
+

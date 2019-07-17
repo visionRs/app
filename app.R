@@ -1,8 +1,7 @@
 library(shiny)
 library(shinyWidgets)
 
-
-source('~/working_dir/projects/Easy-Plot/plots/00_Plots-R-Code.R', echo=F)
+source('plots/00_Plots-R-Code.R', echo=F)
 library(ggplot2)
 ui <- basicPage(
   titlePanel("testApp mainpage"),
@@ -25,7 +24,7 @@ ui <- basicPage(
                  radioGroupButtons(
                    inputId = "radioPlot",
                    label = "Select Plot Type",
-                   choices = c("Bar", "Scatter", "Line", "Pie"),
+                   choices = c("Bar", "Scatter", "Line"),
                    justified = TRUE,
                    checkIcon = list(yes = icon("ok", 
                                                lib = "glyphicon")),
@@ -42,7 +41,8 @@ ui <- basicPage(
                  )
     ),
     mainPanel("Resulting Data with Plot",
-              plotOutput("basic_barplot"))
+              plotOutput("basic_barplot"),
+              uiOutput("displayCode"))
     
   ) # end of sidebarLayout
   
@@ -87,16 +87,27 @@ server <- function(input, output,session) {
     if(is.null(input$radioPlot)){return()}
     
     switch(input$radioPlot,
-           "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY),
+           "Bar" =  bar_plot(data = dt,x=input$selectX,y=input$selectY),
            "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY),
            "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)
     )
-
-           
-          
- 
-
   })
+  
+  
+  # to display code underneath the plot
+  observeEvent(input$radioPlot, {
+    output$displayCode <-  renderUI({
+    
+    switch(input$radioPlot,
+             "Bar" =  includeMarkdown("plots/barplotCode.rmd"),
+             "Scatter" = includeMarkdown("plots/scatterplotCode.rmd"),
+             "Line" =    includeMarkdown("plots/lineplotCode.rmd")
+      )
+    })
+  
+  }) # end of observeEvent
+  
+  
 
 }# end of server
 
