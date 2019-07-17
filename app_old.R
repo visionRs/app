@@ -97,18 +97,18 @@ server <- function(input, output,session) {
   # to display code underneath the plot
   observeEvent(input$radioPlot, {
     output$displayCode <-  renderUI({
-    
-    switch(input$radioPlot,
+      
+      switch(input$radioPlot,
              "Bar" =  includeMarkdown("plots/barplotCode.rmd"),
              "Scatter" = includeMarkdown("plots/scatterplotCode.rmd"),
              "Line" =    includeMarkdown("plots/lineplotCode.rmd")
       )
     })
-  
+    
   }) # end of observeEvent
   
   
-
+  
 }# end of server
 
 runApp(list(ui = ui, server = server))
