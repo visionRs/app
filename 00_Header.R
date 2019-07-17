@@ -3,7 +3,7 @@ library(shinydashboard)
 library(htmltools)
 library(shiny)
 
-header <- dashboardHeader(title = tags$div(id="preloader4",tags$span(),tags$span(),tags$span(),tags$span(),"GGEasyPlot"),
+header <- dashboardHeader(title = tags$div(id="preloader4",tags$span(),tags$span(),tags$span(),tags$span(),"ggEasyPlot"),
                           tags$li(a(onclick = "openTab('Home')",
                                     href = NULL,
                                     #icon("info-circle"),"Home",
