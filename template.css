@@ -132,8 +132,7 @@ border-radius:20px;
 }
 
 
-#input_box {
-  
-  width:45%;
-  
+.box.box-primary {
+    border-top-color: #3c8dbc;
+    height: 643px;
 }
