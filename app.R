@@ -5,6 +5,8 @@ ui <- basicPage(
   titlePanel("testApp mainpage"),
   
   sidebarLayout(
+    # 1. INPUT UI CODE: ------------------
+    #__1.0 Upload data file
     sidebarPanel(h4("Select input params:"),
                  fileInput("file1", "Upload data file (csv/txt/tsv):",
                            accept = c(
@@ -12,15 +14,15 @@ ui <- basicPage(
                              "text/comma-separated-values,text/plain",
                              ".csv")
                  ),
-                 # DropDowns for X and Y axis
+                 #__1.1 DropDowns for X and Y axis-------------
                  selectInput(inputId = "selectX", label = "Select X-axis variable:", choices = ''),
                  selectInput(inputId = "selectY", label = "Select Y-axis variable:", choices = ''),
                  
-                 # Add radios to choose type of plot
+                 #__1.2 Add radios to choose type of plot------------
                  radioGroupButtons(
                    inputId = "radioPlot",
                    label = "Select Plot Type",
-                   choices = c("Bar", "Dot", "Line", "Pie"),
+                   choices = c("Bar", "Scatter", "Line", "Pie"),
                    justified = TRUE,
                    checkIcon = list(yes = icon("ok", 
                                                lib = "glyphicon")),
@@ -28,7 +30,7 @@ ui <- basicPage(
                    status = "warning"
                  ),
                  
-                 # interactive or no?
+                 #__1.3 interactive or no?------------
                  prettySwitch(
                    inputId = "interact",
                    label = "Interactive plot", 
@@ -37,7 +39,7 @@ ui <- basicPage(
                  )
     ),
     mainPanel("Resulting Data with Plot",
-              tableOutput("tabout"))
+              plotOutput("basic_barplot"))
     
   ) # end of sidebarLayout
   
@@ -45,6 +47,7 @@ ui <- basicPage(
 
 
 server <- function(input, output,session) {
+  
   
   data <-  reactive({
     inFile <- input$file1
@@ -74,6 +77,24 @@ server <- function(input, output,session) {
   
   
   
+  # PLOTS CODE: 
+  
+  output$basic_barplot <- renderPlot({
+    dt <- data()
+    if(is.null(dt)){return()}
+    
+    switch(input$radioPlot,
+           "Bar" = ggplot(dt, aes_string(input$selectX, input$selectY)) +
+             geom_bar(stat="identity"),
+           "Scatter" = ggplot(dt, aes_string(input$selectX, input$selectY)) +
+                       geom_point()
+    )
+       
+    
+
+
+  })
+
 }# end of server
 
 runApp(list(ui = ui, server = server))
