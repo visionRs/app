@@ -92,8 +92,9 @@ server <- function(input, output,session) {
                        geom_line()
     )
     print(input$interact)
+      
     
-    
+         
 
 
   })
