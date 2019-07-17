@@ -30,7 +30,13 @@ shinyApp(
   
 server = function(input, output, session) {
   
-  #___4.1 SERVER : Reading Data from file--------------
+  #___4.1 SERVER: Refresh Function
+  observeEvent(input$refresh1, {
+    shinyjs::js$refresh()
+  }) 
+  
+  
+  #___4.2 SERVER : Reading Data from file--------------
   data <-  reactive({
     inFile <- input$file1
     
@@ -41,14 +47,14 @@ server = function(input, output, session) {
     
   })
   
-  #___4.2 SERVER : Update selectInputs--------------
+  #___4.3 SERVER : Update selectInputs--------------
   
   observeEvent(data(), {
     updateSelectInput(session, inputId = "selectX", choices=colnames(data()))
     updateSelectInput(session, inputId = "selectY", choices=colnames(data()))
   })
   
-  #___4.3 SERVER : Displaying Data (sanity check!) ---------
+  #___4.4 SERVER : Displaying Data (sanity check!) ---------
   output$tabout <- renderTable({
     
     if(is.null(data())){
