@@ -1,7 +1,6 @@
 library(shiny)
 library(shinyWidgets)
 
-
 source('~/working_dir/projects/Easy-Plot/plots/00_Plots-R-Code.R', echo=F)
 library(ggplot2)
 ui <- basicPage(
