@@ -24,7 +24,7 @@ ui <- basicPage(
                  radioGroupButtons(
                    inputId = "radioPlot",
                    label = "Select Plot Type",
-                   choices = c("Bar", "Scatter", "Line", "Pie"),
+                   choices = c("Bar", "Scatter", "Line"),
                    justified = TRUE,
                    checkIcon = list(yes = icon("ok", 
                                                lib = "glyphicon")),
