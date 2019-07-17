@@ -91,8 +91,7 @@ server <- function(input, output,session) {
            "Line" =    ggplot(dt, aes_string(input$selectX, input$selectY)) +
                        geom_line()
     )
-    print(input$interact)
-      
+
            
           
  
