@@ -10,6 +10,7 @@ library(shinyWidgets)
 
 body <- dashboardBody(
   includeCSS("template.css"),
+  shinyjs::useShinyjs(),
   
   tabItem("summary",
           

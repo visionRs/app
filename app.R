@@ -70,7 +70,37 @@ shinyApp(
       data()
     })
     
+    #___4.5 SERVER : Input Type CHECK ---------
     
+    #___4.5.1 INPUT TYPE CHECK: All 3 Conditions Covered ---------
+    
+    observeEvent(c(input$selectX,input$selectY), {
+      dt <- data()
+      if(!is.numeric(dt[[input$selectX]]) & !is.numeric(dt[[input$selectY]])){
+        updateRadioGroupButtons(session = session,inputId = "radioPlot",
+                                choices = c(""),
+                                checkIcon = list(yes = icon("ok", 
+                                                            lib = "glyphicon")),
+                                selected = F,
+                                status = "warning")
+      } else if(!is.numeric(dt[[input$selectX]]) | !is.numeric(dt[[input$selectY]])) {
+        
+        updateRadioGroupButtons(session = session,inputId = "radioPlot",
+                                choices = c("Bar", "Line"),
+                                checkIcon = list(yes = icon("ok", 
+                                                            lib = "glyphicon")),
+                                selected = F,
+                                status = "warning")              
+       } else {
+         
+         updateRadioGroupButtons(session = session,inputId = "radioPlot",
+                                 choices = c("Bar", "Scatter","Line","Pie"),
+                                 checkIcon = list(yes = icon("ok", 
+                                                             lib = "glyphicon")),
+                                 selected = F,
+                                 status = "warning") 
+       }
+    })
     
     #5 PLOTS CODE: -------------
     output$basic_barplot <- renderPlot({
