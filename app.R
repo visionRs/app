@@ -1,6 +1,9 @@
 library(shiny)
 library(shinyWidgets)
 
+
+source('~/working_dir/projects/Easy-Plot/plots/00_Plots-R-Code.R', echo=F)
+library(ggplot2)
 ui <- basicPage(
   titlePanel("testApp mainpage"),
   
@@ -84,12 +87,9 @@ server <- function(input, output,session) {
     if(is.null(input$radioPlot)){return()}
     
     switch(input$radioPlot,
-           "Bar" =     ggplot(dt, aes_string(input$selectX, input$selectY)) +
-                       geom_bar(stat="identity"),
-           "Scatter" = ggplot(dt, aes_string(input$selectX, input$selectY)) +
-                       geom_point(),
-           "Line" =    ggplot(dt, aes_string(input$selectX, input$selectY)) +
-                       geom_line()
+           "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY),
+           "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY),
+           "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)
     )
 
            
