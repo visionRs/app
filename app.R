@@ -82,12 +82,15 @@ server <- function(input, output,session) {
   output$basic_barplot <- renderPlot({
     dt <- data()
     if(is.null(dt)){return()}
+    if(is.null(input$radioPlot)){return()}
     
     switch(input$radioPlot,
-           "Bar" = ggplot(dt, aes_string(input$selectX, input$selectY)) +
-             geom_bar(stat="identity"),
+           "Bar" =     ggplot(dt, aes_string(input$selectX, input$selectY)) +
+                       geom_bar(stat="identity"),
            "Scatter" = ggplot(dt, aes_string(input$selectX, input$selectY)) +
-                       geom_point()
+                       geom_point(),
+           "Line" =    ggplot(dt, aes_string(input$selectX, input$selectY)) +
+                       geom_line()
     )
        
     
