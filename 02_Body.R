@@ -46,7 +46,7 @@ body <- dashboardBody(
          status = "primary",
          slim = TRUE
        ),
-       box("Output Code", withSpinner(verbatimTextOutput('return_code'),color = '#3c8dbc'),value = 'return_code', width = 150)
+       box("Plot Code", withSpinner(verbatimTextOutput('return_code'),color = '#3c8dbc'),value = 'return_code', width = 150)
      ) # end of Box
     ),
     
