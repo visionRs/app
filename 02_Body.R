@@ -15,7 +15,7 @@ body <- dashboardBody(
    
    #____4.2.0 Info boxes ---------------
    fluidRow(
-    div(class="input_box", style="width:40%;",
+    div(class="input_box", style="width:70%;",
      box(
         h4("Select input params:"),
         fileInput("file1", "Upload data file (csv/txt/tsv):",
@@ -45,24 +45,16 @@ body <- dashboardBody(
          label = "Interactive plot", 
          status = "primary",
          slim = TRUE
-       )
-     )
-     
-     
-     
-   ),
-    div(class="output_plot", style="width=60%;",
-     box("Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
+       ),
+       box("Output Code", withSpinner(verbatimTextOutput('return_code'),color = '#3c8dbc'),value = 'return_code', width = 150)
+     ) # end of Box
     ),
-    div(class="output_code", style="width=10%;",
-       box("Output Code", withSpinner(verbatimTextOutput('return_code'),color = '#3c8dbc'),value = 'return_code')
-   )
-  )
-     
-     
-   
-   )
-   
-  
-)
+    
+      div(class="output_plot", style="width=60%;",
+       box("Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
+      )
+
+   ) # end of fluidRow
+ ) # end of tabITem 
+) # end of body
   
