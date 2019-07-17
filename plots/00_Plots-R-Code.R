@@ -16,7 +16,7 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL) {
 }
 
 
-#1.2 PLOTS CODE: Line Plot---------------------
+#1.3 PLOTS CODE: Line Plot---------------------
 line_plot <- function(data=dt,x=NULL,y=NULL) {
   p <-  ggplot(data, aes_string(x,y)) +
     geom_line()
