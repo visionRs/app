@@ -1,114 +1,115 @@
+#1. Importing all useful libraries------------------------
+
 library(shiny)
-library(shinyWidgets)
-
-source('plots/00_Plots-R-Code.R', echo=F)
+library(shinydashboard)
+library(shinyFiles)
 library(ggplot2)
-ui <- basicPage(
-  titlePanel("testApp mainpage"),
-  
-  sidebarLayout(
-    # 1. INPUT UI CODE: ------------------
-    #__1.0 Upload data file
-    sidebarPanel(h4("Select input params:"),
-                 fileInput("file1", "Upload data file (csv/txt/tsv):",
-                           accept = c(
-                             "text/csv",
-                             "text/comma-separated-values,text/plain",
-                             ".csv")
-                 ),
-                 #__1.1 DropDowns for X and Y axis-------------
-                 selectInput(inputId = "selectX", label = "Select X-axis variable:", choices = ''),
-                 selectInput(inputId = "selectY", label = "Select Y-axis variable:", choices = ''),
-                 
-                 #__1.2 Add radios to choose type of plot------------
-                 radioGroupButtons(
-                   inputId = "radioPlot",
-                   label = "Select Plot Type",
-                   choices = c("Bar", "Scatter", "Line"),
-                   justified = TRUE,
-                   checkIcon = list(yes = icon("ok", 
-                                               lib = "glyphicon")),
-                   selected = F,
-                   status = "warning"
-                 ),
-                 
-                 #__1.3 interactive or no?------------
-                 prettySwitch(
-                   inputId = "interact",
-                   label = "Interactive plot", 
-                   status = "primary",
-                   slim = TRUE
-                 )
-    ),
-    mainPanel("Resulting Data with Plot",
-              plotOutput("basic_barplot"),
-              uiOutput("displayCode"))
-    
-  ) # end of sidebarLayout
-  
-) # end of ui
+library(shinycssloaders)
+library(shinyWidgets)
+library(R.utils)
 
 
-server <- function(input, output,session) {
+#2. Sourcing all useful scripts------------------------
+source('00_Header.R', echo=F)
+source('01_Sidebar.R', echo=F)
+source('02_Body.R', echo=F)
+sourceDirectory('plots/')
+
+
+
+#3. Calling all functions from sourced scripts------------------------
+
+shinyApp(
+  
+  ui = dashboardPage(
+    header,
+    sidebar,
+    body
+  ),
   
   
-  data <-  reactive({
-    inFile <- input$file1
+  
+  #4. Server Starts Here------------------------
+  
+  server = function(input, output, session) {
     
-    if (is.null(inFile))
-      return(NULL)
+    #___4.1 SERVER: Refresh Function
+    observeEvent(input$refresh1, {
+      shinyjs::js$refresh()
+    }) 
     
-    # read table
-    read.csv(inFile$datapath) 
     
-  })
-  
-  # to update selectInputs
-  observeEvent(data(), {
-    updateSelectInput(session, inputId = "selectX", choices=colnames(data()))
-    updateSelectInput(session, inputId = "selectY", choices=colnames(data()))
-  })
-  
-  # showing table (sanity check!)
-  output$tabout <- renderTable({
+    #___4.2 SERVER : Reading Data from file--------------
     
-    if(is.null(data())){
-      return()
-    }
-    data()
-  })
-  
-  
-  
-  # PLOTS CODE: 
-  output$basic_barplot <- renderPlot({
-    dt <- data()
-    if(is.null(dt)){return()}
-    if(is.null(input$radioPlot)){return()}
-    
-    switch(input$radioPlot,
-           "Bar" =  bar_plot(data = dt,x=input$selectX,y=input$selectY),
-           "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY),
-           "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)
-    )
-  })
-  
-  
-  # to display code underneath the plot
-  observeEvent(input$radioPlot, {
-    output$displayCode <-  renderUI({
-    
-    switch(input$radioPlot,
-             "Bar" =  includeMarkdown("plots/barplotCode.rmd"),
-             "Scatter" = includeMarkdown("plots/scatterplotCode.rmd"),
-             "Line" =    includeMarkdown("plots/lineplotCode.rmd")
-      )
+    data <-  reactive({
+      if(!is.null(input$file1)){
+        inFile <- input$file1
+        read.csv(inFile$datapath) 
+        
+      } else {
+        get(input$tableName)
+        
+        
+      }
     })
+    
+    
+    
+    #___4.3 SERVER : Update selectInputs--------------
+    
+    observeEvent(data(), {
+      updateSelectInput(session, inputId = "selectX", choices=colnames(data()))
+      updateSelectInput(session, inputId = "selectY", choices=colnames(data()))
+    })
+    
+    #___4.4 SERVER : Displaying Data (sanity check!) ---------
+    output$tabout <- renderTable({
+      
+      if(is.null(data())){
+        return()
+      }
+      data()
+    })
+    
+    
+    
+    #5 PLOTS CODE: -------------
+    output$basic_barplot <- renderPlot({
+      dt <- data()
+      if(is.null(dt)){return()}
+      if(is.null(input$radioPlot)){return()}
+      
+      switch(input$radioPlot,
+             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY)$plot,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY)$plot,
+             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)$plot
+      )
+      
+      
+      
+      
+      
+    })
+    
+    
+    #5 RETURN CODE BLOCK: -------------
+    output$return_code <- renderText({
+      dt <- data()
+      if(is.null(dt)){return()}
+      if(is.null(input$radioPlot)){return()}
+      
+      switch(input$radioPlot,
+             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY)$code,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY)$code,
+             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)$code
+      )
+      
+      
+      
+      
+      
+    })
+    
+  }
   
-  }) # end of observeEvent
-  
-  
-
-}# end of server
-
-runApp(list(ui = ui, server = server))
+)
