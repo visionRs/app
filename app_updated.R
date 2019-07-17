@@ -1,10 +1,4 @@
-#1. Sourcing all useful scripts------------------------
-source('00_Header.R', echo=F)
-source('01_Sidebar.R', echo=F)
-source('02_Body.R', echo=F)
-source('plots/00_Plots-R-Code.R', echo=F)
-
-#2. Importing all useful libraries------------------------
+#1. Importing all useful libraries------------------------
 
 library(shiny)
 library(shinydashboard)
@@ -12,6 +6,15 @@ library(shinyFiles)
 library(ggplot2)
 library(shinycssloaders)
 library(shinyWidgets)
+library(R.utils)
+
+
+#2. Sourcing all useful scripts------------------------
+source('00_Header.R', echo=F)
+source('01_Sidebar.R', echo=F)
+source('02_Body.R', echo=F)
+sourceDirectory('plots/')
+
 
 
 #3. Calling all functions from sourced scripts------------------------
