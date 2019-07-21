@@ -16,7 +16,7 @@ source('01_Sidebar.R', echo=F)
 source('02_Body.R', echo=F)
 
 #Source all files in a directory
-sapply(list.files("plots/",full.names = T),source)
+sapply(list.files("plots",full.names = T),source)
 
 
 

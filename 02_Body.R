@@ -16,7 +16,7 @@ body <- dashboardBody(
           
           #____4.2.0 Info boxes ---------------
           fluidRow(
-            #div(class="input_box", style="width:40%;",
+            div(class="input_box", style="width:50%",
                 box(status = "primary",
                     h4("Select input params:"),
                     fileInput("file1", "Upload data file (csv/txt/tsv):",
@@ -54,12 +54,12 @@ body <- dashboardBody(
                     ),
                     
                     tags$h4(tags$b("Code :") ,tags$br(),tags$br(),verbatimTextOutput('return_code'),color = '#3c8dbc')
-                ),
+                )
                 
                 
                 
-            #),
-            div(class="output_box", style="width:100%;",
+            ),
+            div(class="output_box", style="width:150%;",
                 box(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
                 
               )#end of div
