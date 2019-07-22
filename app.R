@@ -106,7 +106,7 @@ shinyApp(
        } else {
          
          updateRadioGroupButtons(session = session,inputId = "radioPlot",
-                                 choices = c("Bar", "Scatter","Line","Pie"),
+                                 choices = c("Bar", "Scatter","Line"),
                                  checkIcon = list(yes = icon("ok", 
                                                              lib = "glyphicon")),
                                  selected = F,
