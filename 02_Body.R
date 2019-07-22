@@ -60,8 +60,19 @@ body <- dashboardBody(
                 
             ),
             div(class="output_box", style="width:150%;",
-                box(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
-                
+                #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
+                tabBox( height = '663px',title = 
+                          dropdownButton(
+                            tags$h3("List of Input"),
+                            selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
+                            selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
+                            sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
+                            circle = TRUE, status = "danger", icon = icon("gear"), width = "300px",
+                            tooltip = tooltipOptions(title = "Click to see inputs !")
+                ),
+                       tabPanel(tagList(shiny::icon("table"),""), withSpinner(plotOutput('basic_barplot',height = '563px'),color = '#3c8dbc'),value = 'plot6')
+                      
+                ) 
               )#end of div
             
           ) #end of fluid row

@@ -136,3 +136,41 @@ border-radius:20px;
     border-top-color: #3c8dbc;
     height: 643px;
 }
+
+.btn.btn-circle {
+    width: 49px;
+    height: 49px;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 20px;
+    line-height: 2.00;
+    border-radius: 30px;
+}
+
+
+.btn-danger {
+    background-color: black;
+    border-color: black;
+}
+
+
+.nav-tabs .dropdown-menu {
+    margin-top: -1px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    left:auto;
+    right:0;
+    margin-right:-10px;
+}
+
+.btn-danger.active, .btn-danger:active, .open>.dropdown-toggle.btn-danger {
+    color: #fff;
+    background-color: black;
+    border-color: black;
+}
+
+
+.btn-danger.focus, .btn-danger:focus {
+    color: #fff;
+    background-color: #444;
+    border-color: #761c19;
