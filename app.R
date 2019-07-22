@@ -54,7 +54,7 @@ shinyApp(
         read.csv(inFile$datapath) 
         
       } else {
-        get(input$tableName)
+        get(input$tableName, envir = .GlobalEnv)
         
         
       }
@@ -67,6 +67,10 @@ shinyApp(
     observeEvent(data(), {
       updateSelectInput(session, inputId = "selectX", choices=colnames(data()))
       updateSelectInput(session, inputId = "selectY", choices=colnames(data()))
+      
+      # update plot parameter dropdowns
+      colorby.choices <- append(colnames(data()),'None')
+      updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
     })
     
     #___4.4 SERVER : Displaying Data (sanity check!) ---------
@@ -117,9 +121,9 @@ shinyApp(
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY)$plot,
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY)$plot,
-             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)$plot
+             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$plot,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$plot,
+             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$plot
       )
       
       
@@ -136,15 +140,11 @@ shinyApp(
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY)$code,
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY)$code,
-             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY)$code
+             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$code,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$code,
+             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$code
       )
-      
-      
-      
-      
-      
+       
     })
     
   }

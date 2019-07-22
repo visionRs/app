@@ -37,7 +37,7 @@ body <- dashboardBody(
                     radioGroupButtons(
                       inputId = "radioPlot",
                       label = "Select Plot Type",
-                      choices = c("Bar", "Scatter", "Line", "Pie"),
+                      choices = c("Bar", "Scatter", "Line"),
                       justified = TRUE,
                       checkIcon = list(yes = icon("ok", 
                                                   lib = "glyphicon")),
@@ -56,17 +56,16 @@ body <- dashboardBody(
                     tags$h4(tags$b("Code :") ,tags$br(),tags$br(),verbatimTextOutput('return_code'),color = '#3c8dbc')
                 )
                 
-                
-                
             ),
             div(class="output_box", style="width:150%;",
                 #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
                 tabBox( height = '663px',title = 
                           dropdownButton(
-                            tags$h3("List of Input"),
-                            selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
-                            selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
-                            sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
+                            tags$h3("Set parameters"),
+                            #selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
+                            selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
+                            #selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
+                            #sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
                             circle = TRUE, status = "danger", icon = icon("gear"), width = "300px",
                             tooltip = tooltipOptions(title = "Click to see inputs !")
                 ),
