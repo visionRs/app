@@ -14,6 +14,7 @@ library(R.utils)
 source('00_Header.R', echo=F)
 source('01_Sidebar.R', echo=F)
 source('02_Body.R', echo=F)
+source('global.R', echo=F)
 
 #Source all files in a directory
 sapply(list.files("plots",full.names = T),source)
