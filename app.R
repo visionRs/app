@@ -14,12 +14,16 @@ library(R.utils)
 source('00_Header.R', echo=F)
 source('01_Sidebar.R', echo=F)
 source('02_Body.R', echo=F)
-source('global.R', echo=F)
 
 #Source all files in a directory
 sapply(list.files("plots",full.names = T),source)
 
+# List dfs
+temp <- ls()[sapply(ls(), function(x) class(get(x))) == 'data.frame']
 
+# example datasets in environment
+data.iris <- iris
+data.mtcars <-  mtcars
 
 #3. Calling all functions from sourced scripts------------------------
 
