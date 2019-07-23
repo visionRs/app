@@ -121,9 +121,12 @@ shinyApp(
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$plot,
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$plot,
-             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$plot
+             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
+                                 fontSize = input$axisFont, legendPos = input$legendPosition)$plot,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
+                                      fontSize = input$axisFont, legendPos = input$legendPosition)$plot,
+             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
+                                   fontSize = input$axisFont, legendPos = input$legendPosition)$plot
       )
       
       
@@ -140,9 +143,12 @@ shinyApp(
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$code,
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$code,
-             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$code
+             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
+                                 fontSize = input$axisFont, legendPos = input$legendPosition)$code,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
+                                      fontSize = input$axisFont, legendPos = input$legendPosition)$code,
+             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
+                                   fontSize = input$axisFont, legendPos = input$legendPosition)$code
       )
        
     })

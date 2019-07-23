@@ -65,6 +65,20 @@ body <- dashboardBody(
                             #selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
                             selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
                             sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
+                            radioGroupButtons(
+                              inputId = "legendPosition",
+                              label = "Legend Position",
+                              choices = c("top"='top', 
+                                          "bottom"='bottom', 
+                                          "left"='left', 
+                                          "right"='right'),
+                              selected = 'right',
+                              justified = TRUE,
+                              checkIcon = list(
+                                yes = icon("ok", 
+                                           lib = "glyphicon"))
+                            ),
+                            
                             #selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
                             #sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
                             circle = TRUE, status = "danger", icon = icon("gear"), width = "300px",
