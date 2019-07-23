@@ -128,11 +128,7 @@ shinyApp(
              "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                    fontSize = input$axisFont, legendPos = input$legendPosition)$plot
       )
-      
-      
-      
-      
-      
+     
     })
     
     

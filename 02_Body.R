@@ -78,7 +78,9 @@ body <- dashboardBody(
                                 yes = icon("ok", 
                                            lib = "glyphicon"))
                             ),
-                            
+                            conditionalPanel(condition = "input.radioPlot == 'Bar'",
+                              selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
+                            ),
                             #selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
                             #sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
                             circle = TRUE, status = "danger", icon = icon("gear"), width = "300px",
