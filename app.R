@@ -124,7 +124,8 @@ shinyApp(
              "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                  fontSize = input$axisFont, legendPos = input$legendPosition)$plot,
              "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
-                                      fontSize = input$axisFont, legendPos = input$legendPosition)$plot,
+                                      fontSize = input$axisFont, legendPos = input$legendPosition,
+                                      dotSize = input$dotSize)$plot,
              "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                    fontSize = input$axisFont, legendPos = input$legendPosition)$plot
       )
@@ -142,7 +143,8 @@ shinyApp(
              "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                  fontSize = input$axisFont, legendPos = input$legendPosition)$code,
              "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
-                                      fontSize = input$axisFont, legendPos = input$legendPosition)$code,
+                                      fontSize = input$axisFont, legendPos = input$legendPosition,
+                                      dotSize = input$dotSize)$code,
              "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                    fontSize = input$axisFont, legendPos = input$legendPosition)$code
       )

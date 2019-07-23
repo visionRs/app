@@ -8,6 +8,7 @@ library(ggplot2)
 library(shinycssloaders)
 library(shinyWidgets)
 
+
 body <- dashboardBody(
   includeCSS("template.css"),
   shinyjs::useShinyjs(),
@@ -57,6 +58,7 @@ body <- dashboardBody(
                 )
                 
             ),
+            
             div(class="output_box", style="width:150%;",
                 #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
                 tabBox( height = '663px',title = 
@@ -64,6 +66,7 @@ body <- dashboardBody(
                             tags$h3("Set parameters"),
                             #selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
                             selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
+                            #selectInput(inputId = 'selectTheme', label = 'Choose Theme', choices = c(theme_bw(), theme_classic()), selected = theme_bw()),
                             sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
                             radioGroupButtons(
                               inputId = "legendPosition",
@@ -80,6 +83,9 @@ body <- dashboardBody(
                             ),
                             conditionalPanel(condition = "input.radioPlot == 'Bar'",
                               selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
+                            ),
+                            conditionalPanel(condition = "input.radioPlot == 'Scatter'",
+                              sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20)
                             ),
                             #selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
                             #sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
