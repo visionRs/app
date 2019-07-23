@@ -64,6 +64,7 @@ body <- dashboardBody(
                             tags$h3("Set parameters"),
                             #selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
                             selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
+                            sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
                             #selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
                             #sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
                             circle = TRUE, status = "danger", icon = icon("gear"), width = "300px",

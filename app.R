@@ -121,9 +121,9 @@ shinyApp(
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$plot,
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$plot,
-             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$plot
+             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$plot,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$plot,
+             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$plot
       )
       
       
@@ -140,9 +140,9 @@ shinyApp(
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$code,
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$code,
-             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby)$code
+             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$code,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$code,
+             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, fontSize = input$axisFont)$code
       )
        
     })
