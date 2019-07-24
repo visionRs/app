@@ -83,6 +83,10 @@ sapply(list.files("plots",full.names = T),source)
                                 selected = F,
                                 status = "warning") 
       }
+      
+      # update textInputs for renaming axes
+      updateTextInput(session = session,inputId = "titleX", value = input$selectX)
+      updateTextInput(session = session,inputId = "titleY", value = input$selectY)
     })
     
     #4 PLOTS CODE: -------------
@@ -92,13 +96,34 @@ sapply(list.files("plots",full.names = T),source)
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
-                                 fontSize = input$axisFont, legendPos = input$legendPosition)$plot,
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
-                                      fontSize = input$axisFont, legendPos = input$legendPosition,
-                                      dotSize = input$dotSize, dotOpa = input$dotOpa)$plot,
-             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
-                                   fontSize = input$axisFont, legendPos = input$legendPosition)$plot
+             "Bar" =    bar_plot(data = dt,
+                                 x=input$selectX,
+                                 y=input$selectY, 
+                                 colorby = input$colorby, 
+                                 fontSize = input$axisFont, 
+                                 legendPos = input$legendPosition,
+                                 title_x = input$titleX,
+                                 title_y = input$titleY)$plot,
+             
+             "Scatter" = scatter_plot(data = dt,
+                                      x=input$selectX,
+                                      y=input$selectY, 
+                                      colorby = input$colorby, 
+                                      fontSize = input$axisFont, 
+                                      legendPos = input$legendPosition,
+                                      dotSize = input$dotSize, 
+                                      dotOpa = input$dotOpa,
+                                      title_x = input$titleX,
+                                      title_y = input$titleY)$plot,
+             
+             "Line" =    line_plot(data = dt,
+                                   x=input$selectX,
+                                   y=input$selectY, 
+                                   colorby = input$colorby, 
+                                   fontSize = input$axisFont, 
+                                   legendPos = input$legendPosition,
+                                   title_x = input$titleX,
+                                   title_y = input$titleY)$plot
       )
       
     })
@@ -111,13 +136,25 @@ sapply(list.files("plots",full.names = T),source)
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
-                                 fontSize = input$axisFont, legendPos = input$legendPosition)$code,
+             "Bar" =    bar_plot(data = dt,
+                                 x=input$selectX,
+                                 y=input$selectY, 
+                                 colorby = input$colorby, 
+                                 fontSize = input$axisFont, 
+                                 legendPos = input$legendPosition,
+                                 title_x = input$titleX,
+                                 title_y = input$titleY)$code,
+             
              "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                       fontSize = input$axisFont, legendPos = input$legendPosition,
-                                      dotSize = input$dotSize, dotOpa = input$dotOpa)$code,
+                                      dotSize = input$dotSize, dotOpa = input$dotOpa,
+                                      title_x = input$titleX,
+                                      title_y = input$titleY)$code,
+             
              "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
-                                   fontSize = input$axisFont, legendPos = input$legendPosition)$code
+                                   fontSize = input$axisFont, legendPos = input$legendPosition,
+                                   title_x = input$titleX,
+                                   title_y = input$titleY)$code
       )
       
     })
