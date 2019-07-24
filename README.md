@@ -18,7 +18,12 @@ This Repo contains R code for the app
     |__02_Plots-Line.R
 |__www
     |__template.css
-|__
+|__acme.csv
+|__README.md
+|__ggEasy_app.Rproj
+|__global.R
+|__.DS_Store
+|__.gitignore
 
  ```
 
