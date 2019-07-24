@@ -3,7 +3,7 @@ This Repo contains R code for the app
 
 ### Directory Structure
 ```bash
-|__app
++-- _app
     |__ui.R
     |__server.R
 |__archive
@@ -18,6 +18,28 @@ This Repo contains R code for the app
     |__02_Plots-Line.R
 |__www
     |__template.css
+    
+    
+    ```bash
+├── app
+│   ├── css
+│   │   ├── **/*.css
+│   ├── favicon.ico
+│   ├── images
+│   ├── index.html
+│   ├── js
+│   │   ├── **/*.js
+│   └── partials/template
+├── dist (or build)
+├── node_modules
+├── bower_components (if using bower)
+├── test
+├── Gruntfile.js/gulpfile.js
+├── README.md
+├── package.json
+├── bower.json (if using bower)
+└── .gitignore
+```
   
   ```
 
