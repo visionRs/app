@@ -79,11 +79,12 @@ ui <- dashboardPage(
                       ),
                       
                       #__3.4 interactive or no?------------
-                      prettySwitch(
+                      materialSwitch(
                         inputId = "interact",
                         label = "Interactive plot", 
                         status = "primary",
-                        slim = TRUE
+                        right=T
+                        
                       ),
                       
                       tags$h4(tags$b("Code :") ,tags$br(),tags$br(),verbatimTextOutput('return_code'),color = '#3c8dbc')
