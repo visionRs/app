@@ -2,6 +2,7 @@
 This Repo contains R code for the app
 
 ### Directory Structure
+```
 |_app
   |_ui.R
   |_server.R
@@ -17,6 +18,7 @@ This Repo contains R code for the app
   |_02_Plots-Line.R
 |_www
   |_template.css
+  ```
 
 ### How to run the app
 `runApp("app")`
