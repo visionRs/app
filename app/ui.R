@@ -94,37 +94,7 @@ ui <- dashboardPage(
               div(class="output_box", 
                   #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
                   tabBox( height="645px",width="6",title = "",
-                            # dropdownButton(
-                            #   tags$h3("Set parameters"),
-                            #   #selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
-                            #   selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
-                            #   #selectInput(inputId = 'selectTheme', label = 'Choose Theme', choices = c(theme_bw(), theme_classic()), selected = theme_bw()),
-                            #   sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
-                            #   radioGroupButtons(
-                            #     inputId = "legendPosition",
-                            #     label = "Legend Position",
-                            #     choices = c("top"='top', 
-                            #                 "bottom"='bottom', 
-                            #                 "left"='left', 
-                            #                 "right"='right'),
-                            #     selected = 'right',
-                            #     justified = TRUE,
-                            #     checkIcon = list(
-                            #       yes = icon("ok", 
-                            #                  lib = "glyphicon"))
-                            #   ),
-                            #   conditionalPanel(condition = "input.radioPlot == 'Bar'",
-                            #                    selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
-                            #   ),
-                            #   conditionalPanel(condition = "input.radioPlot == 'Scatter'",
-                            #                    sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
-                            #                    sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1)
-                            #   ),
-                            #   #selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
-                            #   #sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
-                            #   circle = TRUE, status = "danger", icon = icon("gear"), width = "300px",
-                            #   tooltip = tooltipOptions(title = "Click to see inputs !")
-                            # ),
+                        
                           tabPanel(tagList(shiny::icon("table"),""), withSpinner(plotOutput('basic_barplot',height = '563px'),color = '#3c8dbc'),value = 'plot6')
                           
                   ) # end of tabBox 
