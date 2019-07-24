@@ -40,7 +40,7 @@ ui <- dashboardPage(
   
   # 3. BODY here----
   dashboardBody(
-    includeCSS("../template.css"),
+    includeCSS("../www/template.css"),
     shinyjs::useShinyjs(),
     
     tabItem("summary",
