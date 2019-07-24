@@ -99,7 +99,7 @@ sapply(list.files("plots",full.names = T),source)
                                  fontSize = input$axisFont, legendPos = input$legendPosition)$plot,
              "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                       fontSize = input$axisFont, legendPos = input$legendPosition,
-                                      dotSize = input$dotSize)$plot,
+                                      dotSize = input$dotSize, dotOpa = input$dotOpa)$plot,
              "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                    fontSize = input$axisFont, legendPos = input$legendPosition)$plot
       )
@@ -118,7 +118,7 @@ sapply(list.files("plots",full.names = T),source)
                                  fontSize = input$axisFont, legendPos = input$legendPosition)$code,
              "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                       fontSize = input$axisFont, legendPos = input$legendPosition,
-                                      dotSize = input$dotSize)$code,
+                                      dotSize = input$dotSize, dotOpa = input$dotOpa)$code,
              "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                    fontSize = input$axisFont, legendPos = input$legendPosition)$code
       )

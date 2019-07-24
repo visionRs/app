@@ -7,6 +7,8 @@ library(shinycssloaders)
 library(htmltools)
 library(ggplot2)
 library(R.utils)
+library(dplyr)
+library(tidyverse)
 
 
 ui <- dashboardPage(
@@ -115,7 +117,8 @@ ui <- dashboardPage(
                                                selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
                               ),
                               conditionalPanel(condition = "input.radioPlot == 'Scatter'",
-                                               sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20)
+                                               sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
+                                               sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1)
                               ),
                               #selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
                               #sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
