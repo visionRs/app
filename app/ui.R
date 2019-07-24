@@ -18,7 +18,6 @@ ui <- dashboardPage(
                   tags$li(id="refresh1",a(onclick = "window.location.href=window.location.href",
                                           href = NULL,
                                           tags$p(tags$i(class="fa fa-refresh fa-spin",style="font-size:18px"),HTML("&nbsp;")," Reload Data"),
-                                          #HTML('<i class="fa fa-refresh fa-spin" style="font-size:18px"></i>'),
                                           title = "Refresh",
                                           style = "cursor: pointer; font-size: 16px;, face:bold;"),
                           class = "dropdown",
@@ -92,13 +91,10 @@ ui <- dashboardPage(
               ),
               
               div(class="output_box", style="width:150%;",
-                  #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
                   tabBox( height = '663px',title = 
                             dropdownButton(
                               tags$h3("Set parameters"),
-                              #selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
                               selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
-                              #selectInput(inputId = 'selectTheme', label = 'Choose Theme', choices = c(theme_bw(), theme_classic()), selected = theme_bw()),
                               sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
                               radioGroupButtons(
                                 inputId = "legendPosition",
@@ -119,11 +115,12 @@ ui <- dashboardPage(
                               conditionalPanel(condition = "input.radioPlot == 'Scatter'",
                                                sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
                                                sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1)
+                                               
                               ),
-                              #selectInput(inputId = 'ycol', label = 'Y Variable', choices = names(iris), selected = names(iris)[[2]]),
-                              #sliderInput(inputId = 'clusters', label = 'Cluster count', value = 3, min = 1, max = 9),
+                              
                               circle = TRUE, status = "danger", icon = icon("gear"), width = "300px",
                               tooltip = tooltipOptions(title = "Click to see inputs !")
+                              
                             ),
                           tabPanel(tagList(shiny::icon("table"),""), withSpinner(plotOutput('basic_barplot',height = '563px'),color = '#3c8dbc'),value = 'plot6')
                           
