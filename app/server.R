@@ -1,9 +1,6 @@
 # SERVER SCRIPT
 
 #1. FETCH DATA from Envir------------------------
-data(iris)
-temp <- ls()[sapply(ls(), function(x) class(get(x))) == 'data.frame']
-
 
 # 2. SOURCE all plot scripts-----------------------
 sapply(list.files("plots",full.names = T),source)
