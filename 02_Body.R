@@ -28,8 +28,8 @@ body <- dashboardBody(
                     
                     selectInput(
                       inputId = "tableName", label = "Select R Env Data ",
-                      selected = NULL, multiple = FALSE,
-                      choices = c(temp)),
+                      selected = "None", multiple = FALSE,
+                      choices = c(temp,"None")),
                     #__1.1 DropDowns for X and Y axis-------------
                     selectInput(inputId = "selectX", label = "Select X-axis variable:", choices = ''),
                     selectInput(inputId = "selectY", label = "Select Y-axis variable:", choices = ''),

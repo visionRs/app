@@ -11,19 +11,19 @@ library(R.utils)
 
 
 #2. Sourcing all useful scripts------------------------
-source('00_Header.R', echo=F)
-source('01_Sidebar.R', echo=F)
-source('02_Body.R', echo=F)
+source('00_Header.R')
+source('01_Sidebar.R')
+source('02_Body.R')
+
+# List dfs
+
 
 #Source all files in a directory
 sapply(list.files("plots",full.names = T),source)
 
 # List dfs
-temp <- ls()[sapply(ls(), function(x) class(get(x))) == 'data.frame']
 
-# example datasets in environment
-data.iris <- iris
-data.mtcars <-  mtcars
+
 
 #3. Calling all functions from sourced scripts------------------------
 
@@ -54,8 +54,9 @@ shinyApp(
         read.csv(inFile$datapath) 
         
       } else {
+        if(input$tableName!="None"){
         get(input$tableName, envir = .GlobalEnv)
-        
+        }
         
       }
     })

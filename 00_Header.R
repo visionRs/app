@@ -2,6 +2,9 @@
 library(shinydashboard)
 library(htmltools)
 library(shiny)
+data(iris)
+temp <- ls()[sapply(ls(), function(x) class(get(x))) == 'data.frame']
+
 
 header <- dashboardHeader(title = tags$div(id="preloader4",tags$span(),tags$span(),tags$span(),tags$span(),"ggEasyPlot"),
                           tags$li(a(onclick = "openTab('Home')",
