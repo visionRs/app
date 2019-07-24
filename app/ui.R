@@ -13,7 +13,7 @@ library(tidyverse)
 
 ui <- dashboardPage(
   # 1. HEADER here----
-  dashboardHeader(title = "ggEasyPlot",
+  dashboardHeader(title = "ggQuickPlot",
                   titleWidth = 300,
                   tags$li(id="refresh1",a(onclick = "window.location.href=window.location.href",
                                           href = NULL,
