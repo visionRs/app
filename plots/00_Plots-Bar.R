@@ -10,7 +10,7 @@ bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby, fontSize, legendPos) {
             axis.title.x = element_text(size = fontSize),
             axis.title.y = element_text(size = fontSize))
     
-    code <- paste0('ggplot(data, aes(',x,',',y,')) +
+    code <- paste0('ggplot(',data,', aes(',x,',',y,')) +
               geom_bar(stat="identity") +
             theme(axis.text = element_text(size = ', fontSize,'),
             axis.title.x = element_text(size = ', fontSize,'),
@@ -28,7 +28,7 @@ bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby, fontSize, legendPos) {
             axis.title.y = element_text(size = fontSize),
             legend.position = legendPos)
     
-    code <- paste0('ggplot(data, aes(', x, ',', y, ',' ,'fill = ', colorby, ')) + 
+    code <- paste0('ggplot(',data,', aes(', x, ',', y, ',' ,'fill = ', colorby, ')) + 
                    geom_bar(stat="identity") +
                    theme(axis.text = element_text(size = ', fontSize,'),
                    axis.title.x = element_text(size = ', fontSize,'),

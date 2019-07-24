@@ -26,7 +26,7 @@ line_plot <- function(data=dt,x=NULL,y=NULL, colorby, fontSize, legendPos) {
               axis.title.y = element_text(size = fontSize),
               legend.position = legendPos)
       
-      code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
+      code <- paste0('ggplot(',data,', aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
                       geom_line() +
                       theme(axis.text = element_text(size = ', fontSize,'),
                                axis.title.x = element_text(size = ', fontSize,'),
