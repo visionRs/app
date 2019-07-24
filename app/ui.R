@@ -103,9 +103,7 @@ ui <- dashboardPage(
               div(class="input_box", 
                   box(status = "primary",width="3",
                       tags$h3("Set parameters"),
-                      #selectInput(inputId = 'xcol', label = 'X Variable', choices = names(iris)),
                       selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
-                      #selectInput(inputId = 'selectTheme', label = 'Choose Theme', choices = c(theme_bw(), theme_classic()), selected = theme_bw()),
                       sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
                       radioGroupButtons(
                         inputId = "legendPosition",

@@ -7,6 +7,7 @@ This Repo contains R code for the app
 ├── README.md
 ├── acme.csv
 ├── app
+│   ├── global.R
 │   ├── server.R
 │   └── ui.R
 ├── archive
@@ -16,8 +17,6 @@ This Repo contains R code for the app
 │   ├── app.R
 │   └── app_old.R
 ├── ggEasyPlot.Rproj
-├── ggplot_app.Rproj
-├── global.R
 ├── plots
 │   ├── 00_Plots-Bar.R
 │   ├── 01_Plots-Scatter.R
