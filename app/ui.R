@@ -76,19 +76,9 @@ ui <- dashboardPage(
                       selectInput(inputId = "selectX", label = "Select X-axis variable:", choices = 'None',selected = "None"),
                       selectInput(inputId = "selectY", label = "Select Y-axis variable:", choices = 'None',selected = "None"),
                       
-                      #__3.3 Add radios to choose type of plot------------
-                      radioGroupButtons(
-                        inputId = "radioPlot",
-                        label = "Select Plot Type",
-                        choices = c("Bar", "Scatter", "Line"),
-                        justified = TRUE,
-                        checkIcon = list(yes = icon("ok", 
-                                                    lib = "glyphicon")),
-                        selected = F,
-                        status = "warning"
-                      ),
+
                       
-                      #__3.4 interactive or no?------------
+                      #__3.3 interactive or no?------------
                       materialSwitch(
                         inputId = "interact",
                         label = "Interactive plot", 
@@ -106,7 +96,16 @@ ui <- dashboardPage(
                   #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
                   tabBox( height="645px",width="6",title = "",
                         
-                          tabPanel(tagList(shiny::icon("table"),""), withSpinner(plotOutput('basic_barplot',height = '563px'),color = '#3c8dbc'),value = 'plot6')
+                          tabPanel(radioGroupButtons(
+                            inputId = "radioPlot",
+                            choices = c("Bar", "Scatter", "Line"),
+                            justified = TRUE,
+                            checkIcon = list(yes = icon("ok", 
+                                                        lib = "glyphicon")),
+                            selected = F,
+                            status = "warning"
+                          ),
+                           withSpinner(plotOutput('basic_barplot',height = '563px'),color = '#3c8dbc'),value = 'plot6')
                           
                   ) # end of tabBox 
               ),#end of div
