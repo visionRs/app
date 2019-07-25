@@ -111,7 +111,7 @@ ui <- dashboardPage(
               ),#end of div
               div(class="input_box", 
                   box(status = "primary",width="3",
-                      tags$h3("Set parameters"),
+                      tags$h3("Set Plot parameters"),
                       colourInput("colfill", "Color fill", "#00FF0080", allowTransparent = TRUE),
                       selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
                       sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
