@@ -52,16 +52,26 @@ ui <- dashboardPage(
               div(class="input_box", 
                   box(status = "primary",width = "3",
                       h4("Select input params:"),
+                      
+                      switchInput(inputId = "read_dt", 
+                                  value = TRUE,
+                                  label = "Upload File",
+                                  size = "mini",
+                                  width = '100px'
+                                  ),
+                      
+                      
                       fileInput("file1", "Upload data file (csv/txt/tsv):",
                                 accept = c("text/csv",
                                            "text/comma-separated-values,text/plain",
                                            ".csv")
                       ),
-                      
                       selectInput(
                         inputId = "tableName", label = "Select R Env Data ",
                         selected = "None", multiple = FALSE,
                         choices = c(temp,"None")),
+                      
+                      
                       #__3.2 DropDowns for X and Y axis-------------
                       selectInput(inputId = "selectX", label = "Select X-axis variable:", choices = 'None',selected = "None"),
                       selectInput(inputId = "selectY", label = "Select Y-axis variable:", choices = 'None',selected = "None"),

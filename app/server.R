@@ -14,6 +14,19 @@
     }) 
     
     
+    ## observe the button being pressed
+    observeEvent(input$read_dt, {
+      if(input$read_dt==TRUE) {
+        shinyjs::enable(id = "file1")
+        shinyjs::disable(id = "tableName")
+        
+      } else {
+        shinyjs::disable(id = "file1")
+        shinyjs::enable(id = "tableName")        
+      }
+            
+    })
+
     #___3.2 SERVER : Reading Data from file--------------
     
     data <-  reactive({
