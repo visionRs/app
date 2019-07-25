@@ -57,7 +57,7 @@
     
     observeEvent(c(input$selectX,input$selectY), {
       dt <- data()
-      if(!is.numeric(dt[[input$selectX]]) & !is.numeric(dt[[input$selectY]])){
+      if((!is.numeric(dt[[input$selectX]]) & !is.numeric(dt[[input$selectY]])) | (is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]])) | is.null(dt[[input$selectX]])){
         updateRadioGroupButtons(session = session,inputId = "radioPlot",
                                 choices = c(""),
                                 checkIcon = list(yes = icon("ok", 
@@ -94,14 +94,31 @@
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,
+             "Bar" =    if(!(is.null(dt[[input$selectX]]) | is.null(dt[[input$selectY]]))){
+                              bar_plot(data = dt,
                                  x=input$selectX,
                                  y=input$selectY, 
                                  colorby = input$colorby, 
                                  fontSize = input$axisFont, 
                                  legendPos = input$legendPosition,
                                  title_x = input$titleX,
-                                 title_y = input$titleY)$plot,
+                                 title_y = input$titleY)$plot
+                        } else if(is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]]))
+                        {
+                           print("no plot")
+                          
+                        } else if(!is.null(dt[[input$selectX]])){  
+                               histogram(data = dt,
+                                   x=input$selectX,
+                                   y=input$selectY, 
+                                   fontSize = input$axisFont, 
+                                   title_x = input$titleX,
+                                   title_y = input$titleY)$plot
+                 
+                        } else {
+                          print("no plot")
+                          
+                        },
              
              "Scatter" = scatter_plot(data = dt,
                                       x=input$selectX,
@@ -122,6 +139,7 @@
                                    legendPos = input$legendPosition,
                                    title_x = input$titleX,
                                    title_y = input$titleY)$plot
+             
       )
       
     })
@@ -134,15 +152,33 @@
       if(is.null(input$radioPlot)){return()}
       
       switch(input$radioPlot,
-             "Bar" =    bar_plot(data = dt,
-                                 x=input$selectX,
-                                 y=input$selectY, 
-                                 colorby = input$colorby, 
-                                 fontSize = input$axisFont, 
-                                 legendPos = input$legendPosition,
-                                 title_x = input$titleX,
-                                 title_y = input$titleY)$code,
              
+             "Bar" =    if(!(is.null(dt[[input$selectX]]) | is.null(dt[[input$selectY]]))){
+               bar_plot(data = dt,
+                        x=input$selectX,
+                        y=input$selectY, 
+                        colorby = input$colorby, 
+                        fontSize = input$axisFont, 
+                        legendPos = input$legendPosition,
+                        title_x = input$titleX,
+                        title_y = input$titleY)$code
+             } else if(is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]]))
+             {
+               print("X can't be None")
+               
+             } else if(!is.null(dt[[input$selectX]])){  
+               histogram(data = dt,
+                         x=input$selectX,
+                         y=input$selectY, 
+                         fontSize = input$axisFont, 
+                         title_x = input$titleX,
+                         title_y = input$titleY)$code
+               
+             } else {
+               print("Both can't be None.")
+               
+             },
+
              "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
                                       fontSize = input$axisFont, legendPos = input$legendPosition,
                                       dotSize = input$dotSize, dotOpa = input$dotOpa,
