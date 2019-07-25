@@ -2,21 +2,25 @@
 
 
 #1.1 PLOTS CODE: Scatter Plot---------------------
-scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, legendPos, dotSize, dotOpa, title_x, title_y) {
+scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, legendPos, dotSize, dotOpa, title_x, title_y, plotTitle) {
   if(colorby == 'None'){
       p <- ggplot(data, aes_string(x,y)) +
         geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+        labs(title = plotTitle) +
         xlab(title_x) + ylab(title_y) +
         theme(axis.text = element_text(size = fontSize),
               axis.title.x = element_text(size = fontSize),
-              axis.title.y = element_text(size = fontSize))
+              axis.title.y = element_text(size = fontSize),
+              plot.title = element_text(size = fontSize))
       
       code <- paste0('ggplot(data, aes(',x,',',y,')) +
                       geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ',colourfill,') +
+                      labs(title = ','"',plotTitle,'"',') +
                       xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                       theme(axis.text = element_text(size = ', fontSize,'),
                                axis.title.x = element_text(size = ', fontSize,'),
-                               axis.title.y = element_text(size = ', fontSize,'))')
+                               axis.title.y = element_text(size = ', fontSize,'),
+                                plot.title = element_text(size = ',fontSize,'))')
       ls <- list()
       ls[['plot']] <- p
       ls[['code']] <- code
@@ -24,18 +28,22 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
   } else{
       p <- ggplot(data, aes_string(x,y, color = colorby)) +
         geom_point(size = dotSize, alpha = dotOpa) +
+        labs(title = plotTitle) +
         xlab(title_x) + ylab(title_y) +
         theme(axis.text = element_text(size = fontSize),
               axis.title.x = element_text(size = fontSize),
               axis.title.y = element_text(size = fontSize),
+              plot.title = element_text(size = fontSize),
               legend.position = legendPos)
       
       code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
                       geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+                      labs(title = ','"',plotTitle,'"',') +
                       xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                       theme(axis.text = element_text(size = ', fontSize,'),
                                axis.title.x = element_text(size = ', fontSize,'),
                                axis.title.y = element_text(size = ', fontSize,'),
+                                plot.title = element_text(size = ',fontSize,'),
                                 legend.position = ','"',legendPos,'"',')')
       ls <- list()
       ls[['plot']] <- p

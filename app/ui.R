@@ -116,6 +116,7 @@ ui <- dashboardPage(
                       selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
                       sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
                       radioButtons(inputId = "rename_axes", label = "Rename axes",choices = c("yes" = 1, "no" = 0), selected = 0),
+                      textInput(inputId = "titleTextBox", label = "Set Plot title", value = ""),
                       conditionalPanel(condition = "input.rename_axes == 1",
                         textInput(inputId = "titleX", label = 'X axis title', value = ''),
                         textInput(inputId = "titleY", label = 'Y axis title', value = '')

@@ -2,22 +2,26 @@
 
 #1.1 PLOTS CODE: Bar Plot---------------------
 
-bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby=NULL, fontSize, legendPos, title_x, title_y) {
+bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby=NULL, fontSize, legendPos, title_x, title_y, plotTitle) {
   
     p <- ggplot(data, aes_string(x, y, fill = colorby)) +
       geom_bar(stat="identity") +
+      labs(title = plotTitle) +
       xlab(title_x) + ylab(title_y) +
       theme(axis.text = element_text(size = fontSize),
             axis.title.x = element_text(size = fontSize),
             axis.title.y = element_text(size = fontSize),
+            plot.title = element_text(size = fontSize),
             legend.position = legendPos)
     
     code <- paste0('ggplot(data, aes(', x, ',', y, ',' ,'fill = ', colorby, ')) + 
                    geom_bar(stat="identity") +
+                    labs(title = ','"',plotTitle,'"',') +
                     xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                    theme(axis.text = element_text(size = ', fontSize,'),
                    axis.title.x = element_text(size = ', fontSize,'),
                    axis.title.y = element_text(size = ', fontSize,'),
+                    plot.title = element_text(size = ',fontSize,'),
                    legend.position = ','"',legendPos,'"',')')
     ls <- list()
     ls[['plot']] <- p
@@ -29,19 +33,23 @@ bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby=NULL, fontSize, legendPos,
 histogram <- function(data=NULL,x=NULL,y=NULL, fontSize, title_x, title_y) {
         p <-  ggplot(data, aes_string(x)) +
               geom_histogram() +
+              labs(title = plotTitle) +
               xlab(title_x) +
               ylab(title_y) +
               theme(axis.text = element_text(size = fontSize),
                     axis.title.x = element_text(size = fontSize),
-                    axis.title.y = element_text(size = fontSize)
+                    axis.title.y = element_text(size = fontSize),
+                    plot.title = element_text(size = fontSize)
                     )
         
         code <- paste0('ggplot(',deparse(substitute(data)), ', aes(', x, ')) + 
                         geom_histogram() +
+                        labs(title = ','"',plotTitle,'"',') +
                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                         theme(axis.text = element_text(size = ', fontSize,'),
                               axis.title.x = element_text(size = ', fontSize,'),
-                              axis.title.y = element_text(size = ', fontSize,')')
+                              axis.title.y = element_text(size = ', fontSize,'),
+                              plot.title = element_text(size = ',fontSize,')')
         ls <- list()
         ls[['plot']] <- p
         ls[['code']] <- code
