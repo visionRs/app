@@ -177,7 +177,7 @@
                         title_y = input$titleY)$code
              } else if(is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]]))
              {
-               print("X can't be None")
+               print("Both can't be None")
                
              } else if(!is.null(dt[[input$selectX]])){  
                histogram(data = dt,
@@ -188,7 +188,7 @@
                          title_y = input$titleY)$code
                
              } else {
-               print("Both can't be None.")
+               print("X can't be None.")
                
              },
 
