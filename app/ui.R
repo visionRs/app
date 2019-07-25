@@ -9,7 +9,7 @@ library(ggplot2)
 library(R.utils)
 library(dplyr)
 library(tidyverse)
-
+library(colourpicker)
 
 ui <- dashboardPage(
   # 1. HEADER here----
