@@ -111,6 +111,7 @@
                               bar_plot(data = dt,
                                  x=input$selectX,
                                  y=input$selectY, 
+                                 #colorfill = if(input$colorby=="None"){input$colfill} else {"NULL"}, 
                                  colorby = if(input$colorby=="None"){"NULL"}else{input$colorby} , 
                                  fontSize = input$axisFont, 
                                  legendPos = input$legendPosition,
@@ -135,7 +136,7 @@
              
              "Scatter" = scatter_plot(data = dt,
                                       x=input$selectX,
-                                      y=input$selectY, 
+                                      y=input$selectY,
                                       colourfill = input$colfill,
                                       colorby = input$colorby, 
                                       fontSize = input$axisFont, 
@@ -147,7 +148,8 @@
              
              "Line" =    line_plot(data = dt,
                                    x=input$selectX,
-                                   y=input$selectY, 
+                                   y=input$selectY,
+                                   colourfill = input$colfill,
                                    colorby = input$colorby, 
                                    fontSize = input$axisFont, 
                                    legendPos = input$legendPosition,
@@ -170,7 +172,8 @@
              "Bar" =    if(!(is.null(dt[[input$selectX]]) | is.null(dt[[input$selectY]]))){
                bar_plot(data = dt,
                         x=input$selectX,
-                        y=input$selectY, 
+                        y=input$selectY,
+                        #colourfill = if(input$colorby=="None"){input$colfill} else {"NULL"}, 
                         colorby = if(input$colorby=="None"){"NULL"} else {input$colorby}, 
                         fontSize = input$axisFont, 
                         legendPos = input$legendPosition,
@@ -193,15 +196,23 @@
                
              },
 
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, 
-                                      colourfill = input$colfill, colorby = input$colorby, 
-                                      fontSize = input$axisFont, legendPos = input$legendPosition,
-                                      dotSize = input$dotSize, dotOpa = input$dotOpa,
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,
+                                      y=input$selectY, 
+                                      colourfill = input$colfill,
+                                      colorby = input$colorby, 
+                                      fontSize = input$axisFont, 
+                                      legendPos = input$legendPosition,
+                                      dotSize = input$dotSize, 
+                                      dotOpa = input$dotOpa,
                                       title_x = input$titleX,
                                       title_y = input$titleY)$code,
              
-             "Line" =    line_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
-                                   fontSize = input$axisFont, legendPos = input$legendPosition,
+             "Line" =    line_plot(data = dt,x=input$selectX,
+                                   y=input$selectY, 
+                                   colourfill = input$colfill,
+                                   colorby = input$colorby, 
+                                   fontSize = input$axisFont, 
+                                   legendPos = input$legendPosition,
                                    title_x = input$titleX,
                                    title_y = input$titleY)$code
       )

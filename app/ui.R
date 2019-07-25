@@ -112,7 +112,7 @@ ui <- dashboardPage(
               div(class="input_box", 
                   box(status = "primary",width="3",
                       tags$h3("Set parameters"),
-                      colourInput("colfill", "Color fill", "#00FF0080",allowTransparent = TRUE),
+                      colourInput("colfill", "Color fill", "#00FF0080", allowTransparent = TRUE),
                       selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
                       sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
                       radioButtons(inputId = "rename_axes", label = "Rename axes",choices = c("yes" = 1, "no" = 0), selected = 0),
