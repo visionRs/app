@@ -63,8 +63,8 @@ ui <- dashboardPage(
                         selected = "None", multiple = FALSE,
                         choices = c(temp,"None")),
                       #__3.2 DropDowns for X and Y axis-------------
-                      selectInput(inputId = "selectX", label = "Select X-axis variable:", choices = ''),
-                      selectInput(inputId = "selectY", label = "Select Y-axis variable:", choices = ''),
+                      selectInput(inputId = "selectX", label = "Select X-axis variable:", choices = 'None',selected = "None"),
+                      selectInput(inputId = "selectY", label = "Select Y-axis variable:", choices = 'None',selected = "None"),
                       
                       #__3.3 Add radios to choose type of plot------------
                       radioGroupButtons(

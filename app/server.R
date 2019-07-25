@@ -3,8 +3,6 @@
 #1. FETCH DATA from Envir------------------------
 
 # 2. SOURCE all plot scripts-----------------------
-sapply(list.files("plots",full.names = T),source)
-
 
 # 3. SERVER Starts Here------------------------
   
@@ -36,8 +34,8 @@ sapply(list.files("plots",full.names = T),source)
     #___3.3 SERVER : Update selectInputs--------------
     
     observeEvent(data(), {
-      updateSelectInput(session, inputId = "selectX", choices=colnames(data()))
-      updateSelectInput(session, inputId = "selectY", choices=colnames(data()))
+      updateSelectInput(session, inputId = "selectX", choices=c(colnames(data()),"None"))
+      updateSelectInput(session, inputId = "selectY", choices=c(colnames(data()),"None"))
       
       # update plot parameter dropdowns
       colorby.choices <- append(colnames(data()),'None')
