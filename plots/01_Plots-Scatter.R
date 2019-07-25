@@ -2,17 +2,17 @@
 
 
 #1.1 PLOTS CODE: Scatter Plot---------------------
-scatter_plot <- function(data=dt,x=NULL,y=NULL, colorby, fontSize, legendPos, dotSize, dotOpa, title_x, title_y) {
+scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, legendPos, dotSize, dotOpa, title_x, title_y) {
   if(colorby == 'None'){
       p <- ggplot(data, aes_string(x,y)) +
-        geom_point(size = dotSize, alpha = dotOpa) +
+        geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
         xlab(title_x) + ylab(title_y) +
         theme(axis.text = element_text(size = fontSize),
               axis.title.x = element_text(size = fontSize),
               axis.title.y = element_text(size = fontSize))
       
       code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                      geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+                      geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ',colourfill,') +
                       xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                       theme(axis.text = element_text(size = ', fontSize,'),
                                axis.title.x = element_text(size = ', fontSize,'),

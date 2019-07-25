@@ -136,6 +136,7 @@
              "Scatter" = scatter_plot(data = dt,
                                       x=input$selectX,
                                       y=input$selectY, 
+                                      colourfill = input$colfill,
                                       colorby = input$colorby, 
                                       fontSize = input$axisFont, 
                                       legendPos = input$legendPosition,
@@ -192,7 +193,8 @@
                
              },
 
-             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, colorby = input$colorby, 
+             "Scatter" = scatter_plot(data = dt,x=input$selectX,y=input$selectY, 
+                                      colourfill = input$colfill, colorby = input$colorby, 
                                       fontSize = input$axisFont, legendPos = input$legendPosition,
                                       dotSize = input$dotSize, dotOpa = input$dotOpa,
                                       title_x = input$titleX,
