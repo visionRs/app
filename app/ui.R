@@ -50,7 +50,7 @@ ui <- dashboardPage(
             #__3.1 Info boxes ---------------
             fluidRow(
               div(class="input_box", 
-                  box(status = "primary",width = "3",
+                  box(status = "primary",width = "3",height="645px",
                       h4("Select input params:"),
                       
                       switchInput(inputId = "read_dt", 
@@ -94,7 +94,7 @@ ui <- dashboardPage(
               
               div(class="output_box", 
                   #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
-                  tabBox( height="645px",width="6",title = "",
+                  tabBox( height="620px",width="6",title = "",
                         
                           tabPanel(radioGroupButtons(
                             inputId = "radioPlot",

@@ -175,3 +175,10 @@ border-radius:20px;
     background-color: #444;
     border-color: #761c19;
 }
+
+
+.nav>li[class=active] > a {
+    background-color: #1c1c1d !important;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+}
