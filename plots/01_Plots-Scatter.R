@@ -19,13 +19,15 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
             stat_cor(method = "pearson")
           
           code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                         geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ',colourfill,') +
+                         geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
+                          geom_smooth(method=lm, se=FALSE) +
                          labs(title = ','"',plotTitle,'"',') +
                          xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                          theme(axis.text = element_text(size = ', fontSize,'),
                          axis.title.x = element_text(size = ', fontSize,'),
                          axis.title.y = element_text(size = ', fontSize,'),
-                         plot.title = element_text(size = ',fontSize,'))')
+                         plot.title = element_text(size = ',fontSize,')) +
+                          stat_cor(method = "pearson")')
           ls <- list()
           ls[['plot']] <- p
           ls[['code']] <- code
@@ -43,7 +45,8 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
                 plot.title = element_text(size = fontSize))
         
         code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                       geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ',colourfill,') +
+                       geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
+                        geom_smooth(method=lm, se=FALSE) +
                        labs(title = ','"',plotTitle,'"',') +
                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                        theme(axis.text = element_text(size = ', fontSize,'),
@@ -67,7 +70,7 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
               plot.title = element_text(size = fontSize))
       
       code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                      geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ',colourfill,') +
+                      geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
                       labs(title = ','"',plotTitle,'"',') +
                       xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                       theme(axis.text = element_text(size = ', fontSize,'),
@@ -96,13 +99,15 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
         
         code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
                        geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+                        geom_smooth(method=lm, se=FALSE) +
                        labs(title = ','"',plotTitle,'"',') +
                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                        theme(axis.text = element_text(size = ', fontSize,'),
                        axis.title.x = element_text(size = ', fontSize,'),
                        axis.title.y = element_text(size = ', fontSize,'),
                        plot.title = element_text(size = ',fontSize,'),
-                       legend.position = ','"',legendPos,'"',')')
+                       legend.position = ','"',legendPos,'"',') +
+                        stat_cor(method = "pearson")')
         ls <- list()
         ls[['plot']] <- p
         ls[['code']] <- code
@@ -121,6 +126,7 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
       
       code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
                      geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+                      geom_smooth(method=lm, se=FALSE) +
                      labs(title = ','"',plotTitle,'"',') +
                      xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                      theme(axis.text = element_text(size = ', fontSize,'),
