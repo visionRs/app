@@ -10,6 +10,7 @@ library(R.utils)
 library(dplyr)
 library(tidyverse)
 library(colourpicker)
+library(ggpubr)
 
 ui <- dashboardPage(
   # 1. HEADER here----
@@ -139,7 +140,13 @@ ui <- dashboardPage(
                       ),
                       conditionalPanel(condition = "input.radioPlot == 'Scatter'",
                                        sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
-                                       sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1)
+                                       sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1),
+                                       box(title = "Regression", width = 12,
+                                         checkboxInput(inputId ="regLine", "Add regression line?", value = FALSE),
+                                         #checkboxInput(inputId ="se", "Add confidence interval?"),
+                                         checkboxInput(inputId ="corr", "Show correlation?")
+                                       )
+                                       
                       )
         
                   )

@@ -147,7 +147,9 @@
                                       dotSize = input$dotSize, 
                                       dotOpa = input$dotOpa,
                                       title_x = input$titleX,
-                                      title_y = input$titleY)$plot,
+                                      title_y = input$titleY,
+                                      regressionLine = input$regLine, 
+                                      correlation = input$corr)$plot,
              
              "Line" =    line_plot(data = dt,
                                    x=input$selectX,
@@ -212,7 +214,9 @@
                                       dotSize = input$dotSize, 
                                       dotOpa = input$dotOpa,
                                       title_x = input$titleX,
-                                      title_y = input$titleY)$code,
+                                      title_y = input$titleY,
+                                      regressionLine = input$regLine, 
+                                      correlation = input$corr)$code,
              
              "Line" =    line_plot(data = dt,
                                    x=input$selectX,
