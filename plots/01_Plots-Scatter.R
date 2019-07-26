@@ -24,9 +24,9 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
                          labs(title = ','"',plotTitle,'"',') +
                          xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                          theme(axis.text = element_text(size = ', fontSize,'),
-                         axis.title.x = element_text(size = ', fontSize,'),
-                         axis.title.y = element_text(size = ', fontSize,'),
-                         plot.title = element_text(size = ',fontSize,')) +
+                                axis.title.x = element_text(size = ', fontSize,'),
+                                axis.title.y = element_text(size = ', fontSize,'),
+                                plot.title = element_text(size = ',fontSize,')) +
                           stat_cor(method = "pearson")')
           ls <- list()
           ls[['plot']] <- p
@@ -50,9 +50,9 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
                        labs(title = ','"',plotTitle,'"',') +
                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                        theme(axis.text = element_text(size = ', fontSize,'),
-                       axis.title.x = element_text(size = ', fontSize,'),
-                       axis.title.y = element_text(size = ', fontSize,'),
-                       plot.title = element_text(size = ',fontSize,'))')
+                             axis.title.x = element_text(size = ', fontSize,'),
+                             axis.title.y = element_text(size = ', fontSize,'),
+                             plot.title = element_text(size = ',fontSize,'))')
         ls <- list()
         ls[['plot']] <- p
         ls[['code']] <- code
@@ -103,10 +103,10 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
                        labs(title = ','"',plotTitle,'"',') +
                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                        theme(axis.text = element_text(size = ', fontSize,'),
-                       axis.title.x = element_text(size = ', fontSize,'),
-                       axis.title.y = element_text(size = ', fontSize,'),
-                       plot.title = element_text(size = ',fontSize,'),
-                       legend.position = ','"',legendPos,'"',') +
+                             axis.title.x = element_text(size = ', fontSize,'),
+                             axis.title.y = element_text(size = ', fontSize,'),
+                             plot.title = element_text(size = ',fontSize,'),
+                             legend.position = ','"',legendPos,'"',') +
                         stat_cor(method = "pearson")')
         ls <- list()
         ls[['plot']] <- p
@@ -130,10 +130,10 @@ scatter_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, l
                      labs(title = ','"',plotTitle,'"',') +
                      xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                      theme(axis.text = element_text(size = ', fontSize,'),
-                     axis.title.x = element_text(size = ', fontSize,'),
-                     axis.title.y = element_text(size = ', fontSize,'),
-                     plot.title = element_text(size = ',fontSize,'),
-                     legend.position = ','"',legendPos,'"',')')
+                           axis.title.x = element_text(size = ', fontSize,'),
+                           axis.title.y = element_text(size = ', fontSize,'),
+                           plot.title = element_text(size = ',fontSize,'),
+                           legend.position = ','"',legendPos,'"',')')
       ls <- list()
       ls[['plot']] <- p
       ls[['code']] <- code
