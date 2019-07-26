@@ -111,7 +111,7 @@ ui <- dashboardPage(
                   ) # end of tabBox 
               ),#end of div
               div(class="input_box", 
-                  box(status = "primary",width="3",
+                  box(status = "primary",width="3", height = "1000px",
                       tags$h3("Set plot parameters"),
                       colourInput("colfill", "Color fill", "#00FF0080", allowTransparent = TRUE),
                       selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
