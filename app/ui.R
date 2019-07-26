@@ -143,8 +143,10 @@ ui <- dashboardPage(
                                        sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1),
                                        box(title = "Regression", width = 12,
                                          checkboxInput(inputId ="regLine", "Add regression line?", value = FALSE),
-                                         #checkboxInput(inputId ="se", "Add confidence interval?"),
-                                         checkboxInput(inputId ="corr", "Show correlation?")
+                                         conditionalPanel(condition = "input.regLine == 1",
+                                         #checkboxInput(inputId ="se", "Add confidence interval?", value = FALSE),
+                                         checkboxInput(inputId ="corr", "Show correlation?", value = FALSE)
+                                         )
                                        )
                                        
                       )
