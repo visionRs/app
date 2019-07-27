@@ -121,7 +121,12 @@
                                  title_y = input$titleY)$plot
                         } else if(is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]]))
                         {
-                           print("no plot")
+                          sendSweetAlert(
+                            session = session,
+                            title = "Error !!",
+                            text = "It's broken...",
+                            type = "error"
+                          )
                           
                         } else if(!is.null(dt[[input$selectX]])){  
                                histogram(data = dt,
@@ -134,7 +139,12 @@
                                    title_y = input$titleY)$plot
                  
                         } else {
-                          print("no plot")
+                          sendSweetAlert(
+                            session = session,
+                            title = "Error !!",
+                            text = "It's broken...",
+                            type = "error"
+                          )
                           
                         },
              
