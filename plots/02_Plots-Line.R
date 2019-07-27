@@ -1,10 +1,11 @@
 #1 PLOTS CODE: --------------------------------
 
 #1.1 PLOTS CODE: Line Plot---------------------
-line_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, legendPos, title_x, title_y, plotTitle) {
+line_plot <- function(data=dt,x=NULL,y=NULL, Theme, colourfill, colorby, fontSize, legendPos, title_x, title_y, plotTitle) {
   if(colorby == 'None'){
       p <-  ggplot(data, aes_string(x,y)) +
         geom_line(color = colourfill) +
+        get(Theme)() +
         labs(title = plotTitle) +
         xlab(title_x) + ylab(title_y) +
         theme(axis.text = element_text(size = fontSize),
@@ -14,6 +15,7 @@ line_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, lege
       
       code <- paste0('ggplot(data, aes(',x,',',y,')) +
                       geom_line(color = ',colourfill,') +
+                      ',Theme,'() +
                       labs(title = ','"',plotTitle,'"',') +
                       xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                       theme(axis.text = element_text(size = ', fontSize,'),
@@ -27,6 +29,7 @@ line_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, lege
   } else{
       p <-  ggplot(data, aes_string(x,y, color = colorby)) +
         geom_line() +
+        get(Theme)() +
         labs(title = plotTitle) +
         xlab(title_x) + ylab(title_y) +
         theme(axis.text = element_text(size = fontSize),
@@ -37,6 +40,7 @@ line_plot <- function(data=dt,x=NULL,y=NULL, colourfill, colorby, fontSize, lege
       
       code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
                       geom_line() +
+                      ',Theme,'() +
                       labs(title = ','"',plotTitle,'"',') +
                       xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                       theme(axis.text = element_text(size = ', fontSize,'),

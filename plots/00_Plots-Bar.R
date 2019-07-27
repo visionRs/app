@@ -2,10 +2,11 @@
 
 #1.1 PLOTS CODE: Bar Plot---------------------
 
-bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby=NULL, fontSize, legendPos, title_x, title_y, plotTitle) {
+bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby=NULL, Theme, fontSize, legendPos, title_x, title_y, plotTitle) {
   
     p <- ggplot(data, aes_string(x, y, fill = colorby)) +
       geom_bar(stat="identity") +
+      get(Theme)() +
       labs(title = plotTitle) +
       xlab(title_x) + ylab(title_y) +
       theme(axis.text = element_text(size = fontSize),
@@ -16,6 +17,7 @@ bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby=NULL, fontSize, legendPos,
     
     code <- paste0('ggplot(data, aes(', x, ',', y, ',' ,'fill = ', colorby, ')) + 
                    geom_bar(stat="identity") +
+                    ',Theme,'() +
                     labs(title = ','"',plotTitle,'"',') +
                     xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                    theme(axis.text = element_text(size = ', fontSize,'),
@@ -30,9 +32,10 @@ bar_plot <- function(data=NULL,x=NULL,y=NULL, colorby=NULL, fontSize, legendPos,
   }
 
 
-histogram <- function(data=NULL,x=NULL,y=NULL, fontSize, title_x, title_y) {
+histogram <- function(data=NULL,x=NULL,y=NULL, Theme, fontSize, title_x, title_y) {
         p <-  ggplot(data, aes_string(x)) +
               geom_histogram() +
+              get(Theme)() +
               labs(title = plotTitle) +
               xlab(title_x) +
               ylab(title_y) +
@@ -44,6 +47,7 @@ histogram <- function(data=NULL,x=NULL,y=NULL, fontSize, title_x, title_y) {
         
         code <- paste0('ggplot(',deparse(substitute(data)), ', aes(', x, ')) + 
                         geom_histogram() +
+                        ',Theme,'() +
                         labs(title = ','"',plotTitle,'"',') +
                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
                         theme(axis.text = element_text(size = ', fontSize,'),
