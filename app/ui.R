@@ -139,6 +139,9 @@ ui <- dashboardPage(
                                        selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
                       ),
                       conditionalPanel(condition = "input.radioPlot == 'Scatter'",
+                                       hr(style="border-color: purple;"), 
+                                       h4(tags$b("Scatter Plot specific parameters")), 
+                                       hr(style="border-color: purple;"),
                                        sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
                                        sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1),
                                        box(title = "Regression", width = 12,
