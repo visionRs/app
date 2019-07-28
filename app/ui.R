@@ -47,6 +47,16 @@ ui <- dashboardPage(
     shinyjs::useShinyjs(),
     
     tabItem("summary",
+            fluidRow(
+              actionGroupButtons(
+                inputIds = c("Bar", "Histogram", "Scatter", "Line"),
+                labels = list("Bar", "Histogram", "Scatter","Line"),
+                status = "danger",
+                fullwidth = T
+              )
+              
+            ),
+            
             
             #__3.1 Info boxes ---------------
             fluidRow(
@@ -88,25 +98,16 @@ ui <- dashboardPage(
                         
                       ),
                       
-                      tags$h4(tags$b("Code :") ,tags$br(),tags$br(),verbatimTextOutput('return_code'),color = '#3c8dbc')
+                      tags$h4(tags$b("Code :") ,tags$br(),tags$br(),verbatimTextOutput('code'),color = '#3c8dbc')
                   )
                   
               ),
               
               div(class="output_box", 
                   #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
-                  tabBox( height="620px",width="6",title = "",
-                        
-                          tabPanel(radioGroupButtons(
-                            inputId = "radioPlot",
-                            choices = c("Bar", "Scatter", "Line"),
-                            justified = TRUE,
-                            checkIcon = list(yes = icon("ok", 
-                                                        lib = "glyphicon")),
-                            selected = F,
-                            status = "warning"
-                          ),
-                           withSpinner(plotOutput('basic_barplot',height = '563px'),color = '#3c8dbc'),value = 'plot6')
+                  box(width="6",
+                      title = "",
+                      withSpinner(plotOutput('plot',height = '563px'),color = '#3c8dbc'),value = 'plot6',status = "primary"
                           
                   ) # end of tabBox 
               ),#end of div
@@ -142,10 +143,10 @@ ui <- dashboardPage(
                           yes = icon("ok", 
                                      lib = "glyphicon"))
                       ),
-                      conditionalPanel(condition = "input.radioPlot == 'Bar'",
+                      conditionalPanel(condition = "input.Bar == '1'",
                                        selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
                       ),
-                      conditionalPanel(condition = "input.radioPlot == 'Scatter'",
+                      conditionalPanel(condition = "input.Scatter == '1'",
                                        hr(style="border-color: purple;"), 
                                        h4(tags$b("Scatter Plot specific parameters")), 
                                        hr(style="border-color: purple;"),

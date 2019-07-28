@@ -71,28 +71,35 @@
     observeEvent(c(input$selectX,input$selectY), {
       dt <- data()
       if((!is.numeric(dt[[input$selectX]]) & !is.numeric(dt[[input$selectY]])) | (is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]])) | is.null(dt[[input$selectX]])){
-        updateRadioGroupButtons(session = session,inputId = "radioPlot",
-                                choices = c(""),
-                                checkIcon = list(yes = icon("ok", 
-                                                            lib = "glyphicon")),
-                                selected = F,
-                                status = "warning")
+        shinyjs::disable("Bar")
+        shinyjs::disable("Histogram")
+        shinyjs::disable("Scatter")
+        shinyjs::disable("Line")
+        
+        
+      } else if((is.null(dt[[input$selectY]]) & is.numeric(dt[[input$selectX]]))) {
+        
+        shinyjs::disable("Bar")
+        shinyjs::disable("Scatter")
+        shinyjs::disable("Line")
+        shinyjs::enable("Histogram")
+        
+       
       } else if(!is.numeric(dt[[input$selectX]]) | !is.numeric(dt[[input$selectY]])) {
         
-        updateRadioGroupButtons(session = session,inputId = "radioPlot",
-                                choices = c("Bar", "Line"),
-                                checkIcon = list(yes = icon("ok", 
-                                                            lib = "glyphicon")),
-                                selected = F,
-                                status = "warning")              
+        shinyjs::enable("Bar")
+        shinyjs::disable("Scatter")
+        shinyjs::enable("Line")
+        shinyjs::disable("Histogram")
+        
+                  
       } else {
         
-        updateRadioGroupButtons(session = session,inputId = "radioPlot",
-                                choices = c("Bar", "Scatter","Line"),
-                                checkIcon = list(yes = icon("ok", 
-                                                            lib = "glyphicon")),
-                                selected = F,
-                                status = "warning") 
+        shinyjs::enable("Bar")
+        shinyjs::enable("Scatter")
+        shinyjs::enable("Line")
+        shinyjs::disable("Histogram")
+      
       }
       
       # update textInputs for renaming axes
@@ -101,154 +108,185 @@
     })
     
     #4 PLOTS CODE: -------------
-    output$basic_barplot <- renderPlot({
-      dt <- data()
-      if(is.null(dt)){return()}
-      if(is.null(input$radioPlot)){return()}
-      
-      switch(input$radioPlot,
-             "Bar" =    if(!(is.null(dt[[input$selectX]]) | is.null(dt[[input$selectY]]))){
-                              bar_plot(data = dt,
-                                 x=input$selectX,
-                                 y=input$selectY, 
-                                 plotTitle = input$titleTextBox,
-                                 Theme = input$themeSelect,
-                                 #colorfill = if(input$colorby=="None"){input$colfill} else {"NULL"}, 
-                                 colorby = if(input$colorby=="None"){"NULL"}else{input$colorby} , 
-                                 fontSize = input$axisFont, 
-                                 legendPos = input$legendPosition,
-                                 title_x = input$titleX,
-                                 title_y = input$titleY)$plot
-                        } else if(is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]]))
-                        {
-                          sendSweetAlert(
-                            session = session,
-                            title = "Error !!",
-                            text = "It's broken...",
-                            type = "error"
-                          )
-                          
-                        } else if(!is.null(dt[[input$selectX]])){  
-                               histogram(data = dt,
-                                   x=input$selectX,
-                                   y=input$selectY,
-                                   Theme = input$themeSelect,
-                                   plotTitle = input$titleTextBox,
-                                   fontSize = input$axisFont, 
-                                   title_x = input$titleX,
-                                   title_y = input$titleY)$plot
-                 
-                        } else {
-                          sendSweetAlert(
-                            session = session,
-                            title = "Error !!",
-                            text = "It's broken...",
-                            type = "error"
-                          )
-                          
-                        },
-             
-             "Scatter" = scatter_plot(data = dt,
-                                      x=input$selectX,
-                                      y=input$selectY,
-                                      Theme = input$themeSelect,
-                                      plotTitle = input$titleTextBox,
-                                      colourfill = input$colfill,
-                                      colorby = input$colorby, 
-                                      fontSize = input$axisFont, 
-                                      legendPos = input$legendPosition,
-                                      dotSize = input$dotSize, 
-                                      dotOpa = input$dotOpa,
-                                      title_x = input$titleX,
-                                      title_y = input$titleY,
-                                      regressionLine = input$regLine, 
-                                      correlation = input$corr)$plot,
-             
-             "Line" =    line_plot(data = dt,
-                                   x=input$selectX,
-                                   y=input$selectY,
-                                   Theme = input$themeSelect,
-                                   plotTitle = input$titleTextBox,
-                                   colourfill = input$colfill,
-                                   colorby = input$colorby, 
-                                   fontSize = input$axisFont, 
-                                   legendPos = input$legendPosition,
-                                   title_x = input$titleX,
-                                   title_y = input$titleY)$plot
-             
-      )
-      
+    
+ 
+    #___4.0 PLOTS CODE: Bar Plot Code-----------------
+    observeEvent(input$Bar,ignoreInit  =T ,{
+    if(is.null(input$Bar)) return()
+      isolate({
+        #______4.0.0 GGPLOT Code--------------------
+        
+       output$plot <-
+         renderPlot({
+           dt <- data()
+           bar_plot(data = dt,
+                 x=input$selectX,
+                 y=input$selectY,
+                 plotTitle = input$titleTextBox,
+                 Theme = input$themeSelect,
+                 #colorfill = if(input$colorby=="None"){input$colfill} else {"NULL"},
+                 colorby = if(input$colorby=="None"){"NULL"}else{input$colorby} ,
+                 fontSize = input$axisFont,
+                 legendPos = input$legendPosition,
+                 title_x = input$titleX,
+                 title_y = input$titleY)$plot
+
+         })
+       
+       #______4.0.1 GGPLOT Code--------------------
+       output$code <-
+         renderText({
+           dt <- data()
+           bar_plot(data = dt,
+                    x=input$selectX,
+                    y=input$selectY,
+                    plotTitle = input$titleTextBox,
+                    Theme = input$themeSelect,
+                    #colorfill = if(input$colorby=="None"){input$colfill} else {"NULL"},
+                    colorby = if(input$colorby=="None"){"NULL"}else{input$colorby} ,
+                    fontSize = input$axisFont,
+                    legendPos = input$legendPosition,
+                    title_x = input$titleX,
+                    title_y = input$titleY)$code
+           
+         })
+       
+       
+        })
     })
     
+    #___4.1 PLOTS CODE: Histogram Plot Code--------------------
     
-    #5 RETURN CODE BLOCK: -------------
-    output$return_code <- renderText({
-      dt <- data()
-      if(is.null(dt)){return()}
-      if(is.null(input$radioPlot)){return()}
+    observeEvent(input$Histogram,ignoreInit  =T,{
+      if(is.null(input$Histogram)) return()
+      isolate({
+        #______4.1.0 Plot Code--------------------
+        
+        output$plot <-
+          renderPlot({
+            dt <- data()
+            histogram(data = dt,
+                       x=input$selectX,
+                       Theme = input$themeSelect,
+                       plotTitle = input$titleTextBox,
+                       fontSize = input$axisFont,
+                       title_x = input$titleX,
+                       title_y = input$titleY)$plot
+            
+          })
+        
+        #______4.1.1 GGPLOT Code--------------------
+        
+        output$code <-
+          renderText({
+            dt <- data()
+            histogram(data = dt,
+                      x=input$selectX,
+                      Theme = input$themeSelect,
+                      plotTitle = input$titleTextBox,
+                      fontSize = input$axisFont,
+                      title_x = input$titleX,
+                      title_y = input$titleY)$code
+            
+          })
+      })
+        
       
-      switch(input$radioPlot,
-             
-             "Bar" =    if(!(is.null(dt[[input$selectX]]) | is.null(dt[[input$selectY]]))){
-               bar_plot(data = dt,
-                        x=input$selectX,
-                        y=input$selectY,
-                        Theme = input$themeSelect,
-                        plotTitle = input$titleTextBox,
-                        #colourfill = if(input$colorby=="None"){input$colfill} else {"NULL"}, 
-                        colorby = if(input$colorby=="None"){"NULL"} else {input$colorby}, 
-                        fontSize = input$axisFont, 
-                        legendPos = input$legendPosition,
-                        title_x = input$titleX,
-                        title_y = input$titleY)$code
-             } else if(is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]]))
-             {
-               print("Both can't be None")
-               
-             } else if(!is.null(dt[[input$selectX]])){  
-               histogram(data = dt,
+    })
+       
+
+    #___4.2 PLOTS CODE: Scatter Plot Code------------------
+    
+    observeEvent(input$Scatter,ignoreNULL = T,{
+      if(is.null(input$Scatter)) return()
+      isolate({
+        
+        #______4.2.0 Plot Code--------------------
+        output$plot <-
+          renderPlot({
+            dt <- data()
+            scatter_plot(data = dt,
                          x=input$selectX,
-                         y=input$selectY, 
+                         y=input$selectY,
                          Theme = input$themeSelect,
                          plotTitle = input$titleTextBox,
-                         fontSize = input$axisFont, 
+                         colourfill = input$colfill,
+                         colorby = input$colorby,
+                         fontSize = input$axisFont,
+                         legendPos = input$legendPosition,
+                         dotSize = input$dotSize,
+                         dotOpa = input$dotOpa,
                          title_x = input$titleX,
-                         title_y = input$titleY)$code
-               
-             } else {
-               print("X can't be None.")
-               
-             },
+                         title_y = input$titleY,
+                         regressionLine = input$regLine,
+                         correlation = input$corr)$plot
+            
+          })
+        #______4.2.1 GGPLOT Code--------------------
+        output$code <- renderText({
+          dt <- data()
+          scatter_plot(data = dt,
+                       x=input$selectX,
+                       y=input$selectY,
+                       Theme = input$themeSelect,
+                       plotTitle = input$titleTextBox,
+                       colourfill = input$colfill,
+                       colorby = input$colorby,
+                       fontSize = input$axisFont,
+                       legendPos = input$legendPosition,
+                       dotSize = input$dotSize,
+                       dotOpa = input$dotOpa,
+                       title_x = input$titleX,
+                       title_y = input$titleY,
+                       regressionLine = input$regLine,
+                       correlation = input$corr)$code
+          
+          
+        })
+      })
+    })
+    
+    #___4.3 PLOTS CODE: Line Plot Code------------------
+    
+    observeEvent(input$Line,ignoreInit  =T,{
+      if(is.null(input$Line)) return()
+      isolate({
+        
+        #______4.3.0 Plot Code--------------------
+        output$plot <-
+          renderPlot({
+            dt <- data()
+            line_plot(data = dt,
+                      x=input$selectX,
+                      y=input$selectY,
+                      Theme = input$themeSelect,
+                      plotTitle = input$titleTextBox,
+                      colourfill = input$colfill,
+                      colorby = input$colorby,
+                      fontSize = input$axisFont,
+                      legendPos = input$legendPosition,
+                      title_x = input$titleX,
+                      title_y = input$titleY)$plot
+            
+          })
+        #______4.3.1 GGPLOT Code--------------------
+        output$code <- renderText({
+          dt <- data()
+          line_plot(data = dt,
+                     x=input$selectX,
+                     y=input$selectY,
+                     Theme = input$themeSelect,
+                     plotTitle = input$titleTextBox,
+                     colourfill = input$colfill,
+                     colorby = input$colorby,
+                     fontSize = input$axisFont,
+                     legendPos = input$legendPosition,
+                     title_x = input$titleX,
+                     title_y = input$titleY)$code
 
-             "Scatter" = scatter_plot(data = dt,
-                                      x=input$selectX,
-                                      y=input$selectY,
-                                      Theme = input$themeSelect,
-                                      plotTitle = input$titleTextBox,
-                                      colourfill = input$colfill,
-                                      colorby = input$colorby, 
-                                      fontSize = input$axisFont, 
-                                      legendPos = input$legendPosition,
-                                      dotSize = input$dotSize, 
-                                      dotOpa = input$dotOpa,
-                                      title_x = input$titleX,
-                                      title_y = input$titleY,
-                                      regressionLine = input$regLine, 
-                                      correlation = input$corr)$code,
-             
-             "Line" =    line_plot(data = dt,
-                                   x=input$selectX,
-                                   y=input$selectY, 
-                                   Theme = input$themeSelect,
-                                   plotTitle = input$titleTextBox,
-                                   colourfill = input$colfill,
-                                   colorby = input$colorby, 
-                                   fontSize = input$axisFont, 
-                                   legendPos = input$legendPosition,
-                                   title_x = input$titleX,
-                                   title_y = input$titleY)$code
-      )
-      
+          
+        })
+      })
     })
     
 } # server ends here
