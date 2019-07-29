@@ -2,10 +2,10 @@
 
 #1.1 PLOTS CODE: Line Plot---------------------
 line_plot <- function(data=dt,x=NULL,y=NULL, Theme, colourfill, colorby, fontSize, legendPos, title_x, title_y, plotTitle) {
-  if(colorby == 'None'){
+  if(Theme == 'None'){
+    if(colorby == 'None'){
       p <-  ggplot(data, aes_string(x,y)) +
         geom_line(color = colourfill) +
-        get(Theme)() +
         labs(title = plotTitle) +
         xlab(title_x) + ylab(title_y) +
         theme(axis.text = element_text(size = fontSize),
@@ -14,22 +14,20 @@ line_plot <- function(data=dt,x=NULL,y=NULL, Theme, colourfill, colorby, fontSiz
               plot.title = element_text(size = fontSize))
       
       code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                      geom_line(color = ',colourfill,') +
-                      ',Theme,'() +
-                      labs(title = ','"',plotTitle,'"',') +
-                      xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                      theme(axis.text = element_text(size = ', fontSize,'),
-                           axis.title.x = element_text(size = ', fontSize,'),
-                           axis.title.y = element_text(size = ', fontSize,'),
-                            plot.title = element_text(size = ',fontSize,'))')
+                     geom_line(color = ',colourfill,') +
+                     labs(title = ','"',plotTitle,'"',') +
+                     xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+                     theme(axis.text = element_text(size = ', fontSize,'),
+                     axis.title.x = element_text(size = ', fontSize,'),
+                     axis.title.y = element_text(size = ', fontSize,'),
+                     plot.title = element_text(size = ',fontSize,'))')
       ls <- list()
       ls[['plot']] <- p
       ls[['code']] <- code
       return(ls)
-  } else{
+    } else{
       p <-  ggplot(data, aes_string(x,y, color = colorby)) +
         geom_line() +
-        get(Theme)() +
         labs(title = plotTitle) +
         xlab(title_x) + ylab(title_y) +
         theme(axis.text = element_text(size = fontSize),
@@ -39,18 +37,70 @@ line_plot <- function(data=dt,x=NULL,y=NULL, Theme, colourfill, colorby, fontSiz
               legend.position = legendPos)
       
       code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
-                      geom_line() +
-                      ',Theme,'() +
-                      labs(title = ','"',plotTitle,'"',') +
-                      xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                      theme(axis.text = element_text(size = ', fontSize,'),
-                               axis.title.x = element_text(size = ', fontSize,'),
-                               axis.title.y = element_text(size = ', fontSize,'),
-                                plot.title = element_text(size = ',fontSize,'),
-                                legend.position = ','"',legendPos,'"',')')
+                     geom_line() +
+                     labs(title = ','"',plotTitle,'"',') +
+                     xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+                     theme(axis.text = element_text(size = ', fontSize,'),
+                     axis.title.x = element_text(size = ', fontSize,'),
+                     axis.title.y = element_text(size = ', fontSize,'),
+                     plot.title = element_text(size = ',fontSize,'),
+                     legend.position = ','"',legendPos,'"',')')
       ls <- list()
       ls[['plot']] <- p
       ls[['code']] <- code
       return(ls)
-  }
+    }# else ends for colorby
+  } else{
+    if(colorby == 'None'){
+        p <-  ggplot(data, aes_string(x,y)) +
+          geom_line(color = colourfill) +
+          get(Theme)() +
+          labs(title = plotTitle) +
+          xlab(title_x) + ylab(title_y) +
+          theme(axis.text = element_text(size = fontSize),
+                axis.title.x = element_text(size = fontSize),
+                axis.title.y = element_text(size = fontSize),
+                plot.title = element_text(size = fontSize))
+        
+        code <- paste0('ggplot(data, aes(',x,',',y,')) +
+                        geom_line(color = ',colourfill,') +
+                        ',Theme,'() +
+                        labs(title = ','"',plotTitle,'"',') +
+                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+                        theme(axis.text = element_text(size = ', fontSize,'),
+                             axis.title.x = element_text(size = ', fontSize,'),
+                             axis.title.y = element_text(size = ', fontSize,'),
+                              plot.title = element_text(size = ',fontSize,'))')
+        ls <- list()
+        ls[['plot']] <- p
+        ls[['code']] <- code
+        return(ls)
+    } else{
+        p <-  ggplot(data, aes_string(x,y, color = colorby)) +
+          geom_line() +
+          get(Theme)() +
+          labs(title = plotTitle) +
+          xlab(title_x) + ylab(title_y) +
+          theme(axis.text = element_text(size = fontSize),
+                axis.title.x = element_text(size = fontSize),
+                axis.title.y = element_text(size = fontSize),
+                plot.title = element_text(size = fontSize),
+                legend.position = legendPos)
+        
+        code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
+                        geom_line() +
+                        ',Theme,'() +
+                        labs(title = ','"',plotTitle,'"',') +
+                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+                        theme(axis.text = element_text(size = ', fontSize,'),
+                                 axis.title.x = element_text(size = ', fontSize,'),
+                                 axis.title.y = element_text(size = ', fontSize,'),
+                                  plot.title = element_text(size = ',fontSize,'),
+                                  legend.position = ','"',legendPos,'"',')')
+        ls <- list()
+        ls[['plot']] <- p
+        ls[['code']] <- code
+        return(ls)
+    }# else ends for colorby
+  }# else ends for Theme
 }

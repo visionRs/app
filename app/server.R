@@ -75,6 +75,7 @@
         shinyjs::disable("Histogram")
         shinyjs::disable("Scatter")
         shinyjs::disable("Line")
+        shinyjs::disable("Box")
         
         
       } else if((is.null(dt[[input$selectY]]) & is.numeric(dt[[input$selectX]]))) {
@@ -83,6 +84,7 @@
         shinyjs::disable("Scatter")
         shinyjs::disable("Line")
         shinyjs::enable("Histogram")
+        shinyjs::disable("Box")
         
        
       } else if(!is.numeric(dt[[input$selectX]]) | !is.numeric(dt[[input$selectY]])) {
@@ -91,6 +93,7 @@
         shinyjs::disable("Scatter")
         shinyjs::enable("Line")
         shinyjs::disable("Histogram")
+        shinyjs::enable("Box")
         
                   
       } else {
@@ -98,6 +101,7 @@
         shinyjs::enable("Bar")
         shinyjs::enable("Scatter")
         shinyjs::enable("Line")
+        shinyjs::enable("Box")
         shinyjs::disable("Histogram")
       
       }
@@ -300,6 +304,33 @@
                      title_x = input$titleX,
                      title_y = input$titleY)$code
 
+          
+        })
+      })
+    })
+    
+    #___4.4 PLOTS CODE: Boxplot Plot Code------------------
+    
+    observeEvent(input$Box,ignoreInit  =T,{
+      if(is.null(input$Box)) return()
+      isolate({
+        
+        #______4.4.0 Plot Code--------------------
+        output$plot <-
+          renderPlot({
+            dt <- data()
+            box_plot(data = dt,
+                      x=input$selectX,
+                      y=input$selectY)$plot
+            
+          })
+        #______4.4.1 GGPLOT Code--------------------
+        output$code <- renderText({
+          dt <- data()
+          box_plot(data = dt,
+                    x=input$selectX,
+                    y=input$selectY)$code
+          
           
         })
       })

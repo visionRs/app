@@ -49,8 +49,8 @@ ui <- dashboardPage(
     tabItem("summary",
             fluidRow(
               actionGroupButtons(
-                inputIds = c("Bar", "Histogram", "Scatter", "Line"),
-                labels = list("Bar", "Histogram", "Scatter","Line"),
+                inputIds = c("Bar", "Histogram", "Scatter", "Line", "Box"),
+                labels = list("Bar", "Histogram", "Scatter","Line", "Box"),
                 status = "danger",
                 fullwidth = T
               )
@@ -69,7 +69,8 @@ ui <- dashboardPage(
                   margin = '1px',
                   colourInput("colfill", "Color fill", "#00FF0080", allowTransparent = TRUE),
                   selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
-                  selectInput(inputId = 'themeSelect', label = 'Choose Theme', choices = c('theme_bw()'='theme_bw',
+                  selectInput(inputId = 'themeSelect', label = 'Choose Theme', choices = c('None'='None',
+                                                                                          'theme_bw()'='theme_bw',
                                                                                          'theme_gray()'='theme_gray',
                                                                                          'theme_dark()'='theme_dark',
                                                                                          'theme_minimal()'='theme_minimal',
