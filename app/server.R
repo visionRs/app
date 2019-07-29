@@ -107,12 +107,19 @@
       updateTextInput(session = session,inputId = "titleY", value = input$selectY)
     })
     
+  
     #4 PLOTS CODE: -------------
     
  
     #___4.0 PLOTS CODE: Bar Plot Code-----------------
     observeEvent(input$Bar,ignoreInit  =T ,{
     if(is.null(input$Bar)) return()
+      # hiding scatter specific advance options
+      shinyjs::hide("scatterParams")
+      # Showing Bar specific advance options
+      shinyjs::show("test1")
+      
+    
       isolate({
         #______4.0.0 GGPLOT Code--------------------
         
@@ -201,8 +208,14 @@
     
     observeEvent(input$Scatter,ignoreNULL = T,{
       if(is.null(input$Scatter)) return()
+      # hiding Bar specific advance options
+      shinyjs::hide("test1")
+      # Showing Scatter specific advance options
+      shinyjs::show("scatterParams")
+      
       isolate({
         shinyjs::toggleElement('regression_div')
+        
         
         #______4.2.0 Plot Code--------------------
         output$plot <-

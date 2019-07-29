@@ -122,17 +122,15 @@ ui <- dashboardPage(
               column(
                 width = 3,
                 dropdownButton(inputId = "extra_drp",
-                               label = "Advanced Options",
+                               label = "Plot Specific Paramters",
                                icon = icon("sliders"),
                                status = "primary",
                                circle = FALSE,
-                      conditionalPanel(condition = "input.Bar == '1'",
+                      conditionalPanel(condition = "input.Bar",
                                        selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
                       ),
-                      conditionalPanel(condition = "input.Scatter > '0'",
-                                       hr(style="border-color: purple;"), 
-                                       h4(tags$b("Scatter Plot specific parameters")), 
-                                       hr(style="border-color: purple;"),
+                      conditionalPanel(condition = "input.Scatter",
+                                       box(id = 'scatterParams', width =12,
                                        sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
                                        sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1),
                                        box(title = "Regression", width = 12,
@@ -140,17 +138,19 @@ ui <- dashboardPage(
                                            conditionalPanel(condition = "input.regLine == 1",
                                                             #checkboxInput(inputId ="se", "Add confidence interval?", value = FALSE),
                                                             checkboxInput(inputId ="corr", "Show correlation?", value = FALSE)
-                                           )
+                                           ) # end of input.regline conditional panel
+                                        )
                                        )
-                          )     
+                          ) # end of input.scatter conditional panel  
+                    
                       )
                     
                       
-              )
+              )# column ends here
                   
               
             
-            ),
+            ), # end of fluidRow
             br(),
             
             
