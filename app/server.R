@@ -146,7 +146,6 @@ server = function(input, output, session) {
                                title_y = input$titleY)$plot
     
     
-    print(list_both$plot)
     #______4.0.2 GGPLOT Code--------------------
     list_both$code <-
       bar_plot(data = data(),
@@ -331,7 +330,7 @@ server = function(input, output, session) {
   })
   
   #6. Final RenderText Code for GGPLOT----------------------
-  output$text <- renderText({
+  output$code <- renderText({
     
     if (is.null(list_both$code)) return()
     isolate({
