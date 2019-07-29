@@ -49,8 +49,8 @@ ui <- dashboardPage(
     tabItem("summary",
             fluidRow(
               actionGroupButtons(
-                inputIds = c("Bar", "Histogram", "Scatter", "Line"),
-                labels = list("Bar", "Histogram", "Scatter","Line"),
+                inputIds = c("Bar", "Histogram", "Scatter", "Line","Box"),
+                labels = list("Bar", "Histogram", "Scatter","Line","Box"),
                 status = "danger",
                 fullwidth = T
               )

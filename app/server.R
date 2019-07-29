@@ -75,6 +75,7 @@ server = function(input, output, session) {
       shinyjs::disable("Histogram")
       shinyjs::disable("Scatter")
       shinyjs::disable("Line")
+      shinyjs::disable("Box")
       
       
     } else if((is.null(dt[[input$selectY]]) & is.numeric(dt[[input$selectX]]))) {
@@ -82,6 +83,7 @@ server = function(input, output, session) {
       shinyjs::disable("Bar")
       shinyjs::disable("Scatter")
       shinyjs::disable("Line")
+      shinyjs::disable("Box")
       shinyjs::enable("Histogram")
       
       
@@ -91,6 +93,7 @@ server = function(input, output, session) {
       shinyjs::disable("Scatter")
       shinyjs::enable("Line")
       shinyjs::disable("Histogram")
+      shinyjs::enable("Box")
       
       
     } else {
@@ -98,6 +101,7 @@ server = function(input, output, session) {
       shinyjs::enable("Bar")
       shinyjs::enable("Scatter")
       shinyjs::enable("Line")
+      shinyjs::enable("Box")
       shinyjs::disable("Histogram")
       
     }
@@ -168,8 +172,8 @@ server = function(input, output, session) {
   observeEvent(input$Histogram,{
     # hiding Bar specific advance options
     shinyjs::hide("barplot_extra_param")
-    # Showing Scatter specific advance options
-    shinyjs::show("scatter_extra_params")
+    # hiding Scatter specific advance options
+    shinyjs::hide("scatter_extra_params")
     
     #______4.1.0 Plot Code--------------------
     
@@ -259,7 +263,7 @@ server = function(input, output, session) {
     
     # hiding Bar specific advance options
     shinyjs::hide("barplot_extra_param")
-    # Showing Scatter specific advance options
+    # hiding Scatter specific advance options
     shinyjs::hide("scatter_extra_params")
     
     #______4.3.0 Plot Code--------------------
@@ -290,6 +294,30 @@ server = function(input, output, session) {
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
                 title_y = input$titleY)$code
+    
+  })
+  
+  #___4.4 PLOTS CODE: Box Plot Code------------------
+  
+  observeEvent(input$Box,{
+    
+    # hiding Bar specific advance options
+    shinyjs::hide("barplot_extra_param")
+    # hiding Scatter specific advance options
+    shinyjs::hide("scatter_extra_params")
+    
+    #______4.4.0 Plot Code--------------------
+    list_both$plot <-
+      box_plot(data = data(),
+                x=input$selectX,
+                y=input$selectY)$plot
+    
+    
+    #______4.4.1 GGPLOT Code--------------------
+    list_both$code <- 
+      box_plot(data = data(),
+                x=input$selectX,
+                y=input$selectY)$code
     
   })
   
