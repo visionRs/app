@@ -116,6 +116,8 @@
       isolate({
         #______4.0.0 GGPLOT Code--------------------
         
+      shinyjs::toggleElement('barplot_div')
+        
        output$plot <-
          renderPlot({
            dt <- data()
@@ -200,6 +202,7 @@
     observeEvent(input$Scatter,ignoreNULL = T,{
       if(is.null(input$Scatter)) return()
       isolate({
+        shinyjs::toggleElement('regression_div')
         
         #______4.2.0 Plot Code--------------------
         output$plot <-

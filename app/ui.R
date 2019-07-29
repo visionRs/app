@@ -129,7 +129,7 @@ ui <- dashboardPage(
                       conditionalPanel(condition = "input.Bar == '1'",
                                        selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
                       ),
-                      conditionalPanel(condition = "input.Scatter == '1'",
+                      conditionalPanel(condition = "input.Scatter > '0'",
                                        hr(style="border-color: purple;"), 
                                        h4(tags$b("Scatter Plot specific parameters")), 
                                        hr(style="border-color: purple;"),
