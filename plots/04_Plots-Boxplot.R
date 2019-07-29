@@ -7,8 +7,8 @@ box_plot <- function(data=NULL,x=NULL,y=NULL) {
   p <- ggplot(iris, aes_string(paste0("factor(",x,")"),y)) +
     geom_boxplot()
   
-  code <- paste0('ggplot(iris, aes_string(paste0("factor(",',x,',")"),',y,')) +
-    geom_boxplot()')
+  code <- paste0('ggplot(iris, aes(factor(',x,'),',y,')) +
+  geom_boxplot()')
   
   ls <- list()
   ls[['plot']] <- p
