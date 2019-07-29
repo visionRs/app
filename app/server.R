@@ -124,6 +124,7 @@ server = function(input, output, session) {
     
     #________4.0.0.1 hiding scatter specific advance options
     shinyjs::hide("scatter_extra_params")
+    shinyjs::hide("lineplot_extra_param")
     #________4.0.0.2 Showing Bar specific advance options
     shinyjs::show("barplot_extra_param")
     
@@ -171,6 +172,7 @@ server = function(input, output, session) {
   observeEvent(input$Histogram,{
     # hiding Bar specific advance options
     shinyjs::hide("barplot_extra_param")
+    shinyjs::hide("lineplot_extra_param")
     # hiding Scatter specific advance options
     shinyjs::hide("scatter_extra_params")
     
@@ -211,6 +213,7 @@ server = function(input, output, session) {
     
     # hiding Bar specific advance options
     shinyjs::hide("barplot_extra_param")
+    shinyjs::hide("lineplot_extra_param")
     # Showing Scatter specific advance options
     shinyjs::show("scatter_extra_params")
     
@@ -259,7 +262,7 @@ server = function(input, output, session) {
   #___4.3 PLOTS CODE: Line Plot Code------------------
   
   observeEvent(input$Line,{
-    
+    shinyjs::show("lineplot_extra_param")
     # hiding Bar specific advance options
     shinyjs::hide("barplot_extra_param")
     # hiding Scatter specific advance options
@@ -302,6 +305,7 @@ server = function(input, output, session) {
     
     # hiding Bar specific advance options
     shinyjs::hide("barplot_extra_param")
+    shinyjs::hide("lineplot_extra_param")
     # hiding Scatter specific advance options
     shinyjs::hide("scatter_extra_params")
     

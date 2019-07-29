@@ -141,7 +141,15 @@ ui <- dashboardPage(
                                                         ) # end of input.regline conditional panel
                                                     )
                                                 )
-                               ) # end of input.scatter conditional panel  
+                               ),# end of input.scatter conditional panel  
+                               conditionalPanel(condition = "input.Line",
+                                                selectInput(inputId = 'lineplot_extra_param', label = 'Line type', choices = c('solid'='solid',
+                                                                                                                              'twodash'='twodash',
+                                                                                                                              'longdash'='longdash',
+                                                                                                                              'dotted'='dotted',
+                                                                                                                              'dotdash'='dotdash',
+                                                                                                                              'dashed'='dashed'))
+                               )
                                
                 )
                 
