@@ -1,4 +1,5 @@
-![alt text](https://github.com/easy-plot/AnnotationFilter_hl.png)
+**raw.githubusercontent.com**:
+<img src="https://github.com/easy-plot/app/AnnotationFilter_hl.png" />
 
 
 # app
