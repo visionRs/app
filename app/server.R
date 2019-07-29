@@ -50,47 +50,6 @@ server = function(input, output, session) {
     updateSelectInput(session, inputId = "selectX", choices=c(colnames(data()),"None"))
     updateSelectInput(session, inputId = "selectY", choices=c(colnames(data()),"None"))
     
-<<<<<<< HEAD
-    #___3.5 SERVER : Input Type CHECK ---------
-    
-    #___3.5.1 INPUT TYPE CHECK: All 3 Conditions Covered ---------
-    
-    observeEvent(c(input$selectX,input$selectY), {
-      dt <- data()
-      if((!is.numeric(dt[[input$selectX]]) & !is.numeric(dt[[input$selectY]])) | (is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]])) | is.null(dt[[input$selectX]])){
-        shinyjs::disable("Bar")
-        shinyjs::disable("Histogram")
-        shinyjs::disable("Scatter")
-        shinyjs::disable("Line")
-        shinyjs::disable("Box")
-        
-        
-      } else if((is.null(dt[[input$selectY]]) & is.numeric(dt[[input$selectX]]))) {
-        
-        shinyjs::disable("Bar")
-        shinyjs::disable("Scatter")
-        shinyjs::disable("Line")
-        shinyjs::enable("Histogram")
-        shinyjs::disable("Box")
-        
-       
-      } else if(!is.numeric(dt[[input$selectX]]) | !is.numeric(dt[[input$selectY]])) {
-        
-        shinyjs::enable("Bar")
-        shinyjs::disable("Scatter")
-        shinyjs::enable("Line")
-        shinyjs::disable("Histogram")
-        shinyjs::enable("Box")
-        
-                  
-      } else {
-        
-        shinyjs::enable("Bar")
-        shinyjs::enable("Scatter")
-        shinyjs::enable("Line")
-        shinyjs::enable("Box")
-        shinyjs::disable("Histogram")
-=======
     # update plot parameter dropdowns
     colorby.choices <- append(colnames(data()),'None')
     updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
@@ -116,7 +75,6 @@ server = function(input, output, session) {
       shinyjs::disable("Histogram")
       shinyjs::disable("Scatter")
       shinyjs::disable("Line")
->>>>>>> 8e56d5c55ebb5e1695d0d7d9db5c15205228d149
       
       
     } else if((is.null(dt[[input$selectY]]) & is.numeric(dt[[input$selectX]]))) {
@@ -157,9 +115,17 @@ server = function(input, output, session) {
   
   #___4.0 PLOTS CODE: Bar Plot Code-----------------
   observeEvent(input$Bar,{
-    dt <- data()
-    print(paste0("I am in Bar code"))
-    #______4.0.0 GGPLOT Code--------------------
+    
+    #______4.0.0 HIDE/SHOW Specific Parameters:------------------------
+    
+    #________4.0.0.1 hiding scatter specific advance options
+    shinyjs::hide("scatter_extra_params")
+    #________4.0.0.2 Showing Bar specific advance options
+    shinyjs::show("barplot_extra_param")
+    
+    
+    
+    #______4.0.1 GGPLOT Code--------------------
     
     # shinyjs::toggleElement('barplot_div')
     
@@ -177,7 +143,7 @@ server = function(input, output, session) {
     
     
     print(list_both$plot)
-    #______4.0.1 GGPLOT Code--------------------
+    #______4.0.2 GGPLOT Code--------------------
     list_both$code <-
       bar_plot(data = data(),
                x=input$selectX,
@@ -200,6 +166,10 @@ server = function(input, output, session) {
   #___4.1 PLOTS CODE: Histogram Plot Code--------------------
   
   observeEvent(input$Histogram,{
+    # hiding Bar specific advance options
+    shinyjs::hide("barplot_extra_param")
+    # Showing Scatter specific advance options
+    shinyjs::show("scatter_extra_params")
     
     #______4.1.0 Plot Code--------------------
     
@@ -236,7 +206,10 @@ server = function(input, output, session) {
   
   observeEvent(input$Scatter,{
     
-    #shinyjs::toggleElement('regression_div')
+    # hiding Bar specific advance options
+    shinyjs::hide("barplot_extra_param")
+    # Showing Scatter specific advance options
+    shinyjs::show("scatter_extra_params")
     
     #______4.2.0 Plot Code--------------------
     list_both$plot <-
@@ -284,6 +257,10 @@ server = function(input, output, session) {
   
   observeEvent(input$Line,{
     
+    # hiding Bar specific advance options
+    shinyjs::hide("barplot_extra_param")
+    # Showing Scatter specific advance options
+    shinyjs::hide("scatter_extra_params")
     
     #______4.3.0 Plot Code--------------------
     list_both$plot <-
@@ -328,36 +305,6 @@ server = function(input, output, session) {
   #6. Final RenderText Code for GGPLOT----------------------
   output$text <- renderText({
     
-<<<<<<< HEAD
-    #___4.4 PLOTS CODE: Boxplot Plot Code------------------
-    
-    observeEvent(input$Box,ignoreInit  =T,{
-      if(is.null(input$Box)) return()
-      isolate({
-        
-        #______4.4.0 Plot Code--------------------
-        output$plot <-
-          renderPlot({
-            dt <- data()
-            box_plot(data = dt,
-                      x=input$selectX,
-                      y=input$selectY)$plot
-            
-          })
-        #______4.4.1 GGPLOT Code--------------------
-        output$code <- renderText({
-          dt <- data()
-          box_plot(data = dt,
-                    x=input$selectX,
-                    y=input$selectY)$code
-          
-          
-        })
-      })
-    })
-    
-} # server ends here
-=======
     if (is.null(list_both$code)) return()
     isolate({
       
@@ -366,7 +313,6 @@ server = function(input, output, session) {
   })
   
   
->>>>>>> 8e56d5c55ebb5e1695d0d7d9db5c15205228d149
   
 } # server ends here
 
