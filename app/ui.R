@@ -31,14 +31,14 @@ ui <- dashboardPage(
                                            };
                                            });
                                            }")))
-                  ),
+  ),
   # 2. SIDEBAR here----
   dashboardSidebar(sidebarMenu(
-                        # Setting id makes input$tabs give the tabName of currently-selected tab
-                        id = "tabs",
-                        menuItem("Home", tabName = "summary", icon = icon("dashboard"))
-                        
-                      ),collapsed = T
+    # Setting id makes input$tabs give the tabName of currently-selected tab
+    id = "tabs",
+    menuItem("Home", tabName = "summary", icon = icon("dashboard"))
+    
+  ),collapsed = T
   ),
   
   # 3. BODY here----
@@ -70,55 +70,55 @@ ui <- dashboardPage(
                   colourInput("colfill", "Color fill", "#00FF0080", allowTransparent = TRUE),
                   selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
                   selectInput(inputId = 'themeSelect', label = 'Choose Theme', choices = c('theme_bw()'='theme_bw',
-                                                                                         'theme_gray()'='theme_gray',
-                                                                                         'theme_dark()'='theme_dark',
-                                                                                         'theme_minimal()'='theme_minimal',
-                                                                                         'theme_linedraw()'='theme_linedraw',
-                                                                                         'theme_light()'='theme_light',
-                                                                                         'theme_classic()'='theme_classic'))
-                
+                                                                                           'theme_gray()'='theme_gray',
+                                                                                           'theme_dark()'='theme_dark',
+                                                                                           'theme_minimal()'='theme_minimal',
+                                                                                           'theme_linedraw()'='theme_linedraw',
+                                                                                           'theme_light()'='theme_light',
+                                                                                           'theme_classic()'='theme_classic'))
+                  
                 )
                 
-                ),
-
-                column(
-                    width = 3,
-                    dropdownButton(
-                      inputId = "axes_drp",
-                      label = "Axes/Title",
-                      icon = icon("sliders"),
-                      status = "primary",
-                      circle = FALSE, margin = "1px",
-                    sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
-                    radioButtons(inputId = "rename_axes", label = "Rename axes",choices = c("yes" = 1, "no" = 0), selected = 0),
-                    textInput(inputId = "titleTextBox", label = "Set Plot title", value = ""),
-                    conditionalPanel(condition = "input.rename_axes == 1",
-                                     textInput(inputId = "titleX", label = 'X axis title', value = ''),
-                                     textInput(inputId = "titleY", label = 'Y axis title', value = '')
-                    )
-                    
-                    )),
-                    column(
-                    width = 3,
-                      dropdownButton(inputId = "legend_drp",
-                                     label = "Legend",
-                                     icon = icon("sliders"),
-                                     status = "primary",
-                                     circle = FALSE,
-                      radioGroupButtons(
-                        inputId = "legendPosition",
-                        label = "Legend Position",
-                        choices = c("top"='top', 
-                                    "bottom"='bottom', 
-                                    "left"='left', 
-                                    "right"='right'),
-                        selected = 'right',
-                        justified = TRUE,
-                        checkIcon = list(
-                          yes = icon("ok", 
-                                     lib = "glyphicon"))
-                      )
-                      )),
+              ),
+              
+              column(
+                width = 3,
+                dropdownButton(
+                  inputId = "axes_drp",
+                  label = "Axes/Title",
+                  icon = icon("sliders"),
+                  status = "primary",
+                  circle = FALSE, margin = "1px",
+                  sliderInput(inputId = 'axisFont', label = 'Font Size', value = 10, min = 1, max = 50),
+                  radioButtons(inputId = "rename_axes", label = "Rename axes",choices = c("yes" = 1, "no" = 0), selected = 0),
+                  textInput(inputId = "titleTextBox", label = "Set Plot title", value = ""),
+                  conditionalPanel(condition = "input.rename_axes == 1",
+                                   textInput(inputId = "titleX", label = 'X axis title', value = ''),
+                                   textInput(inputId = "titleY", label = 'Y axis title', value = '')
+                  )
+                  
+                )),
+              column(
+                width = 3,
+                dropdownButton(inputId = "legend_drp",
+                               label = "Legend",
+                               icon = icon("sliders"),
+                               status = "primary",
+                               circle = FALSE,
+                               radioGroupButtons(
+                                 inputId = "legendPosition",
+                                 label = "Legend Position",
+                                 choices = c("top"='top', 
+                                             "bottom"='bottom', 
+                                             "left"='left', 
+                                             "right"='right'),
+                                 selected = 'right',
+                                 justified = TRUE,
+                                 checkIcon = list(
+                                   yes = icon("ok", 
+                                              lib = "glyphicon"))
+                               )
+                )),
               column(
                 width = 3,
                 dropdownButton(inputId = "extra_drp",
@@ -126,30 +126,30 @@ ui <- dashboardPage(
                                icon = icon("sliders"),
                                status = "primary",
                                circle = FALSE,
-                      conditionalPanel(condition = "input.Bar",
-                                       selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
-                      ),
-                      conditionalPanel(condition = "input.Scatter",
-                                       box(id = 'scatterParams', width =12,
-                                       sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
-                                       sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1),
-                                       box(title = "Regression", width = 12,
-                                           checkboxInput(inputId ="regLine", "Add regression line?", value = FALSE),
-                                           conditionalPanel(condition = "input.regLine == 1",
-                                                            #checkboxInput(inputId ="se", "Add confidence interval?", value = FALSE),
-                                                            checkboxInput(inputId ="corr", "Show correlation?", value = FALSE)
-                                           ) # end of input.regline conditional panel
-                                        )
-                                       )
-                          ) # end of input.scatter conditional panel  
-                    
-                      )
-                    
-                      
+                               conditionalPanel(condition = "input.Bar",
+                                                selectInput(inputId = 'test1', label = 'Barplot specific Input', choices = c('None'))
+                               ),
+                               conditionalPanel(condition = "input.Scatter",
+                                                box(id = 'scatterParams', width =12,
+                                                    sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
+                                                    sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1),
+                                                    box(title = "Regression", width = 12,
+                                                        checkboxInput(inputId ="regLine", "Add regression line?", value = FALSE),
+                                                        conditionalPanel(condition = "input.regLine == 1",
+                                                                         #checkboxInput(inputId ="se", "Add confidence interval?", value = FALSE),
+                                                                         checkboxInput(inputId ="corr", "Show correlation?", value = FALSE)
+                                                        ) # end of input.regline conditional panel
+                                                    )
+                                                )
+                               ) # end of input.scatter conditional panel  
+                               
+                )
+                
+                
               )# column ends here
-                  
               
-            
+              
+              
             ), # end of fluidRow
             br(),
             
@@ -165,7 +165,7 @@ ui <- dashboardPage(
                                   label = "Upload File",
                                   size = "mini",
                                   width = '100px'
-                                  ),
+                      ),
                       
                       
                       fileInput("file1", "Upload data file (csv/txt/tsv):",
@@ -183,7 +183,7 @@ ui <- dashboardPage(
                       selectInput(inputId = "selectX", label = "Select X-axis variable:", choices = 'None',selected = "None"),
                       selectInput(inputId = "selectY", label = "Select Y-axis variable:", choices = 'None',selected = "None"),
                       
-
+                      
                       
                       #__3.3 interactive or no?------------
                       materialSwitch(
@@ -204,7 +204,7 @@ ui <- dashboardPage(
                   box(width="9",
                       title = "",
                       withSpinner(plotOutput('plot',height = '563px'),color = '#3c8dbc'),value = 'plot6',status = "primary"
-                          
+                      
                   ) # end of tabBox 
               )#end of div
               # div(class="input_box", 
