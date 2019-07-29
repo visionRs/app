@@ -4,10 +4,10 @@
 
 box_plot <- function(data=NULL,x=NULL,y=NULL) {
   
-  p <- ggplot(iris, aes_string(paste0("factor(",x,")"),y)) +
+  p <- ggplot(data, aes_string(paste0("factor(",x,")"),y)) +
     geom_boxplot()
   
-  code <- paste0('ggplot(iris, aes(factor(',x,'),',y,')) +
+  code <- paste0('ggplot(data, aes(factor(',x,'),',y,')) +
   geom_boxplot()')
   
   ls <- list()
