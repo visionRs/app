@@ -1,5 +1,5 @@
 **raw.githubusercontent.com**:
-<p align="right"><img src="https://github.com/easy-plot/app/blob/master/hexsticker.png" width="200" height="300" /></p>
+<p align="right"><img src="https://github.com/easy-plot/app/blob/master/hexsticker.png" width="300" height="200" /></p>
 
 
 # app
