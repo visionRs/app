@@ -1,5 +1,5 @@
 **raw.githubusercontent.com**:
-<img src="https://github.com/easy-plot/app/blob/master/AnnotationFilter_hl.png" />
+<p align="right"><img src="https://github.com/easy-plot/app/blob/master/hexsticker.png" /></p>
 
 
 # app
