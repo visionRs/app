@@ -138,9 +138,9 @@ server = function(input, output, session) {
                                x=input$selectX,
                                y=input$selectY,
                                plotTitle = input$titleTextBox,
-                               Theme = input$themeSelect,
+                               Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                                #colorfill = if(input$colorby=="None"){input$colfill} else {"NULL"},
-                               colorby = if(input$colorby=="None"){"NULL"}else{input$colorby} ,
+                               colorby = if(input$colorby=="None"){"NULL"}else{input$colorby},
                                fontSize = input$axisFont,
                                legendPos = input$legendPosition,
                                title_x = input$titleX,
@@ -153,9 +153,9 @@ server = function(input, output, session) {
                x=input$selectX,
                y=input$selectY,
                plotTitle = input$titleTextBox,
-               Theme = input$themeSelect,
+               Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                #colorfill = if(input$colorby=="None"){input$colfill} else {"NULL"},
-               colorby = if(input$colorby=="None"){"NULL"}else{input$colorby} ,
+               colorby = if(input$colorby=="None"){"NULL"}else{input$colorby},
                fontSize = input$axisFont,
                legendPos = input$legendPosition,
                title_x = input$titleX,
@@ -222,18 +222,18 @@ server = function(input, output, session) {
       scatter_plot(data = data(),
                    x=input$selectX,
                    y=input$selectY,
-                   Theme = input$themeSelect,
+                   Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                    plotTitle = input$titleTextBox,
                    colourfill = input$colfill,
-                   colorby = input$colorby,
+                   colorby = if(input$colorby=="None"){"NULL"}else{input$colorby},
                    fontSize = input$axisFont,
                    legendPos = input$legendPosition,
                    dotSize = input$dotSize,
                    dotOpa = input$dotOpa,
                    title_x = input$titleX,
                    title_y = input$titleY,
-                   regressionLine = input$regLine,
-                   correlation = input$corr)$plot
+                   regressionLine = if(input$regLine==FALSE){"NULL"}else{input$regLine},
+                   correlation = if(input$corr==FALSE){"NULL"}else{input$corr})$plot
     
     
     #______4.2.1 GGPLOT Code--------------------
@@ -241,18 +241,18 @@ server = function(input, output, session) {
       scatter_plot(data = data(),
                    x=input$selectX,
                    y=input$selectY,
-                   Theme = input$themeSelect,
+                   Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                    plotTitle = input$titleTextBox,
                    colourfill = input$colfill,
-                   colorby = input$colorby,
+                   colorby = if(input$colorby=="None"){"NULL"}else{input$colorby},
                    fontSize = input$axisFont,
                    legendPos = input$legendPosition,
                    dotSize = input$dotSize,
                    dotOpa = input$dotOpa,
                    title_x = input$titleX,
                    title_y = input$titleY,
-                   regressionLine = input$regLine,
-                   correlation = input$corr)$code
+                   regressionLine = if(input$regLine==FALSE){"NULL"}else{input$regLine},
+                   correlation = if(input$corr==FALSE){"NULL"}else{input$corr})$code
     
     
     

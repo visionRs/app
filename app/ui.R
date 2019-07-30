@@ -69,13 +69,14 @@ ui <- dashboardPage(
                   margin = '1px',
                   colourInput("colfill", "Color fill", "#00FF0080", allowTransparent = TRUE),
                   selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
-                  selectInput(inputId = 'themeSelect', label = 'Choose Theme', choices = c('theme_bw()'='theme_bw',
-                                                                                           'theme_gray()'='theme_gray',
-                                                                                           'theme_dark()'='theme_dark',
-                                                                                           'theme_minimal()'='theme_minimal',
-                                                                                           'theme_linedraw()'='theme_linedraw',
-                                                                                           'theme_light()'='theme_light',
-                                                                                           'theme_classic()'='theme_classic'))
+                  selectInput(inputId = 'themeSelect', label = 'Choose Theme', choices = c('None'="NULL",
+                                                                                           'theme_bw()',
+                                                                                           'theme_gray()',
+                                                                                           'theme_dark()',
+                                                                                           'theme_minimal()',
+                                                                                           'theme_linedraw()',
+                                                                                           'theme_light()',
+                                                                                           'theme_classic()'))
                   
                 )
                 

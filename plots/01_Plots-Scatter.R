@@ -2,344 +2,398 @@
 
 
 #1.1 PLOTS CODE: Scatter Plot---------------------
-scatter_plot <- function(data=dt,x=NULL,y=NULL, Theme, colourfill, colorby, fontSize, legendPos, dotSize, dotOpa, title_x, title_y, plotTitle,
-                         regressionLine, correlation) {
-  if(Theme == 'None'){
-    if(colorby == 'None'){
-      if(regressionLine == TRUE){
-        if(correlation == TRUE){
-          p <- ggplot(data, aes_string(x,y)) +
-            geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
-            geom_smooth(method=lm, se=FALSE) +
-            labs(title = plotTitle) +
-            xlab(title_x) + ylab(title_y) +
-            theme(axis.text = element_text(size = fontSize),
-                  axis.title.x = element_text(size = fontSize),
-                  axis.title.y = element_text(size = fontSize),
-                  plot.title = element_text(size = fontSize)) +
-            stat_cor(method = "pearson")
-          
-          code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                         geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
-                         geom_smooth(method=lm, se=FALSE) +
-                         labs(title = ','"',plotTitle,'"',') +
-                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                         theme(axis.text = element_text(size = ', fontSize,'),
-                         axis.title.x = element_text(size = ', fontSize,'),
-                         axis.title.y = element_text(size = ', fontSize,'),
-                         plot.title = element_text(size = ',fontSize,')) +
-                         stat_cor(method = "pearson")')
-          ls <- list()
-          ls[['plot']] <- p
-          ls[['code']] <- code
-          return(ls)
-          
-        } else{
-          p <- ggplot(data, aes_string(x,y)) +
-            geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
-            geom_smooth(method=lm, se=FALSE) +
-            labs(title = plotTitle) +
-            xlab(title_x) + ylab(title_y) +
-            theme(axis.text = element_text(size = fontSize),
-                  axis.title.x = element_text(size = fontSize),
-                  axis.title.y = element_text(size = fontSize),
-                  plot.title = element_text(size = fontSize))
-          
-          code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                         geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
-                         geom_smooth(method=lm, se=FALSE) +
-                         labs(title = ','"',plotTitle,'"',') +
-                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                         theme(axis.text = element_text(size = ', fontSize,'),
-                         axis.title.x = element_text(size = ', fontSize,'),
-                         axis.title.y = element_text(size = ', fontSize,'),
-                         plot.title = element_text(size = ',fontSize,'))')
-          ls <- list()
-          ls[['plot']] <- p
-          ls[['code']] <- code
-          return(ls)
-        }# else ends here for correlation condition
-        
-      } else{ # no regression line
-        p <- ggplot(data, aes_string(x,y)) +
-          geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
-          labs(title = plotTitle) +
-          xlab(title_x) + ylab(title_y) +
-          theme(axis.text = element_text(size = fontSize),
-                axis.title.x = element_text(size = fontSize),
-                axis.title.y = element_text(size = fontSize),
-                plot.title = element_text(size = fontSize))
-        
-        code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                       geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
-                       labs(title = ','"',plotTitle,'"',') +
-                       xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                       theme(axis.text = element_text(size = ', fontSize,'),
-                       axis.title.x = element_text(size = ', fontSize,'),
-                       axis.title.y = element_text(size = ', fontSize,'),
-                       plot.title = element_text(size = ',fontSize,'))')
-        ls <- list()
-        ls[['plot']] <- p
-        ls[['code']] <- code
-        return(ls)
-      } # else ends for regressionLine condition
-    } else{
-      if(regressionLine == TRUE){
-        if(correlation == TRUE){
-          p <- ggplot(data, aes_string(x,y, color = colorby)) +
-            geom_point(size = dotSize, alpha = dotOpa) +
-            geom_smooth(method=lm, se=FALSE) +
-            labs(title = plotTitle) +
-            xlab(title_x) + ylab(title_y) +
-            theme(axis.text = element_text(size = fontSize),
-                  axis.title.x = element_text(size = fontSize),
-                  axis.title.y = element_text(size = fontSize),
-                  plot.title = element_text(size = fontSize),
-                  legend.position = legendPos) +
-            stat_cor(method = "pearson")
-          
-          code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
-                         geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
-                         geom_smooth(method=lm, se=FALSE) +
-                         labs(title = ','"',plotTitle,'"',') +
-                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                         theme(axis.text = element_text(size = ', fontSize,'),
-                         axis.title.x = element_text(size = ', fontSize,'),
-                         axis.title.y = element_text(size = ', fontSize,'),
-                         plot.title = element_text(size = ',fontSize,'),
-                         legend.position = ','"',legendPos,'"',') +
-                         stat_cor(method = "pearson")')
-          ls <- list()
-          ls[['plot']] <- p
-          ls[['code']] <- code
-          return(ls)
-        } else{
-          p <- ggplot(data, aes_string(x,y, color = colorby)) +
-            geom_point(size = dotSize, alpha = dotOpa) +
-            geom_smooth(method=lm, se=FALSE) +
-            labs(title = plotTitle) +
-            xlab(title_x) + ylab(title_y) +
-            theme(axis.text = element_text(size = fontSize),
-                  axis.title.x = element_text(size = fontSize),
-                  axis.title.y = element_text(size = fontSize),
-                  plot.title = element_text(size = fontSize),
-                  legend.position = legendPos)
-          
-          code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
-                         geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
-                         geom_smooth(method=lm, se=FALSE) +
-                         labs(title = ','"',plotTitle,'"',') +
-                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                         theme(axis.text = element_text(size = ', fontSize,'),
-                         axis.title.x = element_text(size = ', fontSize,'),
-                         axis.title.y = element_text(size = ', fontSize,'),
-                         plot.title = element_text(size = ',fontSize,'),
-                         legend.position = ','"',legendPos,'"',')')
-          ls <- list()
-          ls[['plot']] <- p
-          ls[['code']] <- code
-          return(ls)
-        } # else ends for correlation condition
-      } else{ # no regression line
-        p <- ggplot(data, aes_string(x,y, color = colorby)) +
-          geom_point(size = dotSize, alpha = dotOpa) +
-          labs(title = plotTitle) +
-          xlab(title_x) + ylab(title_y) +
-          theme(axis.text = element_text(size = fontSize),
-                axis.title.x = element_text(size = fontSize),
-                axis.title.y = element_text(size = fontSize),
-                plot.title = element_text(size = fontSize),
-                legend.position = legendPos)
-        
-        code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
-                       geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
-                       labs(title = ','"',plotTitle,'"',') +
-                       xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                       theme(axis.text = element_text(size = ', fontSize,'),
-                       axis.title.x = element_text(size = ', fontSize,'),
-                       axis.title.y = element_text(size = ', fontSize,'),
-                       plot.title = element_text(size = ',fontSize,'),
-                       legend.position = ','"',legendPos,'"',')')
-        ls <- list()
-        ls[['plot']] <- p
-        ls[['code']] <- code
-        return(ls)
-      }# else ends for regressionLine condition
-    } # else ends for colorby condition
+scatter_plot <- function(data=dt,
+                         x=NULL,
+                         y=NULL, 
+                         Theme=NULL, 
+                         colourfill='#00FF0080', 
+                         colorby='None', 
+                         fontSize=10, 
+                         legendPos='right', 
+                         dotSize=2, 
+                         dotOpa=0.7, 
+                         title_x='', 
+                         title_y ='', 
+                         plotTitle ='',
+                         regressionLine=FALSE, 
+                         correlation=FALSE) {
+  
+  p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'NULL','NULL',colorby) )) +
+    geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+    eval(parse(text=as.character(Theme))) +
+    labs(title = plotTitle) +
+    xlab(title_x) + ylab(title_y) +
+    theme(axis.text = element_text(size = fontSize),
+          axis.title.x = element_text(size = fontSize),
+          axis.title.y = element_text(size = fontSize),
+          plot.title = element_text(size = fontSize))
+  
+  
+  code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='NULL',')) +', paste0(',' ,'color = ',colorby, ')) +')),' 
+                  geom_point(size = ',dotSize, ',alpha = ',dotOpa, ifelse(colorby=='NULL', paste0(', colour = ', '"' ,colourfill,'"',') +'),' ) +'),
+                 ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
+                 ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),
+                 ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + ')),
+                 ifelse(title_y=='' | is.null(title_y),'',paste0(' ylab(','"',title_y,'"',') ')),
+                 ifelse(fontSize==10 & legendPos == 'right' ,'',paste0('+ theme(axis.text = element_text(size = ', fontSize,'),
+                                                                       axis.title.x = element_text(size = ', fontSize,'),
+                                                                       axis.title.y = element_text(size = ', fontSize,'),
+                                                                       plot.title = element_text(size = ',fontSize,'),
+                                                                       legend.position = ','"',legendPos,'"',')')))
+  
+  if(regressionLine == TRUE & correlation == TRUE){
+    p <- p + geom_smooth(method=lm, se=FALSE) + stat_cor(method = "pearson")
     
-  } else{
-      if(colorby == 'None'){
-          if(regressionLine == TRUE){
-            if(correlation == TRUE){
-              p <- ggplot(data, aes_string(x,y)) +
-                geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
-                geom_smooth(method=lm, se=FALSE) +
-                get(Theme)() +
-                labs(title = plotTitle) +
-                xlab(title_x) + ylab(title_y) +
-                theme(axis.text = element_text(size = fontSize),
-                      axis.title.x = element_text(size = fontSize),
-                      axis.title.y = element_text(size = fontSize),
-                      plot.title = element_text(size = fontSize)) +
-                stat_cor(method = "pearson")
-              
-              code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                             geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
-                              geom_smooth(method=lm, se=FALSE) +
-                             ',Theme,'() +
-                              labs(title = ','"',plotTitle,'"',') +
-                             xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                             theme(axis.text = element_text(size = ', fontSize,'),
-                                    axis.title.x = element_text(size = ', fontSize,'),
-                                    axis.title.y = element_text(size = ', fontSize,'),
-                                    plot.title = element_text(size = ',fontSize,')) +
-                              stat_cor(method = "pearson")')
-              ls <- list()
-              ls[['plot']] <- p
-              ls[['code']] <- code
-              return(ls)
-              
-            } else{
-            p <- ggplot(data, aes_string(x,y)) +
-              geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
-              geom_smooth(method=lm, se=FALSE) +
-              get(Theme)() +
-              labs(title = plotTitle) +
-              xlab(title_x) + ylab(title_y) +
-              theme(axis.text = element_text(size = fontSize),
-                    axis.title.x = element_text(size = fontSize),
-                    axis.title.y = element_text(size = fontSize),
-                    plot.title = element_text(size = fontSize))
-            
-            code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                           geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
-                            geom_smooth(method=lm, se=FALSE) +
-                            ',Theme,'() +
-                           labs(title = ','"',plotTitle,'"',') +
-                           xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                           theme(axis.text = element_text(size = ', fontSize,'),
-                                 axis.title.x = element_text(size = ', fontSize,'),
-                                 axis.title.y = element_text(size = ', fontSize,'),
-                                 plot.title = element_text(size = ',fontSize,'))')
-            ls <- list()
-            ls[['plot']] <- p
-            ls[['code']] <- code
-            return(ls)
-            }# else ends here for correlation condition
-            
-          } else{ # no regression line
-          p <- ggplot(data, aes_string(x,y)) +
-            geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
-            get(Theme)() +
-            labs(title = plotTitle) +
-            xlab(title_x) + ylab(title_y) +
-            theme(axis.text = element_text(size = fontSize),
-                  axis.title.x = element_text(size = fontSize),
-                  axis.title.y = element_text(size = fontSize),
-                  plot.title = element_text(size = fontSize))
-          
-          code <- paste0('ggplot(data, aes(',x,',',y,')) +
-                          geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
-                          ',Theme,'() +
-                          labs(title = ','"',plotTitle,'"',') +
-                          xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                          theme(axis.text = element_text(size = ', fontSize,'),
-                                   axis.title.x = element_text(size = ', fontSize,'),
-                                   axis.title.y = element_text(size = ', fontSize,'),
-                                    plot.title = element_text(size = ',fontSize,'))')
-          ls <- list()
-          ls[['plot']] <- p
-          ls[['code']] <- code
-          return(ls)
-          } # else ends for regressionLine condition
-      } else{
-        if(regressionLine == TRUE){
-          if(correlation == TRUE){
-            p <- ggplot(data, aes_string(x,y, color = colorby)) +
-              geom_point(size = dotSize, alpha = dotOpa) +
-              geom_smooth(method=lm, se=FALSE) +
-              get(Theme)() +
-              labs(title = plotTitle) +
-              xlab(title_x) + ylab(title_y) +
-              theme(axis.text = element_text(size = fontSize),
-                    axis.title.x = element_text(size = fontSize),
-                    axis.title.y = element_text(size = fontSize),
-                    plot.title = element_text(size = fontSize),
-                    legend.position = legendPos) +
-              stat_cor(method = "pearson")
-            
-            code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
-                           geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
-                            geom_smooth(method=lm, se=FALSE) +
-                            ',Theme,'() +
-                           labs(title = ','"',plotTitle,'"',') +
-                           xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                           theme(axis.text = element_text(size = ', fontSize,'),
-                                 axis.title.x = element_text(size = ', fontSize,'),
-                                 axis.title.y = element_text(size = ', fontSize,'),
-                                 plot.title = element_text(size = ',fontSize,'),
-                                 legend.position = ','"',legendPos,'"',') +
-                            stat_cor(method = "pearson")')
-            ls <- list()
-            ls[['plot']] <- p
-            ls[['code']] <- code
-            return(ls)
-          } else{
-          p <- ggplot(data, aes_string(x,y, color = colorby)) +
-            geom_point(size = dotSize, alpha = dotOpa) +
-            geom_smooth(method=lm, se=FALSE) +
-            get(Theme)() +
-            labs(title = plotTitle) +
-            xlab(title_x) + ylab(title_y) +
-            theme(axis.text = element_text(size = fontSize),
-                  axis.title.x = element_text(size = fontSize),
-                  axis.title.y = element_text(size = fontSize),
-                  plot.title = element_text(size = fontSize),
-                  legend.position = legendPos)
-          
-          code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
-                         geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
-                          geom_smooth(method=lm, se=FALSE) +
-                          ',Theme,'() +
-                         labs(title = ','"',plotTitle,'"',') +
-                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                         theme(axis.text = element_text(size = ', fontSize,'),
-                               axis.title.x = element_text(size = ', fontSize,'),
-                               axis.title.y = element_text(size = ', fontSize,'),
-                               plot.title = element_text(size = ',fontSize,'),
-                               legend.position = ','"',legendPos,'"',')')
-          ls <- list()
-          ls[['plot']] <- p
-          ls[['code']] <- code
-          return(ls)
-          } # else ends for correlation condition
-        } else{ # no regression line
-          p <- ggplot(data, aes_string(x,y, color = colorby)) +
-            geom_point(size = dotSize, alpha = dotOpa) +
-            get(Theme)() +
-            labs(title = plotTitle) +
-            xlab(title_x) + ylab(title_y) +
-            theme(axis.text = element_text(size = fontSize),
-                  axis.title.x = element_text(size = fontSize),
-                  axis.title.y = element_text(size = fontSize),
-                  plot.title = element_text(size = fontSize),
-                  legend.position = legendPos)
-          
-          code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
-                          geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
-                          ',Theme,'() +
-                          labs(title = ','"',plotTitle,'"',') +
-                          xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
-                          theme(axis.text = element_text(size = ', fontSize,'),
-                                   axis.title.x = element_text(size = ', fontSize,'),
-                                   axis.title.y = element_text(size = ', fontSize,'),
-                                    plot.title = element_text(size = ',fontSize,'),
-                                    legend.position = ','"',legendPos,'"',')')
-          ls <- list()
-          ls[['plot']] <- p
-          ls[['code']] <- code
-          return(ls)
-        }# else ends for regressionLine condition
-      } # else ends for colorby condition
-  } # else ends for Theme
-}
+    code <-  paste0(code, '+ geom_smooth(method=lm, se=FALSE) + stat_cor(method = "pearson")')
+  } else if(regressionLine == TRUE & correlation == FALSE) {
+    p <- p + geom_smooth(method=lm, se=FALSE)
+    code <-  paste0(code, '+ geom_smooth(method=lm, se=FALSE)')
+  }
+  
+  
+  ls <- list()
+  ls[['plot']] <- p
+  ls[['code']] <- code
+  return(ls)
+  
+}  
+  
+  # if(Theme == 'None'){
+  #   if(colorby == 'None'){
+  #     if(regressionLine == TRUE){
+  #       if(correlation == TRUE){
+  #         p <- ggplot(data, aes_string(x,y)) +
+  #           geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+  #           geom_smooth(method=lm, se=FALSE) +
+  #           labs(title = plotTitle) +
+  #           xlab(title_x) + ylab(title_y) +
+  #           theme(axis.text = element_text(size = fontSize),
+  #                 axis.title.x = element_text(size = fontSize),
+  #                 axis.title.y = element_text(size = fontSize),
+  #                 plot.title = element_text(size = fontSize)) +
+  #           stat_cor(method = "pearson")
+  #         
+  #         code <- paste0('ggplot(data, aes(',x,',',y,')) +
+  #                        geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
+  #                        geom_smooth(method=lm, se=FALSE) +
+  #                        labs(title = ','"',plotTitle,'"',') +
+  #                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                        theme(axis.text = element_text(size = ', fontSize,'),
+  #                        axis.title.x = element_text(size = ', fontSize,'),
+  #                        axis.title.y = element_text(size = ', fontSize,'),
+  #                        plot.title = element_text(size = ',fontSize,')) +
+  #                        stat_cor(method = "pearson")')
+  #         ls <- list()
+  #         ls[['plot']] <- p
+  #         ls[['code']] <- code
+  #         return(ls)
+  #         
+  #       } else{
+  #         p <- ggplot(data, aes_string(x,y)) +
+  #           geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+  #           geom_smooth(method=lm, se=FALSE) +
+  #           labs(title = plotTitle) +
+  #           xlab(title_x) + ylab(title_y) +
+  #           theme(axis.text = element_text(size = fontSize),
+  #                 axis.title.x = element_text(size = fontSize),
+  #                 axis.title.y = element_text(size = fontSize),
+  #                 plot.title = element_text(size = fontSize))
+  #         
+  #         code <- paste0('ggplot(data, aes(',x,',',y,')) +
+  #                        geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
+  #                        geom_smooth(method=lm, se=FALSE) +
+  #                        labs(title = ','"',plotTitle,'"',') +
+  #                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                        theme(axis.text = element_text(size = ', fontSize,'),
+  #                        axis.title.x = element_text(size = ', fontSize,'),
+  #                        axis.title.y = element_text(size = ', fontSize,'),
+  #                        plot.title = element_text(size = ',fontSize,'))')
+  #         ls <- list()
+  #         ls[['plot']] <- p
+  #         ls[['code']] <- code
+  #         return(ls)
+  #       }# else ends here for correlation condition
+  #       
+  #     } else{ # no regression line
+  #       p <- ggplot(data, aes_string(x,y)) +
+  #         geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+  #         labs(title = plotTitle) +
+  #         xlab(title_x) + ylab(title_y) +
+  #         theme(axis.text = element_text(size = fontSize),
+  #               axis.title.x = element_text(size = fontSize),
+  #               axis.title.y = element_text(size = fontSize),
+  #               plot.title = element_text(size = fontSize))
+  #       
+  #       code <- paste0('ggplot(data, aes(',x,',',y,')) +
+  #                      geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
+  #                      labs(title = ','"',plotTitle,'"',') +
+  #                      xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                      theme(axis.text = element_text(size = ', fontSize,'),
+  #                      axis.title.x = element_text(size = ', fontSize,'),
+  #                      axis.title.y = element_text(size = ', fontSize,'),
+  #                      plot.title = element_text(size = ',fontSize,'))')
+  #       ls <- list()
+  #       ls[['plot']] <- p
+  #       ls[['code']] <- code
+  #       return(ls)
+  #     } # else ends for regressionLine condition
+  #   } else{
+  #     if(regressionLine == TRUE){
+  #       if(correlation == TRUE){
+  #         p <- ggplot(data, aes_string(x,y, color = colorby)) +
+  #           geom_point(size = dotSize, alpha = dotOpa) +
+  #           geom_smooth(method=lm, se=FALSE) +
+  #           labs(title = plotTitle) +
+  #           xlab(title_x) + ylab(title_y) +
+  #           theme(axis.text = element_text(size = fontSize),
+  #                 axis.title.x = element_text(size = fontSize),
+  #                 axis.title.y = element_text(size = fontSize),
+  #                 plot.title = element_text(size = fontSize),
+  #                 legend.position = legendPos) +
+  #           stat_cor(method = "pearson")
+  #         
+  #         code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
+  #                        geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+  #                        geom_smooth(method=lm, se=FALSE) +
+  #                        labs(title = ','"',plotTitle,'"',') +
+  #                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                        theme(axis.text = element_text(size = ', fontSize,'),
+  #                        axis.title.x = element_text(size = ', fontSize,'),
+  #                        axis.title.y = element_text(size = ', fontSize,'),
+  #                        plot.title = element_text(size = ',fontSize,'),
+  #                        legend.position = ','"',legendPos,'"',') +
+  #                        stat_cor(method = "pearson")')
+  #         ls <- list()
+  #         ls[['plot']] <- p
+  #         ls[['code']] <- code
+  #         return(ls)
+  #       } else{
+  #         p <- ggplot(data, aes_string(x,y, color = colorby)) +
+  #           geom_point(size = dotSize, alpha = dotOpa) +
+  #           geom_smooth(method=lm, se=FALSE) +
+  #           labs(title = plotTitle) +
+  #           xlab(title_x) + ylab(title_y) +
+  #           theme(axis.text = element_text(size = fontSize),
+  #                 axis.title.x = element_text(size = fontSize),
+  #                 axis.title.y = element_text(size = fontSize),
+  #                 plot.title = element_text(size = fontSize),
+  #                 legend.position = legendPos)
+  #         
+  #         code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
+  #                        geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+  #                        geom_smooth(method=lm, se=FALSE) +
+  #                        labs(title = ','"',plotTitle,'"',') +
+  #                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                        theme(axis.text = element_text(size = ', fontSize,'),
+  #                        axis.title.x = element_text(size = ', fontSize,'),
+  #                        axis.title.y = element_text(size = ', fontSize,'),
+  #                        plot.title = element_text(size = ',fontSize,'),
+  #                        legend.position = ','"',legendPos,'"',')')
+  #         ls <- list()
+  #         ls[['plot']] <- p
+  #         ls[['code']] <- code
+  #         return(ls)
+  #       } # else ends for correlation condition
+  #     } else{ # no regression line
+  #       p <- ggplot(data, aes_string(x,y, color = colorby)) +
+  #         geom_point(size = dotSize, alpha = dotOpa) +
+  #         labs(title = plotTitle) +
+  #         xlab(title_x) + ylab(title_y) +
+  #         theme(axis.text = element_text(size = fontSize),
+  #               axis.title.x = element_text(size = fontSize),
+  #               axis.title.y = element_text(size = fontSize),
+  #               plot.title = element_text(size = fontSize),
+  #               legend.position = legendPos)
+  #       
+  #       code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
+  #                      geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+  #                      labs(title = ','"',plotTitle,'"',') +
+  #                      xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                      theme(axis.text = element_text(size = ', fontSize,'),
+  #                      axis.title.x = element_text(size = ', fontSize,'),
+  #                      axis.title.y = element_text(size = ', fontSize,'),
+  #                      plot.title = element_text(size = ',fontSize,'),
+  #                      legend.position = ','"',legendPos,'"',')')
+  #       ls <- list()
+  #       ls[['plot']] <- p
+  #       ls[['code']] <- code
+  #       return(ls)
+  #     }# else ends for regressionLine condition
+  #   } # else ends for colorby condition
+  #   
+  # } else{
+  #     if(colorby == 'None'){
+  #         if(regressionLine == TRUE){
+  #           if(correlation == TRUE){
+  #             p <- ggplot(data, aes_string(x,y)) +
+  #               geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+  #               geom_smooth(method=lm, se=FALSE) +
+  #               get(Theme)() +
+  #               labs(title = plotTitle) +
+  #               xlab(title_x) + ylab(title_y) +
+  #               theme(axis.text = element_text(size = fontSize),
+  #                     axis.title.x = element_text(size = fontSize),
+  #                     axis.title.y = element_text(size = fontSize),
+  #                     plot.title = element_text(size = fontSize)) +
+  #               stat_cor(method = "pearson")
+  #             
+  #             code <- paste0('ggplot(data, aes(',x,',',y,')) +
+  #                            geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
+  #                             geom_smooth(method=lm, se=FALSE) +
+  #                            ',Theme,'() +
+  #                             labs(title = ','"',plotTitle,'"',') +
+  #                            xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                            theme(axis.text = element_text(size = ', fontSize,'),
+  #                                   axis.title.x = element_text(size = ', fontSize,'),
+  #                                   axis.title.y = element_text(size = ', fontSize,'),
+  #                                   plot.title = element_text(size = ',fontSize,')) +
+  #                             stat_cor(method = "pearson")')
+  #             ls <- list()
+  #             ls[['plot']] <- p
+  #             ls[['code']] <- code
+  #             return(ls)
+  #             
+  #           } else{
+  #           p <- ggplot(data, aes_string(x,y)) +
+  #             geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+  #             geom_smooth(method=lm, se=FALSE) +
+  #             get(Theme)() +
+  #             labs(title = plotTitle) +
+  #             xlab(title_x) + ylab(title_y) +
+  #             theme(axis.text = element_text(size = fontSize),
+  #                   axis.title.x = element_text(size = fontSize),
+  #                   axis.title.y = element_text(size = fontSize),
+  #                   plot.title = element_text(size = fontSize))
+  #           
+  #           code <- paste0('ggplot(data, aes(',x,',',y,')) +
+  #                          geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
+  #                           geom_smooth(method=lm, se=FALSE) +
+  #                           ',Theme,'() +
+  #                          labs(title = ','"',plotTitle,'"',') +
+  #                          xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                          theme(axis.text = element_text(size = ', fontSize,'),
+  #                                axis.title.x = element_text(size = ', fontSize,'),
+  #                                axis.title.y = element_text(size = ', fontSize,'),
+  #                                plot.title = element_text(size = ',fontSize,'))')
+  #           ls <- list()
+  #           ls[['plot']] <- p
+  #           ls[['code']] <- code
+  #           return(ls)
+  #           }# else ends here for correlation condition
+  #           
+  #         } else{ # no regression line
+  #         p <- ggplot(data, aes_string(x,y)) +
+  #           geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+  #           get(Theme)() +
+  #           labs(title = plotTitle) +
+  #           xlab(title_x) + ylab(title_y) +
+  #           theme(axis.text = element_text(size = fontSize),
+  #                 axis.title.x = element_text(size = fontSize),
+  #                 axis.title.y = element_text(size = fontSize),
+  #                 plot.title = element_text(size = fontSize))
+  #         
+  #         code <- paste0('ggplot(data, aes(',x,',',y,')) +
+  #                         geom_point(size = ',dotSize,', alpha = ',dotOpa,', colour = ','"',colourfill,'"',') +
+  #                         ',Theme,'() +
+  #                         labs(title = ','"',plotTitle,'"',') +
+  #                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                         theme(axis.text = element_text(size = ', fontSize,'),
+  #                                  axis.title.x = element_text(size = ', fontSize,'),
+  #                                  axis.title.y = element_text(size = ', fontSize,'),
+  #                                   plot.title = element_text(size = ',fontSize,'))')
+  #         ls <- list()
+  #         ls[['plot']] <- p
+  #         ls[['code']] <- code
+  #         return(ls)
+  #         } # else ends for regressionLine condition
+  #     } else{
+  #       if(regressionLine == TRUE){
+  #         if(correlation == TRUE){
+  #           p <- ggplot(data, aes_string(x,y, color = colorby)) +
+  #             geom_point(size = dotSize, alpha = dotOpa) +
+  #             geom_smooth(method=lm, se=FALSE) +
+  #             get(Theme)() +
+  #             labs(title = plotTitle) +
+  #             xlab(title_x) + ylab(title_y) +
+  #             theme(axis.text = element_text(size = fontSize),
+  #                   axis.title.x = element_text(size = fontSize),
+  #                   axis.title.y = element_text(size = fontSize),
+  #                   plot.title = element_text(size = fontSize),
+  #                   legend.position = legendPos) +
+  #             stat_cor(method = "pearson")
+  #           
+  #           code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
+  #                          geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+  #                           geom_smooth(method=lm, se=FALSE) +
+  #                           ',Theme,'() +
+  #                          labs(title = ','"',plotTitle,'"',') +
+  #                          xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                          theme(axis.text = element_text(size = ', fontSize,'),
+  #                                axis.title.x = element_text(size = ', fontSize,'),
+  #                                axis.title.y = element_text(size = ', fontSize,'),
+  #                                plot.title = element_text(size = ',fontSize,'),
+  #                                legend.position = ','"',legendPos,'"',') +
+  #                           stat_cor(method = "pearson")')
+  #           ls <- list()
+  #           ls[['plot']] <- p
+  #           ls[['code']] <- code
+  #           return(ls)
+  #         } else{
+  #         p <- ggplot(data, aes_string(x,y, color = colorby)) +
+  #           geom_point(size = dotSize, alpha = dotOpa) +
+  #           geom_smooth(method=lm, se=FALSE) +
+  #           get(Theme)() +
+  #           labs(title = plotTitle) +
+  #           xlab(title_x) + ylab(title_y) +
+  #           theme(axis.text = element_text(size = fontSize),
+  #                 axis.title.x = element_text(size = fontSize),
+  #                 axis.title.y = element_text(size = fontSize),
+  #                 plot.title = element_text(size = fontSize),
+  #                 legend.position = legendPos)
+  #         
+  #         code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
+  #                        geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+  #                         geom_smooth(method=lm, se=FALSE) +
+  #                         ',Theme,'() +
+  #                        labs(title = ','"',plotTitle,'"',') +
+  #                        xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                        theme(axis.text = element_text(size = ', fontSize,'),
+  #                              axis.title.x = element_text(size = ', fontSize,'),
+  #                              axis.title.y = element_text(size = ', fontSize,'),
+  #                              plot.title = element_text(size = ',fontSize,'),
+  #                              legend.position = ','"',legendPos,'"',')')
+  #         ls <- list()
+  #         ls[['plot']] <- p
+  #         ls[['code']] <- code
+  #         return(ls)
+  #         } # else ends for correlation condition
+  #       } else{ # no regression line
+  #         p <- ggplot(data, aes_string(x,y, color = colorby)) +
+  #           geom_point(size = dotSize, alpha = dotOpa) +
+  #           get(Theme)() +
+  #           labs(title = plotTitle) +
+  #           xlab(title_x) + ylab(title_y) +
+  #           theme(axis.text = element_text(size = fontSize),
+  #                 axis.title.x = element_text(size = fontSize),
+  #                 axis.title.y = element_text(size = fontSize),
+  #                 plot.title = element_text(size = fontSize),
+  #                 legend.position = legendPos)
+  #         
+  #         code <- paste0('ggplot(data, aes(',x,',',y, ',' ,'color = ', colorby, ')) + 
+  #                         geom_point(size = ',dotSize,', alpha = ',dotOpa,') +
+  #                         ',Theme,'() +
+  #                         labs(title = ','"',plotTitle,'"',') +
+  #                         xlab(','"',title_x,'"',') + ylab(','"',title_y,'"',') +
+  #                         theme(axis.text = element_text(size = ', fontSize,'),
+  #                                  axis.title.x = element_text(size = ', fontSize,'),
+  #                                  axis.title.y = element_text(size = ', fontSize,'),
+  #                                   plot.title = element_text(size = ',fontSize,'),
+  #                                   legend.position = ','"',legendPos,'"',')')
+  #         ls <- list()
+  #         ls[['plot']] <- p
+  #         ls[['code']] <- code
+  #         return(ls)
+  #       }# else ends for regressionLine condition
+  #     } # else ends for colorby condition
+  # } # else ends for Theme
+
