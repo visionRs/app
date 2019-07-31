@@ -221,7 +221,7 @@ border-radius:20px;
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 2px;
     z-index: 1000;
     display: none;
     float: left;
