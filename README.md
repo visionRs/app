@@ -1,4 +1,4 @@
-<p align="right"><img src="https://github.com/easy-plot/app/blob/master/hexsticker.png" width="200" height="200" /></p>
+<p align="right"><img src="https://github.com/easy-plot/app/blob/master/hexsticker.png" width="180" height="200" /></p>
 
 
 # app
