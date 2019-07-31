@@ -47,7 +47,8 @@ scatter_plot <- function(data=dt,
     theme(axis.text = element_text(size = fontSize),
           axis.title.x = element_text(size = fontSize),
           axis.title.y = element_text(size = fontSize),
-          plot.title = element_text(size = fontSize)) 
+          plot.title = element_text(size = fontSize),
+          legend.position = legendPos)
   if(colorby == "None"){
     print(colorby)
     
