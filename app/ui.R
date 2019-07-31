@@ -18,7 +18,7 @@ ui <- dashboardPage(
                   titleWidth = 300,
                   dropdownActionMenu(id="menu-drpdwn",title= "",icon = icon("chevron-circle-down"),
                                      actionItem("refresh",tags$p(tags$i(class="fa fa-refresh fa-spin",style="font-size:12px"),HTML("&nbsp;")," Reload Data")),
-                                     actionItem("github","Report Issue" ,icon = icon("exclamation-triangle"),onclick_event = "window.open('https://github.com/rushabhpatel31/Model-Evaluation-Tool/issues', '_blank')")
+                                     actionItem("github","Report Issue" ,icon = icon("exclamation-triangle"),onclick_event = "window.open('https://github.com/easy-plot/app/issues', '_blank')")
                   )
                   # tags$li(id="refresh1",a(onclick = "window.location.href=window.location.href",
                   #                         href = NULL,
