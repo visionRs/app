@@ -9,7 +9,7 @@
 server = function(input, output, session) {
   
   #___3.1 SERVER: Refresh Function--------------
-  observeEvent(input$refresh1, {
+  observeEvent(input$refresh, {
     shinyjs::js$refresh()
   }) 
   
