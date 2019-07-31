@@ -47,6 +47,7 @@ gg <- ggplot() +
   trans_rect +
   theme_void() + guides(alpha = FALSE) + theme(axis.line=element_blank()) +
   scale_alpha_continuous(range = c(0, alpha_max))
+## print(gg)
 
 sticker(gg, package="ggQuickPlot", p_size = 5.5, p_y = 1.25, s_x = 0.89,
         s_y = 1.08, s_width = 1.04, s_height = 1.7, p_color = col_text,
@@ -56,8 +57,8 @@ sticker(gg, package="ggQuickPlot", p_size = 5.5, p_y = 1.25, s_x = 0.89,
 
 set.seed(123)
 sticker(gg, package="ggQuickPlot", p_size = 5, p_y = 1.48, s_x = 1,
-        s_y = 0.8, s_width = 1.04, s_height = 1.7, p_color = "#5C97BF",h_size = 0.5 ,
+        s_y = 0.8, s_width = 1.04, s_height = 1, p_color = "#5C97BF",h_size = 0.5 ,
         h_fill = col_bg, h_color = "#bfbab6", spotlight = TRUE,
-        filename="hexsticker.png", l_x = 1, l_y = 1, l_alpha = 0.1,l_width = 5.5,l_height = 5.5,
+        filename="hexsticker.png", l_x = 1, l_y = 1, l_alpha = 0.1,l_width = 5,l_height = 5,
         p_family = "Aller_Lt", u_color = col_border)
 

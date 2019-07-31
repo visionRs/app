@@ -53,9 +53,12 @@ server = function(input, output, session) {
     # update plot parameter dropdowns
     colorby.choices <- append(colnames(data()),'None')
     updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
+    print(input$colorby == 'None')
+    
   })
   
   #___3.4 SERVER : Displaying Data (sanity check!) ---------
+ 
   output$tabout <- renderTable({
     
     if(is.null(data())){
@@ -68,8 +71,21 @@ server = function(input, output, session) {
   
   #___3.5.1 INPUT TYPE CHECK: All 3 Conditions Covered ---------
   
+  
+  observeEvent(input$colorby,{
+    
+    if(input$colorby != 'None'){
+      shinyjs::disable('colfill')
+    }
+    
+    if(input$colorby == 'None'){
+      shinyjs::enable('colfill')
+    }
+  })
+  
   observeEvent(c(input$selectX,input$selectY), {
     dt <- data()
+   
     if((!is.numeric(dt[[input$selectX]]) & !is.numeric(dt[[input$selectY]])) | (is.null(dt[[input$selectX]]) & is.null(dt[[input$selectY]])) | is.null(dt[[input$selectX]])){
       shinyjs::disable("Bar")
       shinyjs::disable("Histogram")
@@ -225,7 +241,7 @@ server = function(input, output, session) {
                    Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                    plotTitle = input$titleTextBox,
                    colourfill = input$colfill,
-                   colorby = if(input$colorby=="None"){"NULL"}else{input$colorby},
+                   colorby = input$colorby,
                    fontSize = input$axisFont,
                    legendPos = input$legendPosition,
                    dotSize = input$dotSize,
@@ -244,7 +260,7 @@ server = function(input, output, session) {
                    Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                    plotTitle = input$titleTextBox,
                    colourfill = input$colfill,
-                   colorby = if(input$colorby=="None"){"NULL"}else{input$colorby},
+                   colorby = input$colorby,
                    fontSize = input$axisFont,
                    legendPos = input$legendPosition,
                    dotSize = input$dotSize,

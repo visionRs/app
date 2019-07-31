@@ -18,17 +18,21 @@ scatter_plot <- function(data=dt,
                          regressionLine=FALSE, 
                          correlation=FALSE) {
   
-  p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'NULL','NULL',colorby) )) +
-    geom_point(size = dotSize, alpha = dotOpa, colour = colourfill) +
+  p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby) )) +
+    geom_point(size = dotSize, alpha = dotOpa) +
     eval(parse(text=as.character(Theme))) +
     labs(title = plotTitle) +
     xlab(title_x) + ylab(title_y) +
     theme(axis.text = element_text(size = fontSize),
           axis.title.x = element_text(size = fontSize),
           axis.title.y = element_text(size = fontSize),
-          plot.title = element_text(size = fontSize))
-  
-  
+          plot.title = element_text(size = fontSize)) 
+  if(colorby == "None"){
+    print(colorby)
+    
+    p <- p + geom_point(color=colourfill)
+  } 
+
   code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='NULL',')) +', paste0(',' ,'color = ',colorby, ')) +')),' 
                   geom_point(size = ',dotSize, ',alpha = ',dotOpa, ifelse(colorby=='NULL', paste0(', colour = ', '"' ,colourfill,'"',') +'),' ) +'),
                  ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
