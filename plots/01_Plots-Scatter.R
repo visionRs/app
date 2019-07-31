@@ -1,3 +1,24 @@
+#' @title Bar Plot Code
+#' @description Helper function to generate bar plot based on different conditions.
+#' @param data data.frame - Passed from shiny enviornment
+#' @param x character- This is x variable for aesthitic, supplied from shiny enviornment.
+#' @param y character- This is y variable for aesthitic, supplied from shiny enviornment.
+#' @param colorby character - Parameter used to colorby plot. (defaults to None).
+#' @param colourfill character - Parameter used to colour plot.
+#' @param Theme character- parameter to change plot theme. (defaults to None).
+#' @param fontsize numeric- This parameter controls fontsize for x-y titles, x-y ticks labels. (defaults to 10).
+#' @param legendPos character- Adjust Legend position (defaults to right)
+#' @param title_x character- Set x axis title.
+#' @param title_y character- Set y axis title.
+#' @param plotTitle character- Set plot title.
+#' @param dotSize numeric- Set size of dots.
+#' @param dotOpa numeric- Set opacity of dots.
+#' @param regressionLine checkbox- to add regression line to plot.
+#' @param correlation checkbox- to calculate pearson correlation.
+#' @return returns H2OFrame
+#' @export
+
+
 #1 PLOTS CODE: --------------------------------
 
 
