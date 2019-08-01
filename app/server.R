@@ -303,7 +303,8 @@ server = function(input, output, session) {
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
                 title_y = input$titleY,
-                lineType = input$lineplot_extra_param)$plot
+                lineType = input$lineplot_extra_param,
+                dots = input$dotLine)$plot
     
     
     #______4.3.1 GGPLOT Code--------------------
@@ -319,7 +320,8 @@ server = function(input, output, session) {
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
                 title_y = input$titleY,
-                lineType = input$lineplot_extra_param)$code
+                lineType = input$lineplot_extra_param,
+                dots = input$dotLine)$code
     
   })
   

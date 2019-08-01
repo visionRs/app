@@ -12,7 +12,8 @@ line_plot <- function(data=dt,
                       title_x, 
                       title_y, 
                       plotTitle, 
-                      lineType) {
+                      lineType,
+                      dots) {
   
   p <-  ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby) ))
     #geom_line() +
@@ -40,8 +41,13 @@ line_plot <- function(data=dt,
             legend.position = legendPos)
   }
   
+  if(dots == TRUE){
+    p <-  p + geom_point()
+  }
+  
   code <- paste0('ggplot(data, aes(',x,',', y, ifelse(colorby == 'None',')) +',paste0(', color =',colorby,')) + ')),
-                 'geom_line(',ifelse(lineType == 'solid', paste0(') +'), paste0('linetype = ',lineType, ') +') ),
+                 'geom_line(',ifelse(lineType == 'solid', paste0(') + '), paste0('linetype = ',lineType, ') + ') ),
+                 ifelse(dots == TRUE, paste0('geom_point() + '),''),
                  ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
                  ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),
                  ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + ')),

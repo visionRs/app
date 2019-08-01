@@ -153,7 +153,8 @@ ui <- dashboardPage(
                                                                                                                               'longdash',
                                                                                                                               'dotted',
                                                                                                                               'dotdash',
-                                                                                                                              'dashed'), selected = 'solid')
+                                                                                                                              'dashed'), selected = 'solid'),
+                                                checkboxInput(inputId ="dotLine", "Add Points to plot", value = FALSE)
                                )
                                
                 )
