@@ -136,6 +136,7 @@ ui <- dashboardPage(
                                ),
                                conditionalPanel(condition = "input.Scatter",
                                                 box(id = 'scatter_extra_params', width =12,
+                                                    selectInput(inputId = 'shapeBy', label = 'Shape by', choices = c('None')),
                                                     sliderInput(inputId = 'dotSize', label = 'Dot Size', value = 2, min = 1, max = 20),
                                                     sliderInput(inputId = 'dotOpa', label = 'Dot opacity', value = 0.7, min = 0, max = 1),
                                                     box(title = "Regression", width = 12,

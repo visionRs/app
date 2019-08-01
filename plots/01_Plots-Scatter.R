@@ -29,6 +29,7 @@ scatter_plot <- function(data=dt,
                          Theme=NULL, 
                          colourfill='#00FF0080', 
                          colorby='None', 
+                         shapeby,
                          fontSize=10, 
                          legendPos='right', 
                          dotSize=2, 
@@ -41,7 +42,7 @@ scatter_plot <- function(data=dt,
   
 
   
-  p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby) ))
+  p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby), shape = ifelse(shapeby == 'None','NULL',shapeby)))
   if(colorby == "None"){
     
     p <- p + geom_point(size = dotSize, alpha = dotOpa, color=colourfill) +
@@ -65,8 +66,12 @@ scatter_plot <- function(data=dt,
             legend.position = legendPos)
   }
 
-  code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='None',')) +', paste0(',' ,'color = ',colorby, ')) +')),' 
-                  geom_point(size = ',dotSize, ',alpha = ',dotOpa, ifelse(colorby=='NULL', paste0(', colour = ', '"' ,colourfill,'"',') +'),' ) +'),
+  code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='None' & shapeby == 'None',')) +',
+                                                           ifelse(colorby == 'None' & shapeby != 'None', paste0(',' ,'shape = ',shapeby, ')) +'),
+                                                                  ifelse(colorby != 'None' & shapeby == 'None', paste0(',' ,'color = ',colorby, ')) +'),
+                                                                         ifelse(colorby !='None' & shapeby != 'None', paste0(',' ,'color = ',colorby, ',' ,'shape = ',shapeby, ')) +'))
+                                                                  ))),
+                  'geom_point(size = ',dotSize, ',alpha = ',dotOpa, ifelse(colorby=='NULL', paste0(', colour = ', '"' ,colourfill,'"',') +'),' ) +'),
                  ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
                  ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),
                  ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + ')),

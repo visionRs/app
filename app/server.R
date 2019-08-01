@@ -53,7 +53,12 @@ server = function(input, output, session) {
     # update plot parameter dropdowns
     colorby.choices <- append(colnames(data()),'None')
     updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
-    print(input$colorby == 'None')
+    
+    # update shaby choices scatterplot parameter dropdowns
+    # only factor variables will be populated in the dropdown
+    shapeby.choices <-  c(names(data())[ sapply(data(), is.factor)],  'None')
+    updateSelectInput(session, inputId = "shapeBy", choices=shapeby.choices, selected = 'None')
+    
     
   })
   
@@ -253,6 +258,7 @@ server = function(input, output, session) {
                    plotTitle = input$titleTextBox,
                    colourfill = input$colfill,
                    colorby = input$colorby,
+                   shapeby = input$shapeBy,
                    fontSize = input$axisFont,
                    legendPos = input$legendPosition,
                    dotSize = input$dotSize,
@@ -272,6 +278,7 @@ server = function(input, output, session) {
                    plotTitle = input$titleTextBox,
                    colourfill = input$colfill,
                    colorby = input$colorby,
+                   shapeby = input$shapeBy,
                    fontSize = input$axisFont,
                    legendPos = input$legendPosition,
                    dotSize = input$dotSize,
