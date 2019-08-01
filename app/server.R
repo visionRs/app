@@ -197,9 +197,12 @@ server = function(input, output, session) {
     list_both$plot <-
       histogram(data = data(),
                 x=input$selectX,
-                Theme = input$themeSelect,
+                Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                 plotTitle = input$titleTextBox,
                 fontSize = input$axisFont,
+                colourfill = input$colfill,
+                colorby = input$colorby,
+                legendPos = input$legendPosition,
                 title_x = input$titleX,
                 title_y = input$titleY)$plot
     
@@ -210,9 +213,12 @@ server = function(input, output, session) {
     list_both$code <-
       histogram(data = data(),
                 x=input$selectX,
-                Theme = input$themeSelect,
+                Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                 plotTitle = input$titleTextBox,
                 fontSize = input$axisFont,
+                colourfill = input$colfill,
+                colorby = input$colorby,
+                legendPos = input$legendPosition,
                 title_x = input$titleX,
                 title_y = input$titleY)$code
     
