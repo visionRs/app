@@ -155,6 +155,9 @@ ui <- dashboardPage(
                                                                                                                               'dotdash',
                                                                                                                               'dashed'), selected = 'solid'),
                                                 checkboxInput(inputId ="dotLine", "Add Points to plot", value = FALSE)
+                               ),
+                               conditionalPanel(condition = "input.Box",
+                                                checkboxInput(inputId ="addJitter", "Add Jitter", value = FALSE)
                                )
                                
                 )

@@ -141,6 +141,8 @@ server = function(input, output, session) {
     #________4.0.0.1 hiding scatter specific advance options
     shinyjs::hide("scatter_extra_params")
     shinyjs::hide("lineplot_extra_param")
+    shinyjs::hide("dotLine")
+    shinyjs::hide("addJitter")
     #________4.0.0.2 Showing Bar specific advance options
     shinyjs::show("barplot_extra_param")
     
@@ -186,10 +188,11 @@ server = function(input, output, session) {
   #___4.1 PLOTS CODE: Histogram Plot Code--------------------
   
   observeEvent(input$Histogram,{
-    # hiding Bar specific advance options
+    #________4.1.0.1 hiding scatter specific advance options
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("lineplot_extra_param")
-    # hiding Scatter specific advance options
+    shinyjs::hide("dotLine")
+    shinyjs::hide("addJitter")
     shinyjs::hide("scatter_extra_params")
     
     #______4.1.0 Plot Code--------------------
@@ -233,10 +236,12 @@ server = function(input, output, session) {
   
   observeEvent(input$Scatter,{
     
-    # hiding Bar specific advance options
+    #________4.2.0.1 hiding scatter specific advance options
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("lineplot_extra_param")
-    # Showing Scatter specific advance options
+    shinyjs::hide("dotLine")
+    shinyjs::hide("addJitter")
+    #________4.2.0.2 Showing scatter specific advance options
     shinyjs::show("scatter_extra_params")
     
     #______4.2.0 Plot Code--------------------
@@ -284,11 +289,13 @@ server = function(input, output, session) {
   #___4.3 PLOTS CODE: Line Plot Code------------------
   
   observeEvent(input$Line,{
-    shinyjs::show("lineplot_extra_param")
-    # hiding Bar specific advance options
+    #________4.3.0.1 hiding Line specific advance options
+    shinyjs::hide("addJitter")
     shinyjs::hide("barplot_extra_param")
-    # hiding Scatter specific advance options
     shinyjs::hide("scatter_extra_params")
+    #________4.3.0.2 Show Line specific advance options
+    shinyjs::show("lineplot_extra_param")
+    shinyjs::show("dotLine")
     
     #______4.3.0 Plot Code--------------------
     list_both$plot <-
@@ -329,11 +336,13 @@ server = function(input, output, session) {
   
   observeEvent(input$Box,{
     
-    # hiding Bar specific advance options
+    #________4.4.0.1 hiding specific advance options
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("lineplot_extra_param")
-    # hiding Scatter specific advance options
+    shinyjs::hide("dotLine")
     shinyjs::hide("scatter_extra_params")
+    #________4.4.0.2 Showing Box specific advance options
+    shinyjs::show("addJitter")
     
     #______4.4.0 Plot Code--------------------
     list_both$plot <-
@@ -347,7 +356,8 @@ server = function(input, output, session) {
                  fontSize = input$axisFont,
                  legendPos = input$legendPosition,
                  title_x = input$titleX,
-                 title_y = input$titleY)$plot
+                 title_y = input$titleY,
+                jitter = input$addJitter)$plot
     
     
     #______4.4.1 GGPLOT Code--------------------
@@ -362,7 +372,8 @@ server = function(input, output, session) {
                  fontSize = input$axisFont,
                  legendPos = input$legendPosition,
                  title_x = input$titleX,
-                 title_y = input$titleY)$code
+                 title_y = input$titleY,
+                jitter = input$addJitter)$code
     
   })
   

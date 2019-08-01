@@ -12,7 +12,8 @@ box_plot <- function(data=NULL,
                      legendPos,
                      title_x, 
                      title_y, 
-                     plotTitle) {
+                     plotTitle,
+                     jitter) {
   
   p <- ggplot(data, aes_string(paste0("factor(",x,")"),y, fill = ifelse(colorby == 'None','NULL',colorby) ))
     
@@ -38,6 +39,10 @@ box_plot <- function(data=NULL,
             axis.title.y = element_text(size = fontSize),
             plot.title = element_text(size = fontSize),
             legend.position = legendPos)
+  }
+  
+  if(jitter == TRUE){
+    p <-  p + geom_jitter()
   }
   
   code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='None',')) +', paste0(',' ,'fill = ',colorby, ')) +')),' 
