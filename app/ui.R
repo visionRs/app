@@ -148,12 +148,12 @@ ui <- dashboardPage(
                                                 )
                                ),# end of input.scatter conditional panel  
                                conditionalPanel(condition = "input.Line",
-                                                selectInput(inputId = 'lineplot_extra_param', label = 'Line type', choices = c('solid'='solid',
-                                                                                                                              'twodash'='twodash',
-                                                                                                                              'longdash'='longdash',
-                                                                                                                              'dotted'='dotted',
-                                                                                                                              'dotdash'='dotdash',
-                                                                                                                              'dashed'='dashed'))
+                                                selectInput(inputId = 'lineplot_extra_param', label = 'Line type', choices = c('solid',
+                                                                                                                              'twodash',
+                                                                                                                              'longdash',
+                                                                                                                              'dotted',
+                                                                                                                              'dotdash',
+                                                                                                                              'dashed'), selected = 'solid')
                                )
                                
                 )

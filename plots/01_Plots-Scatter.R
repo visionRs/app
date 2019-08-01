@@ -39,23 +39,33 @@ scatter_plot <- function(data=dt,
                          regressionLine=FALSE, 
                          correlation=FALSE) {
   
-  p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby) )) +
-    geom_point(size = dotSize, alpha = dotOpa) +
-    eval(parse(text=as.character(Theme))) +
-    labs(title = plotTitle) +
-    xlab(title_x) + ylab(title_y) +
-    theme(axis.text = element_text(size = fontSize),
-          axis.title.x = element_text(size = fontSize),
-          axis.title.y = element_text(size = fontSize),
-          plot.title = element_text(size = fontSize),
-          legend.position = legendPos)
-  if(colorby == "None"){
-    print(colorby)
-    
-    p <- p + geom_point(color=colourfill)
-  } 
 
-  code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='NULL',')) +', paste0(',' ,'color = ',colorby, ')) +')),' 
+  
+  p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby) ))
+  if(colorby == "None"){
+    
+    p <- p + geom_point(size = dotSize, alpha = dotOpa, color=colourfill) +
+      eval(parse(text=as.character(Theme))) +
+      labs(title = plotTitle) +
+      xlab(title_x) + ylab(title_y) +
+      theme(axis.text = element_text(size = fontSize),
+            axis.title.x = element_text(size = fontSize),
+            axis.title.y = element_text(size = fontSize),
+            plot.title = element_text(size = fontSize),
+            legend.position = legendPos)
+  } else{
+    p <- p + geom_point(size = dotSize, alpha = dotOpa) +
+      eval(parse(text=as.character(Theme))) +
+      labs(title = plotTitle) +
+      xlab(title_x) + ylab(title_y) +
+      theme(axis.text = element_text(size = fontSize),
+            axis.title.x = element_text(size = fontSize),
+            axis.title.y = element_text(size = fontSize),
+            plot.title = element_text(size = fontSize),
+            legend.position = legendPos)
+  }
+
+  code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='None',')) +', paste0(',' ,'color = ',colorby, ')) +')),' 
                   geom_point(size = ',dotSize, ',alpha = ',dotOpa, ifelse(colorby=='NULL', paste0(', colour = ', '"' ,colourfill,'"',') +'),' ) +'),
                  ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
                  ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),
@@ -71,7 +81,7 @@ scatter_plot <- function(data=dt,
     p <- p + geom_smooth(method=lm, se=FALSE) + stat_cor(method = "pearson")
     
     code <-  paste0(code, '+ geom_smooth(method=lm, se=FALSE) + stat_cor(method = "pearson")')
-  } else if(regressionLine == TRUE & correlation == FALSE) {
+  } else if(regressionLine == TRUE & correlation == "NULL") {
     p <- p + geom_smooth(method=lm, se=FALSE)
     code <-  paste0(code, '+ geom_smooth(method=lm, se=FALSE)')
   }

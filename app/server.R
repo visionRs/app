@@ -295,14 +295,15 @@ server = function(input, output, session) {
       line_plot(data = data(),
                 x=input$selectX,
                 y=input$selectY,
-                Theme = input$themeSelect,
+                Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                 plotTitle = input$titleTextBox,
                 colourfill = input$colfill,
                 colorby = input$colorby,
                 fontSize = input$axisFont,
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
-                title_y = input$titleY)$plot
+                title_y = input$titleY,
+                lineType = input$lineplot_extra_param)$plot
     
     
     #______4.3.1 GGPLOT Code--------------------
@@ -310,14 +311,15 @@ server = function(input, output, session) {
       line_plot(data = data(),
                 x=input$selectX,
                 y=input$selectY,
-                Theme = input$themeSelect,
+                Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                 plotTitle = input$titleTextBox,
                 colourfill = input$colfill,
                 colorby = input$colorby,
                 fontSize = input$axisFont,
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
-                title_y = input$titleY)$code
+                title_y = input$titleY,
+                lineType = input$lineplot_extra_param)$code
     
   })
   
