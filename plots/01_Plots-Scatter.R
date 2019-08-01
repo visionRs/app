@@ -45,27 +45,21 @@ scatter_plot <- function(data=dt,
   
   p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby), shape = ifelse(shapeby == 'None','NULL',shapeby)))
   if(colorby == "None"){
-    
-    p <- p + geom_point(size = dotSize, alpha = dotOpa, color=colourfill) +
-      eval(parse(text=as.character(Theme))) +
-      labs(title = plotTitle) +
-      xlab(title_x) + ylab(title_y) +
-      theme(axis.text = element_text(size = fontSize),
-            axis.title.x = element_text(size = fontSize),
-            axis.title.y = element_text(size = fontSize),
-            plot.title = element_text(size = fontSize),
-            legend.position = legendPos)
+    p <- p + geom_point(size = dotSize, alpha = dotOpa, color=colourfill)
+      
   } else{
-    p <- p + geom_point(size = dotSize, alpha = dotOpa) +
-      eval(parse(text=as.character(Theme))) +
-      labs(title = plotTitle) +
-      xlab(title_x) + ylab(title_y) +
-      theme(axis.text = element_text(size = fontSize),
-            axis.title.x = element_text(size = fontSize),
-            axis.title.y = element_text(size = fontSize),
-            plot.title = element_text(size = fontSize),
-            legend.position = legendPos)
+    p <- p + geom_point(size = dotSize, alpha = dotOpa)
+     
   }
+  
+  p <-  p + eval(parse(text=as.character(Theme))) +
+    labs(title = plotTitle) +
+    xlab(title_x) + ylab(title_y) +
+    theme(axis.text = element_text(size = fontSize),
+          axis.title.x = element_text(size = fontSize),
+          axis.title.y = element_text(size = fontSize),
+          plot.title = element_text(size = fontSize),
+          legend.position = legendPos)
 
   code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='None' & shapeby == 'None',')) +',
                                                            ifelse(colorby == 'None' & shapeby != 'None', paste0(',' ,'shape = ',shapeby, ')) +'),
