@@ -28,9 +28,11 @@ bar_plot <- function(data=NULL,
                      legendPos='right',
                      title_x='',
                      title_y='',
+                     colourfill='#00FF0080',
                      plotTitle='') {
   
-  p <- ggplot(data, aes_string(x, y, fill = ifelse(colorby=="None",NULL,colorby))) +
+  print(colourfill)
+  p <- ggplot(data, aes_string(x, y, fill =ifelse(colorby == 'None', shQuote("None"), colorby) )) +
     geom_bar(stat="identity") +
     eval(parse(text=as.character(Theme))) +
     labs(title = plotTitle) +
@@ -40,8 +42,12 @@ bar_plot <- function(data=NULL,
           axis.title.y = element_text(size = fontSize),
           plot.title = element_text(size = fontSize),
           legend.position = legendPos)
-  
-  code <-paste0('ggplot(', 'aes(', x, ',', y, ifelse(colorby=="None",'',paste0(',' ,'fill = ',colorby, ')) +')),' 
+
+  if(colorby=='None'){
+    
+    p <- p + scale_fill_manual(values = colourfill) + theme(legend.position = 'none')
+  }
+  code <-paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=="None",paste0(', fill=', colourfill, ')) + '),paste0(',' ,'fill = ',colorby, ')) +')),' 
                 geom_bar(stat="identity") +',
                 ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
                 ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),
@@ -53,6 +59,7 @@ bar_plot <- function(data=NULL,
                                                                       plot.title = element_text(size = ',fontSize,'),
                                                                       legend.position = ','"',legendPos,'"',')'))
                 )
+  print(code)
   ls <- list()
   ls[['plot']] <- p
   ls[['code']] <- code
