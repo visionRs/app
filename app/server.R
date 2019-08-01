@@ -339,14 +339,30 @@ server = function(input, output, session) {
     list_both$plot <-
       box_plot(data = data(),
                 x=input$selectX,
-                y=input$selectY)$plot
+                y=input$selectY,
+                 plotTitle = input$titleTextBox,
+                 Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
+                 colourfill  = input$colfill,
+                 colorby = input$colorby,
+                 fontSize = input$axisFont,
+                 legendPos = input$legendPosition,
+                 title_x = input$titleX,
+                 title_y = input$titleY)$plot
     
     
     #______4.4.1 GGPLOT Code--------------------
     list_both$code <- 
       box_plot(data = data(),
                 x=input$selectX,
-                y=input$selectY)$code
+                y=input$selectY,
+                 plotTitle = input$titleTextBox,
+                 Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
+                 colourfill  = input$colfill,
+                 colorby = input$colorby,
+                 fontSize = input$axisFont,
+                 legendPos = input$legendPosition,
+                 title_x = input$titleX,
+                 title_y = input$titleY)$code
     
   })
   
