@@ -100,6 +100,19 @@ ui <- dashboardPage(
                   conditionalPanel(condition = "input.rename_axes == 1",
                                    textInput(inputId = "titleX", label = 'X axis title', value = ''),
                                    textInput(inputId = "titleY", label = 'Y axis title', value = '')
+                                   
+                  ),
+                  checkboxInput(inputId ="showFacet", "Show facets", value = FALSE),
+                  conditionalPanel(condition = "input.showFacet == 1",
+                                   checkboxInput(inputId ="facetRow", "Facet by row", value = FALSE),
+                                   conditionalPanel(condition = "input.facetRow ==1",
+                                                    selectInput(inputId = "selectFacetRow", label = "Select variable", choices = 'None')
+                                   ),
+                                   checkboxInput(inputId ="facetCol", "Facet by column", value = FALSE),
+                                   conditionalPanel(condition = "input.facetCol ==1",
+                                                    selectInput(inputId = "selectFacetCol", label = "Select variable", choices = 'None')
+                                   )
+                                   
                   )
                   
                 )),

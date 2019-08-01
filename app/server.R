@@ -59,6 +59,10 @@ server = function(input, output, session) {
     shapeby.choices <-  c(names(data())[ sapply(data(), is.factor)],  'None')
     updateSelectInput(session, inputId = "shapeBy", choices=shapeby.choices, selected = 'None')
     
+    # update facet row and col selectInputs (only factor vars)
+    facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+    updateSelectInput(session, inputId = "selectFacetRow", choices=shapeby.choices, selected = 'None')
+    updateSelectInput(session, inputId = "selectFacetCol", choices=shapeby.choices, selected = 'None')
     
   })
   
@@ -266,7 +270,9 @@ server = function(input, output, session) {
                    title_x = input$titleX,
                    title_y = input$titleY,
                    regressionLine = if(input$regLine==FALSE){"NULL"}else{input$regLine},
-                   correlation = if(input$corr==FALSE){"NULL"}else{input$corr})$plot
+                   correlation = if(input$corr==FALSE){"NULL"}else{input$corr},
+                   facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                   facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
     
     
     #______4.2.1 GGPLOT Code--------------------
@@ -286,7 +292,9 @@ server = function(input, output, session) {
                    title_x = input$titleX,
                    title_y = input$titleY,
                    regressionLine = if(input$regLine==FALSE){"NULL"}else{input$regLine},
-                   correlation = if(input$corr==FALSE){"NULL"}else{input$corr})$code
+                   correlation = if(input$corr==FALSE){"NULL"}else{input$corr},
+                   facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                   facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
     
     
     

@@ -38,9 +38,10 @@ scatter_plot <- function(data=dt,
                          title_y ='', 
                          plotTitle ='',
                          regressionLine=FALSE, 
-                         correlation=FALSE) {
+                         correlation=FALSE,
+                         facetRow,
+                         facetCol) {
   
-
   
   p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby), shape = ifelse(shapeby == 'None','NULL',shapeby)))
   if(colorby == "None"){
@@ -90,6 +91,21 @@ scatter_plot <- function(data=dt,
     p <- p + geom_smooth(method=lm, se=FALSE)
     code <-  paste0(code, '+ geom_smooth(method=lm, se=FALSE)')
   }
+  
+  if(facetRow != 'None' & facetCol != 'None'){
+    p <-  p + facet_grid(as.formula(paste0(facetRow, "~", facetCol)))
+    code <- paste0(code,'+ facet_grid(',facetRow,' ~ ',facetCol,')')
+  }
+  if(facetRow != 'None' & facetCol == 'None'){
+    p <-  p + facet_grid(as.formula(paste0(facetRow, "~ .")))
+    code <- paste0(code,'+ facet_grid(',facetRow,' ~ .)')
+  }
+  if(facetRow == 'None' & facetCol != 'None'){
+    p <-  p + facet_grid(as.formula(paste0(". ~", facetCol)))
+    code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
+  }
+  
+
   
   
   ls <- list()
