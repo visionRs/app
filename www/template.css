@@ -278,3 +278,6 @@ display: block;
     padding: 0px;
     position: relative;
 }
+
+div.copying { background-color: yellow; }
+div.copying .nocopy { display: none; }

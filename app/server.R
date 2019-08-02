@@ -251,6 +251,9 @@ server = function(input, output, session) {
       rv$last_btn = "Histogram"
     }
     
+    
+    
+    
     # update plot parameter dropdowns
     colorby.choices <- append(colnames(data()),'None')
     updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
@@ -501,7 +504,12 @@ server = function(input, output, session) {
   })
   
   #6. Final RenderText Code for GGPLOT----------------------
-  output$code <- renderText({
+  output$clip <- renderUI({
+    rclipButton("clipbtn", "Copy", list_both$code, icon("clipboard"))
+    
+  })
+
+  output$code <- renderUI({
     
     if (is.null(list_both$code)) return()
     isolate({

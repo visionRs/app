@@ -11,6 +11,8 @@ library(dplyr)
 library(tidyverse)
 library(colourpicker)
 library(ggpubr)
+library(rclipboard)
+
 
 ui <- dashboardPage(
   # 1. HEADER here----
@@ -49,6 +51,8 @@ ui <- dashboardPage(
   dashboardBody(
     includeCSS("../www/template.css"),
     shinyjs::useShinyjs(),
+    rclipboardSetup(),
+    
     tags$head(tags$script(HTML("$(document).on('click', '.needed', function () {
                                 Shiny.onInputChange('last_btn',this.id);
                                });"))),
@@ -245,7 +249,9 @@ ui <- dashboardPage(
                         
                       ),
                       
-                      htmlOutput('code')
+                      htmlOutput('code'),
+                      uiOutput("clip")
+                      
                       )
                   
               ),
@@ -262,7 +268,9 @@ ui <- dashboardPage(
                         icon = icon("sliders"),
                         block = TRUE
                       ),
-                      withSpinner(plotOutput('plot',height = '650px'),color = '#3c8dbc'),value = 'plot6',status = "primary"
+                      withSpinner(plotOutput('plot',height = '650px'),color = '#3c8dbc'),
+                      
+                      value = 'plot6',status = "primary"
                       
                   ) # end of tabBox 
               )#end of div
