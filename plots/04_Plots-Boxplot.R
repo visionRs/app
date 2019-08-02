@@ -17,7 +17,14 @@ box_plot <- function(data=NULL,
                      facetRow,
                      facetCol) {
   
-  p <- ggplot(data, aes_string(paste0("factor(",x,")"),y, fill = ifelse(colorby == 'None','NULL',colorby) ))
+  # generate colors dynamically
+  if(length(unique(factor(data[[colorby]]))) > 5){
+  size <- unique(data[[x]])
+  cols <-  gg_fill_hue(length(size))
+  }
+  
+  p <- ggplot(data, aes_string(paste0("factor(",x,")"),y, fill = ifelse(colorby == 'None','NULL', paste0('factor(',colorby,')')) )) + 
+              scale_fill_manual(values = c(cols))
     
   if(colorby == "None"){
     p <- p + geom_boxplot(fill = colourfill)
@@ -25,7 +32,8 @@ box_plot <- function(data=NULL,
     p <- p + geom_boxplot()
   }
   
-  p <-  p + eval(parse(text=as.character(Theme))) +
+  p <-  p +
+    eval(parse(text=as.character(Theme))) +
     labs(title = plotTitle) +
     xlab(title_x) + ylab(title_y) +
     theme(axis.text = element_text(size = fontSize),
