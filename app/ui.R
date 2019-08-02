@@ -157,6 +157,16 @@ ui <- dashboardPage(
                                conditionalPanel(condition = "input.Bar",
                                                 selectInput(inputId = 'barplot_extra_param', label = 'Barplot specific Input', choices = c('None'))
                                ),
+                               conditionalPanel(condition = "input.Histogram",
+                                                materialSwitch(
+                                                  inputId = "hist_density",
+                                                  label = "Density", 
+                                                  value = FALSE,
+                                                  status = "primary"
+                                                )
+                                                
+                               ),
+                               
                                conditionalPanel(condition = "input.Scatter",
                                                 box(id = 'scatter_extra_params', width =12,
                                                     selectInput(inputId = 'shapeBy', label = 'Shape by', choices = c('None')),
@@ -198,7 +208,7 @@ ui <- dashboardPage(
             #__3.1 Info boxes ---------------
             fluidRow(
               div(class="input_box", 
-                  box(status = "primary",width = "3",height="645px",
+                  box(status = "primary",width = "3",height="750px",
                       h4("Select input params:"),
                       
                       switchInput(inputId = "read_dt", 
@@ -216,7 +226,7 @@ ui <- dashboardPage(
                       ),
                       selectInput(
                         inputId = "tableName", label = "Select R Env Data ",
-                        selected = "None", multiple = FALSE,
+                        selected = "None", multiple = F,
                         choices = c(temp,"None")),
                       
                       
@@ -235,14 +245,14 @@ ui <- dashboardPage(
                         
                       ),
                       
-                      tags$h4(tags$b("Code :") ,tags$br(),tags$br(),verbatimTextOutput('code'),color = '#3c8dbc')
-                  )
+                      htmlOutput('code')
+                      )
                   
               ),
               
               div(class="output_box", 
                   #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
-                  box(width="9",
+                  box(width="9",height = '750px',
                       title = "",
                       actionBttn(
                         inputId = "update_bttn",
@@ -252,7 +262,7 @@ ui <- dashboardPage(
                         icon = icon("sliders"),
                         block = TRUE
                       ),
-                      withSpinner(plotOutput('plot',height = '563px'),color = '#3c8dbc'),value = 'plot6',status = "primary"
+                      withSpinner(plotOutput('plot',height = '650px'),color = '#3c8dbc'),value = 'plot6',status = "primary"
                       
                   ) # end of tabBox 
               )#end of div

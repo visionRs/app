@@ -20,6 +20,7 @@
 #1.1 PLOTS CODE: Bar Plot---------------------
 
 bar_plot <- function(data=NULL,
+                     df_name=NULL,
                      x=NULL,
                      y=NULL, 
                      colorby="None",
@@ -50,19 +51,20 @@ bar_plot <- function(data=NULL,
   }
   
 
-  code <-paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=="None",paste0(', fill=', colourfill, ')) + '),paste0(',' ,'fill = ',colorby, ')) +')),' 
-                geom_bar(stat="identity") +',
-                ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
-                ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),
-                ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + ')),
-                ifelse(title_y=='' | is.null(title_y),'',paste0(' ylab(','"',title_y,'"',') ')),
-                ifelse(fontSize==10 & legendPos == 'right' ,'',
-                paste0('+ theme(axis.text = element_text(size = ', fontSize,'),
-                                axis.title.x = element_text(size = ', fontSize,'),
-                                axis.title.y = element_text(size = ', fontSize,'),
-                                plot.title = element_text(size = ',fontSize,'),
-                                legend.position = ','"',legendPos,'"',')'))
-                )
+  code <-HTML(paste0('<pre>ggplot(data = ',df_name, ' , aes(x=', x, ', y=', y, ifelse(colorby=="None",")) + <br> ",paste0(',' ,'fill = ',colorby, ')) + <br>')), 
+                     paste0('geom_bar(stat="identity"'), ifelse(colorby=="None",paste0(', fill =',shQuote(colourfill), ') + <br>'), ') + <br>'),
+                     paste0(ifelse(Theme=="NULL" | is.null(Theme),'',paste0('&ensp;',Theme,'+ <br>'))),
+                     ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('&ensp; labs(title = ','"',plotTitle,'"',') + <br>')),
+                     ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + <br>')),
+                     ifelse(title_y=='' | is.null(title_y),'',paste0(' ylab(','"',title_y,'"',') ')),
+                     ifelse(fontSize==10 & legendPos == 'right' ,'',
+                            paste0(paste0('+ <br> theme(axis.text = element_text(size = ', fontSize,'), <br>'),
+                                   paste0(' &emsp; &emsp; &emsp; axis.title.x = element_text(size = ', fontSize,'),<br>'),
+                                   paste0(' &emsp; &emsp; &emsp; axis.title.y = element_text(size = ', fontSize,'),<br>'),
+                                   paste0(' &emsp; &emsp; &emsp; plot.title = element_text(size = ',fontSize,'),<br>'),
+                                   paste0(' &emsp; &emsp; &emsp; legend.position = ','"',legendPos,'"',')<br>')
+                            )),
+                     '</pre>'))
   
   # facet
   if(facetRow != 'None' & facetCol != 'None'){

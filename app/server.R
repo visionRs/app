@@ -204,8 +204,8 @@ server = function(input, output, session) {
     
     # shinyjs::toggleElement('barplot_div')
     
-    list_both$plot <- 
-      bar_plot(data = data(),
+    list_both$plot <- bar_plot(data = data(),
+                               df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                                x=input$selectX,
                                y=input$selectY,
                                plotTitle = input$titleTextBox,
@@ -223,6 +223,7 @@ server = function(input, output, session) {
     #______4.0.2 GGPLOT Code--------------------
     list_both$code <-
       bar_plot(data = data(),
+               df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                x=input$selectX,
                y=input$selectY,
                plotTitle = input$titleTextBox,
@@ -265,6 +266,7 @@ server = function(input, output, session) {
     
     list_both$plot <-
       histogram(data = data(),
+                df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                 x=input$selectX,
                 Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                 plotTitle = input$titleTextBox,
@@ -283,6 +285,7 @@ server = function(input, output, session) {
     
     list_both$code <-
       histogram(data = data(),
+                df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                 x=input$selectX,
                 Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
                 plotTitle = input$titleTextBox,
