@@ -52,8 +52,8 @@ ui <- dashboardPage(
     tags$head(tags$script(HTML("$(document).on('click', '.needed', function () {
                                 Shiny.onInputChange('last_btn',this.id);
                                });"))),
-    tags$head(tags$script(HTML("$('#update_btn').click(function(){
-      $('#primaryButton').click();"))),
+    shinyjs::extendShinyjs(text = "shinyjs.refresh = function() { location.reload(); }"),
+    
     
     tabItem("summary",
             fluidRow(
