@@ -57,17 +57,17 @@ ui <- dashboardPage(
     
     tabItem("summary",
             fluidRow(
-              div(style="display:inline-block;width:100%;",actionButton("Bar", "Bar",class="needed")),
-              div(style="display:inline-block;width:100%;",actionButton("Histogram", "Histogram",class="needed")),
-              div(style="display:inline-block;width:100%;",actionButton("Scatter", "Scatter",class="needed")),
-              div(style="display:inline-block;width:100%;",actionButton("Line", "Line",class="needed")),
-              div(style="display:inline-block;width:100%;",actionButton("Box", "Box",class="needed"))
-              # actionGroupButtons(
-              #   inputIds = c("Bar", "Histogram", "Scatter", "Line","Box"),
-              #   labels = list("Bar", "Histogram", "Scatter","Line","Box"),
-              #   status = "needed",
-              #   fullwidth = T
-              # )
+              # div(style="display:inline-block;width:20%;",actionButton("Bar", "Bar",class="needed")),
+              # div(style="display:inline-block;width:20%;",actionButton("Histogram", "Histogram",class="needed")),
+              # div(style="display:inline-block;width:20%;",actionButton("Scatter", "Scatter",class="needed")),
+              # div(style="display:inline-block;width:20%;",actionButton("Line", "Line",class="needed")),
+              # div(style="display:inline-block;width:19%;",actionButton("Box", "Box",class="needed"))
+              actionGroupButtons(
+                inputIds = c("Bar", "Histogram", "Scatter", "Line","Box"),
+                labels = list("Bar", "Histogram", "Scatter","Line","Box"),
+                status = "danger",
+                fullwidth = T
+              )
               
             ),
             br(),

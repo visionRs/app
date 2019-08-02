@@ -13,33 +13,94 @@ server = function(input, output, session) {
     shinyjs::js$refresh()
   }) 
   
+  
+  rv <- reactiveValues(last_btn = character())
+  observeEvent(input$Bar, {
+    if (input$Bar > 0 ) {
+      rv$last_btn = "Bar"
+    }
+  })
+  observeEvent(input$Scatter, {
+    if (input$Scatter > 0 ) {
+      rv$last_btn = "Scatter"
+    }
+  })
+  observeEvent(input$Histogram, {
+    if (input$Histogram > 0 ) {
+      rv$last_btn = "Histogram"
+    }
+  })
+  observeEvent(input$Box, {
+    if (input$Box > 0 ) {
+      rv$last_btn = "Box"
+    }
+  })
+  observeEvent(input$Line, {
+    if (input$Line > 0 ) {
+      rv$last_btn = "Line"
+    }
+  })
+  
+  
+  
   observeEvent(input$update_bttn,{
-     if(is.null(input$update_bttn)) return()
+    if(is.null(input$update_bttn)) return()
     if(input$update_bttn==0) return()
     
-      if(input$last_btn=="Bar"){
-        print(input$last_btn)
-         shinyjs::click('Bar')
-        
-      } else if(input$last_btn=="Scatter") {
-        print(input$last_btn)
-        shinyjs::click('Scatter')
-        
-      } else if(input$last_btn=="Histogram") {
-        print(input$last_btn)
-        shinyjs::click('Histogram')
-        
-      } else if(input$last_btn=="Line") {
-        print(input$last_btn)
-        shinyjs::click('Line')
-        
-      } else if(input$last_btn=="Box") {
-        print(input$last_btn)
-        shinyjs::click('Box')
-      }
+    if(rv$last_btn=="Bar"){
+      print(rv$last_btn)
+      shinyjs::click('Bar')
+      
+    } else if(rv$last_btn=="Scatter") {
+      print(rv$last_btn)
+      shinyjs::click('Scatter')
+      
+    } else if(rv$last_btn=="Histogram") {
+      print(rv$last_btn)
+      shinyjs::click('Histogram')
+      
+    } else if(rv$last_btn=="Line") {
+      print(rv$last_btn)
+      shinyjs::click('Line')
+      
+    } else if(rv$last_btn=="Box") {
+      print(input$last_btn)
+      shinyjs::click('Box')
+    }
     
     
   })
+  
+  # observeEvent(input$update_bttn,{
+  #    if(is.null(input$update_bttn)) return()
+  #   if(input$update_bttn==0) return()
+  #   
+  #     if(input$last_btn=="Bar"){
+  #       print(input$last_btn)
+  #        shinyjs::click('Bar')
+  #       
+  #     } else if(input$last_btn=="Scatter") {
+  #       print(input$last_btn)
+  #       shinyjs::click('Scatter')
+  #       
+  #     } else if(input$last_btn=="Histogram") {
+  #       print(input$last_btn)
+  #       shinyjs::click('Histogram')
+  #       
+  #     } else if(input$last_btn=="Line") {
+  #       print(input$last_btn)
+  #       shinyjs::click('Line')
+  #       
+  #     } else if(input$last_btn=="Box") {
+  #       print(input$last_btn)
+  #       shinyjs::click('Box')
+  #     }
+  #   
+  #   
+  # })
+  # 
+  
+  
   
   ## observe the button being pressed
   observeEvent(input$read_dt, {
