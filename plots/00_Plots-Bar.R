@@ -65,9 +65,9 @@ bar_plot <- function(data=NULL,
                                    paste0(' &emsp; &emsp; &emsp; legend.position = ','"',legendPos,'"',')<br>'))
                               
                             ),
-                     ifelse(facetRow != 'None' & facetCol != 'None',paste0(" + facet_grid(",as.formula(paste0(facetRow, "~", facetCol)),") <br>" ),''),
-                     ifelse(facetRow != 'None' & facetCol == 'None',paste0('+ facet_grid(',facetRow,' ~ .) <br>'),'' ),
-                     ifelse(facetRow == 'None' & facetCol != 'None',paste0('+ facet_grid(. ~ ',facetCol,') <br>') ,''),
+                     ifelse(facetRow != 'None' & facetCol != 'None',paste0(" + <br> facet_grid(",as.formula(paste0(facetRow, "~", facetCol)),") <br>" ),''),
+                     ifelse(facetRow != 'None' & facetCol == 'None',paste0('+ <br> facet_grid(',facetRow,' ~ .) <br>'),'' ),
+                     ifelse(facetRow == 'None' & facetCol != 'None',paste0('+ <br> facet_grid(. ~ ',facetCol,') <br>') ,''),
                      
                      '</pre>'))
   
