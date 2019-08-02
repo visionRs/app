@@ -53,11 +53,12 @@ bar_plot <- function(data=NULL,
                 ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),
                 ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + ')),
                 ifelse(title_y=='' | is.null(title_y),'',paste0(' ylab(','"',title_y,'"',') ')),
-                ifelse(fontSize==10 & legendPos == 'right' ,'',paste0('+ theme(axis.text = element_text(size = ', fontSize,'),
-                                                                      axis.title.x = element_text(size = ', fontSize,'),
-                                                                      axis.title.y = element_text(size = ', fontSize,'),
-                                                                      plot.title = element_text(size = ',fontSize,'),
-                                                                      legend.position = ','"',legendPos,'"',')'))
+                ifelse(fontSize==10 & legendPos == 'right' ,'',
+                paste0('+ theme(axis.text = element_text(size = ', fontSize,'),
+                                axis.title.x = element_text(size = ', fontSize,'),
+                                axis.title.y = element_text(size = ', fontSize,'),
+                                plot.title = element_text(size = ',fontSize,'),
+                                legend.position = ','"',legendPos,'"',')'))
                 )
   print(code)
   ls <- list()

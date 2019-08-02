@@ -8,101 +8,42 @@
 
 server = function(input, output, session) {
   
-  #___3.1 SERVER: Refresh Function--------------
+  #___3.0 SERVER: Refresh Function--------------
   observeEvent(input$refresh1, {
     shinyjs::js$refresh()
   }) 
   
+  #___3.1 SERVER: UPDATE Button Logic--------------
   
   rv <- reactiveValues(last_btn = character())
-  observeEvent(input$Bar, {
-    if (input$Bar > 0 ) {
-      rv$last_btn = "Bar"
-    }
-  })
-  observeEvent(input$Scatter, {
-    if (input$Scatter > 0 ) {
-      rv$last_btn = "Scatter"
-    }
-  })
-  observeEvent(input$Histogram, {
-    if (input$Histogram > 0 ) {
-      rv$last_btn = "Histogram"
-    }
-  })
-  observeEvent(input$Box, {
-    if (input$Box > 0 ) {
-      rv$last_btn = "Box"
-    }
-  })
-  observeEvent(input$Line, {
-    if (input$Line > 0 ) {
-      rv$last_btn = "Line"
-    }
-  })
-  
-  
-  
+ 
   observeEvent(input$update_bttn,{
     if(is.null(input$update_bttn)) return()
     if(input$update_bttn==0) return()
     
     if(rv$last_btn=="Bar"){
-      print(rv$last_btn)
       shinyjs::click('Bar')
       
     } else if(rv$last_btn=="Scatter") {
-      print(rv$last_btn)
       shinyjs::click('Scatter')
       
     } else if(rv$last_btn=="Histogram") {
-      print(rv$last_btn)
       shinyjs::click('Histogram')
       
     } else if(rv$last_btn=="Line") {
-      print(rv$last_btn)
       shinyjs::click('Line')
       
     } else if(rv$last_btn=="Box") {
-      print(input$last_btn)
       shinyjs::click('Box')
     }
     
     
   })
   
-  # observeEvent(input$update_bttn,{
-  #    if(is.null(input$update_bttn)) return()
-  #   if(input$update_bttn==0) return()
-  #   
-  #     if(input$last_btn=="Bar"){
-  #       print(input$last_btn)
-  #        shinyjs::click('Bar')
-  #       
-  #     } else if(input$last_btn=="Scatter") {
-  #       print(input$last_btn)
-  #       shinyjs::click('Scatter')
-  #       
-  #     } else if(input$last_btn=="Histogram") {
-  #       print(input$last_btn)
-  #       shinyjs::click('Histogram')
-  #       
-  #     } else if(input$last_btn=="Line") {
-  #       print(input$last_btn)
-  #       shinyjs::click('Line')
-  #       
-  #     } else if(input$last_btn=="Box") {
-  #       print(input$last_btn)
-  #       shinyjs::click('Box')
-  #     }
-  #   
-  #   
-  # })
-  # 
+ 
   
   
-  
-  ## observe the button being pressed
+  #___3.3 SERVER observe the button being pressed--------------
   observeEvent(input$read_dt, {
     if(input$read_dt==TRUE) {
       shinyjs::enable(id = "file1")
@@ -115,7 +56,7 @@ server = function(input, output, session) {
     
   })
   
-  #___3.2 SERVER : Reading Data from file--------------
+  #___3.4 SERVER : Reading Data from file--------------
   
   data <-  reactive({
     if(!is.null(input$file1)){
@@ -132,7 +73,7 @@ server = function(input, output, session) {
   
   
   
-  #___3.3 SERVER : Update selectInputs--------------
+  #___3.5 SERVER : Update selectInputs--------------
   
   observeEvent(data(), {
     updateSelectInput(session, inputId = "selectX", choices=c(colnames(data()),"None"))
@@ -154,7 +95,7 @@ server = function(input, output, session) {
     
   })
   
-  #___3.4 SERVER : Displaying Data (sanity check!) ---------
+  #___3.6 SERVER : Displaying Data (sanity check!) ---------
  
   output$tabout <- renderTable({
     
@@ -164,10 +105,7 @@ server = function(input, output, session) {
     data()
   })
   
-  #___3.5 SERVER : Input Type CHECK ---------
-  
-  #___3.5.1 INPUT TYPE CHECK: All 3 Conditions Covered ---------
-  
+  #___3.7 SERVER : Color By ObserveEvent (to disable colfill) ---------
   
   observeEvent(input$colorby,{
     
@@ -179,6 +117,13 @@ server = function(input, output, session) {
       shinyjs::enable('colfill')
     }
   })
+  
+  #___3.8 SERVER : Input Type CHECK ---------
+  
+  #___3.8.1 INPUT TYPE CHECK: All 3 Conditions Covered ---------
+  
+  
+ 
   
   observeEvent(c(input$selectX,input$selectY), {
     dt <- data()
@@ -233,6 +178,11 @@ server = function(input, output, session) {
   #___4.0 PLOTS CODE: Bar Plot Code-----------------
   observeEvent(input$Bar,{
     
+    if (input$Bar > 0 ) {
+      rv$last_btn = "Bar"
+    }
+    
+    
     #______4.0.0 HIDE/SHOW Specific Parameters:------------------------
     
     #________4.0.0.1 hiding scatter specific advance options
@@ -249,7 +199,8 @@ server = function(input, output, session) {
     
     # shinyjs::toggleElement('barplot_div')
     
-    list_both$plot <- bar_plot(data = data(),
+    list_both$plot <- 
+      bar_plot(data = data(),
                                x=input$selectX,
                                y=input$selectY,
                                plotTitle = input$titleTextBox,
@@ -285,6 +236,11 @@ server = function(input, output, session) {
   #___4.1 PLOTS CODE: Histogram Plot Code--------------------
   
   observeEvent(input$Histogram,{
+    
+    if (input$Histogram > 0 ) {
+      rv$last_btn = "Histogram"
+    }
+    
     #________4.1.0.1 hiding scatter specific advance options
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("lineplot_extra_param")
@@ -332,6 +288,10 @@ server = function(input, output, session) {
   #___4.2 PLOTS CODE: Scatter Plot Code------------------
   
   observeEvent(input$Scatter,{
+    
+    if (input$Scatter > 0 ) {
+      rv$last_btn = "Scatter"
+    }
     
     #________4.2.0.1 hiding scatter specific advance options
     shinyjs::hide("barplot_extra_param")
@@ -392,6 +352,12 @@ server = function(input, output, session) {
   #___4.3 PLOTS CODE: Line Plot Code------------------
   
   observeEvent(input$Line,{
+    
+    if (input$Line > 0 ) {
+      rv$last_btn = "Line"
+    }
+    
+    
     #________4.3.0.1 hiding Line specific advance options
     shinyjs::hide("addJitter")
     shinyjs::hide("barplot_extra_param")
@@ -438,6 +404,10 @@ server = function(input, output, session) {
   #___4.4 PLOTS CODE: Box Plot Code------------------
   
   observeEvent(input$Box,{
+    
+    if (input$Box > 0 ) {
+      rv$last_btn = "Box"
+    }
     
     #________4.4.0.1 hiding specific advance options
     shinyjs::hide("barplot_extra_param")
