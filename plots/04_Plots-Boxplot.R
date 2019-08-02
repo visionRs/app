@@ -17,14 +17,8 @@ box_plot <- function(data=NULL,
                      facetRow,
                      facetCol) {
   
-  # generate colors dynamically
-  if(length(unique(factor(data[[colorby]]))) > 5){
-  size <- unique(data[[x]])
-  cols <-  gg_fill_hue(length(size))
-  }
   
-  p <- ggplot(data, aes_string(paste0("factor(",x,")"),y, fill = ifelse(colorby == 'None','NULL', paste0('factor(',colorby,')')) )) + 
-              scale_fill_manual(values = c(cols))
+  p <- ggplot(data, aes_string(paste0("factor(",x,")"),y, fill = ifelse(colorby == 'None','NULL', colorby) )) 
     
   if(colorby == "None"){
     p <- p + geom_boxplot(fill = colourfill)
@@ -46,8 +40,8 @@ box_plot <- function(data=NULL,
     p <-  p + geom_jitter()
   }
   
-  code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=='None',')) +', paste0(',' ,'fill = ',colorby, ')) +')),' 
-                  geom_boxplot(', ifelse(colorby=='None', paste0('fill = ', '"' ,colourfill,'"',') +'),') +'),
+  code <- paste0('ggplot(data,', 'aes(', x, ',', y, ifelse(colorby=="None", ')) +', paste0(',' ,'fill = ',colorby, ')) +')),
+                  'geom_boxplot(', ifelse(colorby=='None', paste0('fill = ', '"' ,colourfill,'"',') +'),') +'),
                  ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
                  ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),
                  ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + ')),

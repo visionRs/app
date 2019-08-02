@@ -79,9 +79,10 @@ server = function(input, output, session) {
     updateSelectInput(session, inputId = "selectX", choices=c(colnames(data()),"None"))
     updateSelectInput(session, inputId = "selectY", choices=c(colnames(data()),"None"))
     
-    # update plot parameter dropdowns
-    colorby.choices <- append(colnames(data()),'None')
-    updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
+    
+    # # update plot parameter dropdowns
+    # colorby.choices <- append(colnames(data()),'None')
+    # updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
     
     # update shaby choices scatterplot parameter dropdowns
     # only factor variables will be populated in the dropdown
@@ -182,6 +183,10 @@ server = function(input, output, session) {
       rv$last_btn = "Bar"
     }
     
+    # update plot parameter dropdowns
+    colorby.choices <- append(colnames(data()),'None')
+    updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
+    
     
     #______4.0.0 HIDE/SHOW Specific Parameters:------------------------
     
@@ -245,6 +250,10 @@ server = function(input, output, session) {
       rv$last_btn = "Histogram"
     }
     
+    # update plot parameter dropdowns
+    colorby.choices <- append(colnames(data()),'None')
+    updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
+    
     #________4.1.0.1 hiding scatter specific advance options
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("lineplot_extra_param")
@@ -300,6 +309,10 @@ server = function(input, output, session) {
     if (input$Scatter > 0 ) {
       rv$last_btn = "Scatter"
     }
+    
+    # update plot parameter dropdowns
+    colorby.choices <- append(colnames(data()),'None')
+    updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
     
     #________4.2.0.1 hiding scatter specific advance options
     shinyjs::hide("barplot_extra_param")
@@ -365,6 +378,9 @@ server = function(input, output, session) {
       rv$last_btn = "Line"
     }
     
+    # update plot parameter dropdowns
+    colorby.choices <- append(colnames(data()),'None')
+    updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
     
     #________4.3.0.1 hiding Line specific advance options
     shinyjs::hide("addJitter")
@@ -420,6 +436,12 @@ server = function(input, output, session) {
     if (input$Box > 0 ) {
       rv$last_btn = "Box"
     }
+    
+   
+    # update plot parameter dropdowns
+    colorby.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+    updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
+    
     
     #________4.4.0.1 hiding specific advance options
     shinyjs::hide("barplot_extra_param")
