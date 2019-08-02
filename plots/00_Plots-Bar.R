@@ -62,22 +62,27 @@ bar_plot <- function(data=NULL,
                                    paste0(' &emsp; &emsp; &emsp; axis.title.x = element_text(size = ', fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; axis.title.y = element_text(size = ', fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; plot.title = element_text(size = ',fontSize,'),<br>'),
-                                   paste0(' &emsp; &emsp; &emsp; legend.position = ','"',legendPos,'"',')<br>')
-                            )),
+                                   paste0(' &emsp; &emsp; &emsp; legend.position = ','"',legendPos,'"',')<br>'))
+                              
+                            ),
+                     ifelse(facetRow != 'None' & facetCol != 'None',paste0(" + facet_grid(",as.formula(paste0(facetRow, "~", facetCol)),") <br>" ),''),
+                     ifelse(facetRow != 'None' & facetCol == 'None',paste0('+ facet_grid(',facetRow,' ~ .) <br>'),'' ),
+                     ifelse(facetRow == 'None' & facetCol != 'None',paste0('+ facet_grid(. ~ ',facetCol,') <br>') ,''),
+                     
                      '</pre>'))
   
   # facet
   if(facetRow != 'None' & facetCol != 'None'){
     p <-  p + facet_grid(as.formula(paste0(facetRow, "~", facetCol)))
-    code <- paste0(code,'+ facet_grid(',facetRow,' ~ ',facetCol,')')
+    #code <- paste0(code,'+ facet_grid(',facetRow,' ~ ',facetCol,')')
   }
   if(facetRow != 'None' & facetCol == 'None'){
     p <-  p + facet_grid(as.formula(paste0(facetRow, "~ .")))
-    code <- paste0(code,'+ facet_grid(',facetRow,' ~ .)')
+   # code <- paste0(code,'+ facet_grid(',facetRow,' ~ .)')
   }
   if(facetRow == 'None' & facetCol != 'None'){
     p <-  p + facet_grid(as.formula(paste0(". ~", facetCol)))
-    code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
+    #code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
   }
   
   
