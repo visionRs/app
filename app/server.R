@@ -210,7 +210,9 @@ server = function(input, output, session) {
                                fontSize = input$axisFont,
                                legendPos = input$legendPosition,
                                title_x = input$titleX,
-                               title_y = input$titleY)$plot
+                               title_y = input$titleY,
+                               facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                               facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
     
     
     #______4.0.2 GGPLOT Code--------------------
@@ -225,7 +227,9 @@ server = function(input, output, session) {
                fontSize = input$axisFont,
                legendPos = input$legendPosition,
                title_x = input$titleX,
-               title_y = input$titleY)$code
+               title_y = input$titleY,
+               facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+               facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
     
     
     
@@ -260,7 +264,9 @@ server = function(input, output, session) {
                 colorby = input$colorby,
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
-                title_y = input$titleY)$plot
+                title_y = input$titleY,
+                facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
     
     
     
@@ -276,7 +282,9 @@ server = function(input, output, session) {
                 colorby = input$colorby,
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
-                title_y = input$titleY)$code
+                title_y = input$titleY,
+                facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
     
     
     
@@ -380,7 +388,9 @@ server = function(input, output, session) {
                 title_x = input$titleX,
                 title_y = input$titleY,
                 lineType = input$lineplot_extra_param,
-                dots = input$dotLine)$plot
+                dots = input$dotLine,
+                facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
     
     
     #______4.3.1 GGPLOT Code--------------------
@@ -397,7 +407,9 @@ server = function(input, output, session) {
                 title_x = input$titleX,
                 title_y = input$titleY,
                 lineType = input$lineplot_extra_param,
-                dots = input$dotLine)$code
+                dots = input$dotLine,
+                facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
     
   })
   
@@ -430,7 +442,9 @@ server = function(input, output, session) {
                  legendPos = input$legendPosition,
                  title_x = input$titleX,
                  title_y = input$titleY,
-                jitter = input$addJitter)$plot
+                 jitter = input$addJitter,
+                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                 facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
     
     
     #______4.4.1 GGPLOT Code--------------------
@@ -446,7 +460,9 @@ server = function(input, output, session) {
                  legendPos = input$legendPosition,
                  title_x = input$titleX,
                  title_y = input$titleY,
-                jitter = input$addJitter)$code
+                 jitter = input$addJitter,
+                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
+                 facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
     
   })
   

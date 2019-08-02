@@ -7,7 +7,9 @@ histogram <- function(data=NULL,
                       legendPos = 'right',
                       title_x='', 
                       title_y='',
-                      plotTitle='') {
+                      plotTitle='',
+                      facetRow,
+                      facetCol) {
   
   
   p <-  ggplot(data, aes_string(x,fill =ifelse(colorby == 'None', shQuote("None"), colorby))) +
@@ -49,6 +51,20 @@ if(colorby=='None'){
                                                                       plot.title = element_text(size = ',fontSize,'),
                                                                       legend.position = ','"',legendPos,'"',')'))
                 )
+  
+  # facet
+  if(facetRow != 'None' & facetCol != 'None'){
+    p <-  p + facet_grid(as.formula(paste0(facetRow, "~", facetCol)))
+    code <- paste0(code,'+ facet_grid(',facetRow,' ~ ',facetCol,')')
+  }
+  if(facetRow != 'None' & facetCol == 'None'){
+    p <-  p + facet_grid(as.formula(paste0(facetRow, "~ .")))
+    code <- paste0(code,'+ facet_grid(',facetRow,' ~ .)')
+  }
+  if(facetRow == 'None' & facetCol != 'None'){
+    p <-  p + facet_grid(as.formula(paste0(". ~", facetCol)))
+    code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
+  }
   
   ls <- list()
   ls[['plot']] <- p
