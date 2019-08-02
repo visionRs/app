@@ -9,10 +9,37 @@
 server = function(input, output, session) {
   
   #___3.1 SERVER: Refresh Function--------------
-  observeEvent(input$refresh, {
+  observeEvent(input$refresh1, {
     shinyjs::js$refresh()
   }) 
   
+  observeEvent(input$update_bttn,{
+     if(is.null(input$update_bttn)) return()
+    if(input$update_bttn==0) return()
+    
+      if(input$last_btn=="Bar"){
+        print(input$last_btn)
+         shinyjs::click('Bar')
+        
+      } else if(input$last_btn=="Scatter") {
+        print(input$last_btn)
+        shinyjs::click('Scatter')
+        
+      } else if(input$last_btn=="Histogram") {
+        print(input$last_btn)
+        shinyjs::click('Histogram')
+        
+      } else if(input$last_btn=="Line") {
+        print(input$last_btn)
+        shinyjs::click('Line')
+        
+      } else if(input$last_btn=="Box") {
+        print(input$last_btn)
+        shinyjs::click('Box')
+      }
+    
+    
+  })
   
   ## observe the button being pressed
   observeEvent(input$read_dt, {

@@ -17,7 +17,7 @@ ui <- dashboardPage(
   dashboardHeader(title = "ggQuickPlot",
                   titleWidth = 300,
                   dropdownActionMenu(id="menu-drpdwn",title= "",icon = icon("chevron-circle-down"),
-                                     actionItem("refresh",tags$p(tags$i(class="fa fa-refresh fa-spin",style="font-size:12px"),HTML("&nbsp;")," Reload Data")),
+                                     actionItem("refresh1",tags$p(tags$i(class="fa fa-refresh fa-spin",style="font-size:12px"),HTML("&nbsp;")," Reload Data")),
                                      actionItem("github","Report Issue" ,icon = icon("exclamation-triangle"),onclick_event = "window.open('https://github.com/easy-plot/app/issues', '_blank')")
                   )
                   # tags$li(id="refresh1",a(onclick = "window.location.href=window.location.href",
@@ -49,15 +49,25 @@ ui <- dashboardPage(
   dashboardBody(
     includeCSS("../www/template.css"),
     shinyjs::useShinyjs(),
+    tags$head(tags$script(HTML("$(document).on('click', '.needed', function () {
+                                Shiny.onInputChange('last_btn',this.id);
+                               });"))),
+    tags$head(tags$script(HTML("$('#update_btn').click(function(){
+      $('#primaryButton').click();"))),
     
     tabItem("summary",
-            fluidRow(
-              actionGroupButtons(
-                inputIds = c("Bar", "Histogram", "Scatter", "Line","Box"),
-                labels = list("Bar", "Histogram", "Scatter","Line","Box"),
-                status = "danger",
-                fullwidth = T
-              )
+            fluidRow( div(class="action_btns",
+              actionButton("Bar", "Bar",class="needed"),
+              actionButton("Histogram", "Histogram",class="needed"),
+              actionButton("Scatter", "Scatter",class="needed"),
+              actionButton("Line", "Line",class="needed"),
+              actionButton("Box", "Box",class="needed"))
+              # actionGroupButtons(
+              #   inputIds = c("Bar", "Histogram", "Scatter", "Line","Box"),
+              #   labels = list("Bar", "Histogram", "Scatter","Line","Box"),
+              #   status = "needed",
+              #   fullwidth = T
+              # )
               
             ),
             br(),
@@ -234,6 +244,14 @@ ui <- dashboardPage(
                   #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
                   box(width="9",
                       title = "",
+                      actionBttn(
+                        inputId = "update_bttn",
+                        label = "Update",
+                        color = "success",
+                        style = "material-flat",
+                        icon = icon("sliders"),
+                        block = TRUE
+                      ),
                       withSpinner(plotOutput('plot',height = '563px'),color = '#3c8dbc'),value = 'plot6',status = "primary"
                       
                   ) # end of tabBox 
