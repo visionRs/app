@@ -205,6 +205,7 @@ border-radius:20px;
     line-height: 1.42857143;
     text-align: center;
     white-space: nowrap;
+    width: 100%;
     vertical-align: middle;
     -ms-touch-action: manipulation;
     touch-action: manipulation;
@@ -258,3 +259,22 @@ border-radius:20px;
 display: block;
 }
 
+
+.bttn-material-flat.bttn-success {
+    height: 10%;
+    background: #282c2f;
+    color: #fff;
+    width: 15%;
+}
+.bttn-material-flat.bttn-md {
+    font-size: 15px;
+    font-family: inherit;
+    padding: 5px 12px;
+}
+
+.box-header {
+    color: #444;
+    display: block;
+    padding: 0px;
+    position: relative;
+}

@@ -56,12 +56,12 @@ ui <- dashboardPage(
       $('#primaryButton').click();"))),
     
     tabItem("summary",
-            fluidRow( div(class="action_btns",
-              actionButton("Bar", "Bar",class="needed"),
-              actionButton("Histogram", "Histogram",class="needed"),
-              actionButton("Scatter", "Scatter",class="needed"),
-              actionButton("Line", "Line",class="needed"),
-              actionButton("Box", "Box",class="needed"))
+            fluidRow(
+              div(style="display:inline-block;width:100%;",actionButton("Bar", "Bar",class="needed")),
+              div(style="display:inline-block;width:100%;",actionButton("Histogram", "Histogram",class="needed")),
+              div(style="display:inline-block;width:100%;",actionButton("Scatter", "Scatter",class="needed")),
+              div(style="display:inline-block;width:100%;",actionButton("Line", "Line",class="needed")),
+              div(style="display:inline-block;width:100%;",actionButton("Box", "Box",class="needed"))
               # actionGroupButtons(
               #   inputIds = c("Bar", "Histogram", "Scatter", "Line","Box"),
               #   labels = list("Bar", "Histogram", "Scatter","Line","Box"),
