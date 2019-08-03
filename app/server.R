@@ -279,6 +279,8 @@ server = function(input, output, session) {
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
                 title_y = input$titleY,
+                bin=input$bin,
+                binwidth=input$binwidth,
                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                 facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
     
@@ -298,6 +300,8 @@ server = function(input, output, session) {
                 legendPos = input$legendPosition,
                 title_x = input$titleX,
                 title_y = input$titleY,
+                bin=input$bin,
+                binwidth=input$binwidth,
                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                 facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
     

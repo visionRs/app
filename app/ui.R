@@ -169,6 +169,7 @@ ui <- dashboardPage(
                                                   status = "primary"
                                                 )
                                                 
+                                                
                                ),
                                
                                conditionalPanel(condition = "input.Scatter",
