@@ -216,6 +216,7 @@ server = function(input, output, session) {
     shinyjs::hide("scatter_extra_params")
     shinyjs::hide("lineplot_extra_param")
     shinyjs::hide("dotLine")
+    shinyjs::hide("lineSize")
     shinyjs::hide("addJitter")
     #________4.0.0.2 Showing Bar specific advance options
     shinyjs::show("barplot_extra_param")
@@ -284,6 +285,7 @@ server = function(input, output, session) {
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("lineplot_extra_param")
     shinyjs::hide("dotLine")
+    shinyjs::hide("lineSize")
     shinyjs::hide("addJitter")
     shinyjs::hide("scatter_extra_params")
     
@@ -350,6 +352,7 @@ server = function(input, output, session) {
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("lineplot_extra_param")
     shinyjs::hide("dotLine")
+    shinyjs::hide("lineSize")
     shinyjs::hide("addJitter")
     #________4.2.0.2 Showing scatter specific advance options
     shinyjs::show("scatter_extra_params")
@@ -482,6 +485,7 @@ server = function(input, output, session) {
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("lineplot_extra_param")
     shinyjs::hide("dotLine")
+    shinyjs::hide("lineSize")
     shinyjs::hide("scatter_extra_params")
     #________4.4.0.2 Showing Box specific advance options
     shinyjs::show("addJitter")
