@@ -89,10 +89,32 @@ server = function(input, output, session) {
     shapeby.choices <-  c(names(data())[ sapply(data(), is.factor)],  'None')
     updateSelectInput(session, inputId = "shapeBy", choices=shapeby.choices, selected = 'None')
     
-    # update facet row and col selectInputs (only factor vars)
-    facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
-    updateSelectInput(session, inputId = "selectFacetRow", choices=shapeby.choices, selected = 'None')
-    updateSelectInput(session, inputId = "selectFacetCol", choices=shapeby.choices, selected = 'None')
+    # # update facet row and col selectInputs (only factor vars)
+    # facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+    # updateSelectInput(session, inputId = "selectFacetRow", choices=facet.choices, selected = 'None')
+    # updateSelectInput(session, inputId = "selectFacetCol", choices=facet.choices, selected = 'None')
+    # 
+  })
+  
+  #_____3.5.1 SERVER : update facet row and col selectInputs (only factor vars) ----
+  observeEvent(c(input$facetRow, input$facetCol), {
+    
+    updateSelectInput(session, inputId = "selectFacetRow", choices=c('None'), selected = 'None')
+    updateSelectInput(session, inputId = "selectFacetCol", choices=c('None'), selected = 'None')
+    
+   if(length(names(data())[ sapply(data(), is.factor)]) == 1){
+     if(input$facetRow == 1 & input$facetCol == 0){
+       facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+       updateSelectInput(session, inputId = "selectFacetRow", choices=facet.choices, selected = 'None')
+     } else if(input$facetRow == 0 & input$facetCol == 1){
+       facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+       updateSelectInput(session, inputId = "selectFacetCol", choices=facet.choices, selected = 'None')
+     }
+   } else {
+       facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+       updateSelectInput(session, inputId = "selectFacetRow", choices=facet.choices, selected = 'None')
+       updateSelectInput(session, inputId = "selectFacetCol", choices=facet.choices, selected = 'None')
+   }
     
   })
   
