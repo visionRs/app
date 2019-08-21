@@ -193,7 +193,8 @@ ui <- dashboardPage(
                                                                                                                               'dotted',
                                                                                                                               'dotdash',
                                                                                                                               'dashed'), selected = 'solid'),
-                                                checkboxInput(inputId ="dotLine", "Add Points to plot", value = FALSE)
+                                                checkboxInput(inputId ="dotLine", "Add Points to plot", value = FALSE),
+                                                sliderInput(inputId = 'lineSize', label = 'Line Size', value = 1, min = 1, max = 5)
                                ),
                                conditionalPanel(condition = "input.Box",
                                                 checkboxInput(inputId ="addJitter", "Add Jitter", value = FALSE)

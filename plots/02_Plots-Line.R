@@ -13,6 +13,7 @@ line_plot <- function(data=dt,
                       title_y, 
                       plotTitle, 
                       lineType,
+                      lineSize,
                       dots,
                       facetRow,
                       facetCol) {
@@ -20,9 +21,9 @@ line_plot <- function(data=dt,
   p <-  ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby) ))
   
   if(colorby == "None"){
-    p <- p + geom_line(linetype = lineType, colour=colourfill)
+    p <- p + geom_line(linetype = lineType, colour=colourfill, size = lineSize)
   } else{
-    p <- p + geom_line(linetype = lineType)
+    p <- p + geom_line(linetype = lineType, size = lineSize)
   }
   
   p <- p + eval(parse(text=as.character(Theme))) +
@@ -39,7 +40,10 @@ line_plot <- function(data=dt,
   }
   
   code <- paste0('ggplot(data, aes(',x,',', y, ifelse(colorby == 'None',')) +',paste0(', color =',colorby,')) + ')),
-                 'geom_line(',ifelse(lineType == 'solid', paste0(') + '), paste0('linetype = ',lineType, ') + ') ),
+                 'geom_line(',ifelse(lineType == 'solid' & lineSize == 1, paste0(') + '), 
+                                     ifelse(lineType != 'solid' & lineSize == 1, paste0('linetype = ', lineType, ') +'),
+                                            ifelse(lineType == 'solid' & lineSize != 1, paste0('size = ', lineSize, ') +'),
+                                                   ifelse(lineType != 'solid' & lineSize != 1, paste0('linetype = ', lineType, ', size = ', lineSize, ') +'))))),
                  ifelse(dots == TRUE, paste0('geom_point() + '),''),
                  ifelse(Theme=="NULL" | is.null(Theme),'',paste0(Theme,'+ ')),
                  ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('labs(title = ','"',plotTitle,'"',') + ')),

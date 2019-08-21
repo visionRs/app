@@ -421,6 +421,7 @@ server = function(input, output, session) {
     #________4.3.0.2 Show Line specific advance options
     shinyjs::show("lineplot_extra_param")
     shinyjs::show("dotLine")
+    shinyjs::show("lineSize")
     
     #______4.3.0 Plot Code--------------------
     list_both$plot <-
@@ -436,6 +437,7 @@ server = function(input, output, session) {
                 title_x = input$titleX,
                 title_y = input$titleY,
                 lineType = input$lineplot_extra_param,
+                lineSize = input$lineSize,
                 dots = input$dotLine,
                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                 facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
@@ -455,6 +457,7 @@ server = function(input, output, session) {
                 title_x = input$titleX,
                 title_y = input$titleY,
                 lineType = input$lineplot_extra_param,
+                lineSize = input$lineSize,
                 dots = input$dotLine,
                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                 facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
