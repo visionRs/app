@@ -95,28 +95,36 @@ server = function(input, output, session) {
     # updateSelectInput(session, inputId = "selectFacetCol", choices=facet.choices, selected = 'None')
     # 
   })
+ 
   
   #_____3.5.1 SERVER : update facet row and col selectInputs (only factor vars) ----
   observeEvent(c(input$facetRow, input$facetCol), {
+    facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+    shinyjs::enable('facetRow')
+    shinyjs::enable('facetCol')
     
-    updateSelectInput(session, inputId = "selectFacetRow", choices=c('None'), selected = 'None')
-    updateSelectInput(session, inputId = "selectFacetCol", choices=c('None'), selected = 'None')
-    
-   if(length(names(data())[ sapply(data(), is.factor)]) == 1){
+   if(length(names(data())[ sapply(data(), is.factor)]) == 1){ # if only 1 factor variable present
+     
      if(input$facetRow == 1 & input$facetCol == 0){
-       facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+       shinyjs::enable('facetRow')
+       shinyjs::disable('facetCol')
        updateSelectInput(session, inputId = "selectFacetRow", choices=facet.choices, selected = 'None')
+       
      } else if(input$facetRow == 0 & input$facetCol == 1){
-       facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+       shinyjs::disable('facetRow')
+       shinyjs::enable('facetCol')
        updateSelectInput(session, inputId = "selectFacetCol", choices=facet.choices, selected = 'None')
+       
      }
-   } else {
-       facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+   } else { # if more than 1 factor variables present; populate both dropdowns
+       shinyjs::enable('facetRow')
+       shinyjs::enable('facetCol')
        updateSelectInput(session, inputId = "selectFacetRow", choices=facet.choices, selected = 'None')
        updateSelectInput(session, inputId = "selectFacetCol", choices=facet.choices, selected = 'None')
    }
     
   })
+  
   
   #___3.6 SERVER : Displaying Data (sanity check!) ---------
  
