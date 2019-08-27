@@ -1,7 +1,6 @@
-<p align="right"><img src="https://github.com/easy-plot/app/blob/master/hexsticker.png" width="180" height="200" /></p>
+# ggQuickPlot<img src="https://github.com/easy-plot/app/blob/master/hexsticker.png" width="180" height="200" align="right"/>
 
 
-# app
 This Repo contains R code for the app
 
 ### Directory Structure
