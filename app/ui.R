@@ -12,7 +12,7 @@ library(tidyverse)
 library(colourpicker)
 library(ggpubr)
 library(rclipboard)
-
+library(highcharter)
 
 ui <- dashboardPage(
   # 1. HEADER here----

@@ -32,8 +32,9 @@ bar_plot <- function(data=NULL,
                      colourfill='#00FF0080',
                      plotTitle='',
                      facetRow,
-                     facetCol) {
-  
+                     facetCol,
+                     interactive=FALSE) {
+  if(interactive==FALSE){
   p <- ggplot(data, aes_string(x, y, fill =ifelse(colorby == 'None', shQuote("None"), colorby) )) +
     geom_bar(stat="identity") +
     eval(parse(text=as.character(Theme))) +
@@ -92,7 +93,14 @@ bar_plot <- function(data=NULL,
   ls[['plot']] <- p
   ls[['code']] <- code
   return(ls)
-}# else ends for Theme
+  
+  } else {
+  
+    
+  #data %>% 
+  
+  
+} # else ends for Theme
 
 
-
+} #function ends here
