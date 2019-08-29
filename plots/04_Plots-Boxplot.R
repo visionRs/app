@@ -14,8 +14,8 @@ box_plot <- function(data=NULL,
                      title_y, 
                      plotTitle,
                      jitter,
-                     hideAxis,
-                     axisAngle,
+                     hideAxis = 0,
+                     axisAngle = 0,
                      facetRow,
                      facetCol) {
   
@@ -68,15 +68,17 @@ box_plot <- function(data=NULL,
     code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
   }
   
-  if(hideAxis == 1){
+
+  if(hideAxis != 1){
+    if(axisAngle > 0){
+      p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
+      code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
+    }
+  } else {
     p <-  p + theme(axis.text.x = element_blank())
     code <- paste0(code, '+ theme(axis.text.x = element_blank())')
   }
   
-  if(axisAngle > 0){
-    p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
-    code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
-  }
   
   ls <- list()
   ls[['plot']] <- p

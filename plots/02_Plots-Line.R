@@ -12,6 +12,8 @@ line_plot <- function(data=dt,
                       title_x, 
                       title_y, 
                       plotTitle, 
+                      hideAxis,
+                      axisAngle,
                       lineType,
                       lineSize,
                       dots,
@@ -70,6 +72,15 @@ line_plot <- function(data=dt,
     code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
   }
   
+  if(hideAxis == 1){
+    p <-  p + theme(axis.text.x = element_blank())
+    code <- paste0(code, '+ theme(axis.text.x = element_blank())')
+  }
+  
+  if(axisAngle > 0){
+    p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
+    code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
+  }
   
   ls <- list()
   ls[['plot']] <- p
