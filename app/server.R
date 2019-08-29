@@ -149,6 +149,17 @@ server = function(input, output, session) {
     }
   })
   
+  #_____3.7.1 SERVER : Hide Axis labels ObserveEvent (to disable axis label angle sliderInput) ---------
+  
+  observeEvent(input$hideAxisLabels, {
+    if(input$hideAxisLabels == 1){
+      shinyjs::disable('axisLabelAngle')
+    } else {
+      shinyjs::enable('axisLabelAngle')
+    }
+  })
+  
+  
   #___3.8 SERVER : Input Type CHECK ---------
   
   #___3.8.1 INPUT TYPE CHECK: All 3 Conditions Covered ---------
@@ -512,6 +523,8 @@ server = function(input, output, session) {
                  title_x = input$titleX,
                  title_y = input$titleY,
                  jitter = input$addJitter,
+                 hideAxis = input$hideAxisLabels,
+                 axisAngle = input$axisLabelAngle,
                  facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                  facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
     
@@ -530,6 +543,8 @@ server = function(input, output, session) {
                  title_x = input$titleX,
                  title_y = input$titleY,
                  jitter = input$addJitter,
+                 hideAxis = input$hideAxisLabels,
+                 axisAngle = input$axisLabelAngle,
                  facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                  facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
     

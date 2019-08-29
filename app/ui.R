@@ -116,6 +116,8 @@ ui <- dashboardPage(
                                    textInput(inputId = "titleY", label = 'Y axis title', value = '')
                                    
                   ),
+                  checkboxInput(inputId ="hideAxisLabels", "Hide Axis Labels", value = FALSE),
+                  sliderInput(inputId = 'axisLabelAngle', label = 'Axis Label Angle', value = 0, min = 0, max = 90, step = 5),
                   checkboxInput(inputId ="showFacet", "Show facets", value = FALSE),
                   conditionalPanel(condition = "input.showFacet == 1",
                                    checkboxInput(inputId ="facetRow", "Facet by row", value = FALSE),
