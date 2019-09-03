@@ -76,6 +76,20 @@ server = function(input, output, session) {
   #___3.5 SERVER : Update selectInputs--------------
   
   observeEvent(data(), {
+    
+    factor_vars <-  c(names(data())[ sapply(data(), is.factor)])
+    char_vars <-  c(names(data())[ sapply(data(), is.character)])
+    numeric_vars <-  c(names(data())[ sapply(data(), is.numeric)])
+    int_vars <-  c(names(data())[ sapply(data(), is.integer)])
+    
+    showModal(modalDialog(
+      title = "Data Summary",
+      p(ifelse(is_empty(factor_vars), paste0("Factor variables: None"), paste0("Factor variables: ", factor_vars))),
+      p(ifelse(is_empty(char_vars), paste0("Character variables: None"), paste0("Character variables: ", paste(char_vars, collapse = ", ")))),
+      p(ifelse(is_empty(numeric_vars), paste0("Numeric variables: None"), paste0("Numeric variables: ", paste(numeric_vars, collapse = ", ")))),
+      p(ifelse(is_empty(int_vars), paste0("Integer variables: None"), paste0("Integer variables: ", paste(int_vars, collapse = ", ")))),
+      easyClose = TRUE
+    ))
     updateSelectInput(session, inputId = "selectX", choices=c(colnames(data()),"None"))
     updateSelectInput(session, inputId = "selectY", choices=c(colnames(data()),"None"))
     
