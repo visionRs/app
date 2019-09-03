@@ -245,7 +245,7 @@ server = function(input, output, session) {
     #______4.0.1 GGPLOT Code--------------------
     
     # shinyjs::toggleElement('barplot_div')
-    
+    print(input$hideAxisLabels)
     list_both$plot <- bar_plot(data = data(),
                                df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                                x=input$selectX,

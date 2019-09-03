@@ -34,7 +34,7 @@ bar_plot <- function(data=NULL,
                      facetRow,
                      facetCol,
                      hideAxis,
-                     axisAngle,
+                     axisAngle=180,
                      interactive=FALSE) {
   if(interactive==FALSE){
   p <- ggplot(data, aes_string(x, y, fill =ifelse(colorby == 'None', shQuote("None"), colorby) )) +
@@ -88,16 +88,23 @@ bar_plot <- function(data=NULL,
     #code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
   }
   
-  if(hideAxis == 1){
-    p <-  p + theme(axis.text.x = element_blank())
-    code <- paste0(code, '+ theme(axis.text.x = element_blank())')
-  }
   
-  if(axisAngle > 0){
-    p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
-    code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
-  }
+  #p <- p + ifelse(hideAxis==TRUE, theme(axis.text.x =element_blank()), theme(axis.text.x=element_text(angle = axisAngle, hjust = 1)))
+  code <- paste0(code, " + " ,ifelse(hideAxis==TRUE, 'theme(axis.text.x =element_blank())', 'theme(axis.text.x=element_text(angle = axisAngle, hjust = 1))'))
+  # if(hideAxis == TRUE ){
+  #   p <-  p + theme(axis.text.x = element_blank())
+  #   code <- paste0(code, '+ theme(axis.text.x = element_blank())',hideAxis)
+  # } else if (axisAngle > 0 & hideAxis==FALSE) {
+  #   
+  #   p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
+  #   code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
+  # }
   
+  # if(axisAngle > 0){
+  #   p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
+  #   code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
+  # }
+  # 
  
   ls <- list()
   ls[['plot']] <- p
