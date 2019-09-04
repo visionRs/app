@@ -83,8 +83,13 @@ server = function(input, output, session) {
     int_vars <-  c(names(data())[ sapply(data(), is.integer)])
     
     showModal(modalDialog(
-      title = "Data Summary",
-      p(ifelse(is_empty(factor_vars), paste0("Factor variables: None"), paste0("Factor variables: ", factor_vars))),
+      title = h4(tags$b("Data Summary")),
+      h5(tags$b("Data Dimensions")),
+      p(paste0("Rows: ", nrow(data()))),
+      p(paste0("Columns: ", ncol(data()))),
+      br(),
+      h5(tags$b("Variable class")),
+      p(ifelse(is_empty(factor_vars), paste0("Factor variables: None"), paste0("Factor variables: ", paste(factor_vars, collapse = ", ")))),
       p(ifelse(is_empty(char_vars), paste0("Character variables: None"), paste0("Character variables: ", paste(char_vars, collapse = ", ")))),
       p(ifelse(is_empty(numeric_vars), paste0("Numeric variables: None"), paste0("Numeric variables: ", paste(numeric_vars, collapse = ", ")))),
       p(ifelse(is_empty(int_vars), paste0("Integer variables: None"), paste0("Integer variables: ", paste(int_vars, collapse = ", ")))),
