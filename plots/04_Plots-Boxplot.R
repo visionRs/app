@@ -69,14 +69,14 @@ box_plot <- function(data=NULL,
   }
   
 
-  if(hideAxis != 1){
+  if(hideAxis == TRUE){
+    p <-  p + theme(axis.text.x = element_blank())
+    code <- paste0(code, '+ theme(axis.text.x = element_blank())')
+  } else{
     if(axisAngle > 0){
       p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
       code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
     }
-  } else {
-    p <-  p + theme(axis.text.x = element_blank())
-    code <- paste0(code, '+ theme(axis.text.x = element_blank())')
   }
   
   

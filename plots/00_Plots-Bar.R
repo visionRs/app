@@ -90,7 +90,7 @@ bar_plot <- function(data=NULL,
   
   
   #p <- p + ifelse(hideAxis==TRUE, theme(axis.text.x =element_blank()), theme(axis.text.x=element_text(angle = axisAngle, hjust = 1)))
-  code <- paste0(code, " + " ,ifelse(hideAxis==TRUE, 'theme(axis.text.x =element_blank())', 'theme(axis.text.x=element_text(angle = axisAngle, hjust = 1))'))
+  #code <- paste0(code, " + " ,ifelse(hideAxis==TRUE, 'theme(axis.text.x =element_blank())', 'theme(axis.text.x=element_text(angle = axisAngle, hjust = 1))'))
   # if(hideAxis == TRUE ){
   #   p <-  p + theme(axis.text.x = element_blank())
   #   code <- paste0(code, '+ theme(axis.text.x = element_blank())',hideAxis)
@@ -105,6 +105,16 @@ bar_plot <- function(data=NULL,
   #   code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
   # }
   # 
+  
+  if(hideAxis == TRUE){
+    p <-  p + theme(axis.text.x = element_blank())
+    code <- paste0(code, '+ theme(axis.text.x = element_blank())')
+  } else{
+    if(axisAngle > 0){
+      p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
+      code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
+    }
+  }
  
   ls <- list()
   ls[['plot']] <- p

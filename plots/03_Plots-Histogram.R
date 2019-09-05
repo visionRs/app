@@ -91,14 +91,14 @@ if(colorby=='None'){
     code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
   }
   
-  if(hideAxis == 1){
+  if(hideAxis == TRUE){
     p <-  p + theme(axis.text.x = element_blank())
     code <- paste0(code, '+ theme(axis.text.x = element_blank())')
-  }
-  
-  if(axisAngle > 0){
-    p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
-    code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
+  } else{
+    if(axisAngle > 0){
+      p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
+      code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
+    }
   }
   
   ls <- list()
