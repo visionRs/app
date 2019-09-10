@@ -61,13 +61,13 @@ bar_plot <- function(data=NULL,
                      ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('&ensp; labs(title = ','"',plotTitle,'"',') + <br>')),
                      ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + <br>')),
                      ifelse(title_y=='' | is.null(title_y),'',paste0(' ylab(','"',title_y,'"',') ')),
-                     ifelse(fontSize==10 & legendPos == 'right' ,'',
+                     ifelse(fontSize==10 & legendPos == 'right' , paste0(' + <br> theme(axis.text.x = ', ifelse(hideAxis, 'element_blank())  <br>', paste0('element_text(angle = ', axisAngle, ', hjust = 1)) <br>'))),
                             paste0(paste0('+ <br> theme(axis.text = element_text(size = ', fontSize,'), <br>'),
                                    paste0(' &emsp; &emsp; &emsp; axis.title.x = element_text(size = ', fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; axis.title.y = element_text(size = ', fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; plot.title = element_text(size = ',fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; legend.position = ','"',legendPos,'"',')<br>'),
-                                   paste0(' &emsp; &emsp; &emsp; axis.text.x = ', ifelse(hideAxis, 'element_blank()', paste0('element_text(angle = ', axisAngle, ', hjust = 1)'),') + <br>'))
+                                   paste0(' &emsp; &emsp; &emsp; axis.text.x = ', ifelse(hideAxis, 'element_blank()) <br>', paste0('element_text(angle = ', axisAngle, ', hjust = 1)) <br>')))
                                    
                                    )
                               
@@ -75,7 +75,7 @@ bar_plot <- function(data=NULL,
                      ifelse(facetRow != 'None' & facetCol != 'None',paste0(" + <br> facet_grid(",as.formula(paste0(facetRow, "~", facetCol)),") <br>" ),''),
                      ifelse(facetRow != 'None' & facetCol == 'None',paste0('+ <br> facet_grid(',facetRow,' ~ .) <br>'),'' ),
                      ifelse(facetRow == 'None' & facetCol != 'None',paste0('+ <br> facet_grid(. ~ ',facetCol,') <br>') ,''),
-                     ifelse(hideAxis==TRUE, paste0('+ <br> theme(axis.text.x = element_blank()) <br>'),paste0('+ <br> theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1)) <br>')),
+                     #ifelse(hideAxis==TRUE, paste0('+ <br> theme(axis.text.x = element_blank()) <br>'),paste0('+ <br> theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1)) <br>')),
                      '</pre>'))
   
   # facet
