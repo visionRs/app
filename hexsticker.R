@@ -21,10 +21,10 @@ n_steps <- 30
 y_min <- 0.75
 y_max <- 1.04
 x_min <- 0.1
-x_max <- 1.9
+x_max <- 1.0
 alpha_max <- 0.7
 
-img <- readPNG("./hex1.png")
+img <- readPNG("./eval1.png")
 ## Invert and add alpha channel.
 img_a <- matrix(rgb(1 - img[,,1], 1 - img[,,2], 1 - img[,,3], img[,,4] * 0.8),
                 nrow = dim(img)[1])
@@ -42,23 +42,23 @@ trans_rect <- geom_rect(data = trans_df, fill = col_bg,
                             alpha = alpha))
 
 gg <- ggplot() +
-  geom_rect(aes(xmin = 0, xmax = x_max, ymin = 0, ymax = 1.5), fill = NA) +
-  annotation_custom(g_img, xmin = -0.02, ymin = -0.15) +
+  geom_rect(aes(xmin = 0, xmax = 0.5, ymin = 0, ymax = 1.5), fill = NA) +
+  annotation_custom(g_img, xmin = -0.0, ymin = -0.01) +
   trans_rect +
   theme_void() + guides(alpha = FALSE) + theme(axis.line=element_blank()) +
   scale_alpha_continuous(range = c(0, alpha_max))
 ## print(gg)
 
-sticker(gg, package="ggQuickPlot", p_size = 5.5, p_y = 1.25, s_x = 0.89,
-        s_y = 1.08, s_width = 1.04, s_height = 1.7, p_color = col_text,
+s <- sticker(gg, package="OMET", p_size = 5.5, p_y = 1.5, s_x = 1,
+        s_y = 0.8, s_width = 1.04, s_height = 1.7, p_color = col_text,
         h_fill = col_bg, h_color = col_border, filename="AnnotationFilter.png",
         p_family = "Aller_Lt", u_color = col_border,
         url = "https://github.com/easy-plot/")
 
 set.seed(123)
-sticker(gg, package="ggQuickPlot", p_size = 5, p_y = 1.48, s_x = 1,
+s <- sticker(gg, package="OMET", p_size = 10.5, p_y = 1.5, s_x = 1,
         s_y = 0.8, s_width = 1.04, s_height = 1, p_color = "#5C97BF",h_size = 0.5 ,
         h_fill = col_bg, h_color = "#bfbab6", spotlight = TRUE,
-        filename="hexsticker.png", l_x = 1, l_y = 1, l_alpha = 0.1,l_width = 5,l_height = 5,
-        p_family = "Aller_Lt", u_color = col_border)
+        filename="hexsticker.png", l_x = 1, l_y = 1, l_alpha = 0.2,l_width = 5,l_height = 5, 
+        p_family = "Aller_Lt", u_color = col_border,u_size = 2.0)
 

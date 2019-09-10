@@ -49,7 +49,7 @@ ui <- dashboardPage(
   
   # 3. BODY here----
   dashboardBody(
-    includeCSS("../www/template.css"),
+    includeCSS("./inst/www/template.css"),
     shinyjs::useShinyjs(),
     rclipboardSetup(),
     
