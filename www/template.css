@@ -80,7 +80,7 @@ background-color: #3a95e296;
 }
 
 
-#refresh1 {
+/*#refresh1 {
     display:block;
     text-align:center;
     position: absolute;
@@ -94,7 +94,7 @@ background-color: #3a95e296;
     padding-top: 9px;
     padding-bottom: 2px;
 }
-
+*/
 
 #preloader_4{
     position:relative;
@@ -256,7 +256,7 @@ border-radius:20px;
     }
 
 #menu-drpdwn a:hover a + .hidden, .hidden:hover {
-display: block;
+display: inline-block;
 }
 
 
