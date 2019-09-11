@@ -35,10 +35,14 @@ bar_plot <- function(data=NULL,
                      facetCol,
                      hideAxis,
                      axisAngle=90,
+                     position='',
                      interactive=FALSE) {
   if(interactive==FALSE){
+    
+    
+    
   p <- ggplot(data, aes_string(x, y, fill =ifelse(colorby == 'None', shQuote("None"), colorby) )) +
-    geom_bar(stat="identity") +
+    geom_bar(stat="identity" , position = position) + #if(position=='') {} else { paste0(',', position = position)} ) +
     eval(parse(text=as.character(Theme))) +
     labs(title = plotTitle) +
     xlab(title_x) + ylab(title_y) +
@@ -46,17 +50,17 @@ bar_plot <- function(data=NULL,
           axis.title.x = element_text(size = fontSize),
           axis.title.y = element_text(size = fontSize),
           plot.title = element_text(size = fontSize),
-          legend.position = legendPos,
+          legend.position = if (colorby=='None') 'none' else legendPos,
           axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1))
 
   if(colorby=='None'){
     
-    p <- p + scale_fill_manual(values = colourfill) + theme(legend.position = 'none')
+    p <- p + scale_fill_manual(values = colourfill)
   }
   
 
   code <-HTML(paste0('<pre>ggplot(data = ',df_name, ' , aes(x=', x, ', y=', y, ifelse(colorby=="None",")) + <br> ",paste0(',' ,'fill = ',colorby, ')) + <br>')), 
-                     paste0('geom_bar(stat="identity"'), ifelse(colorby=="None",paste0(', fill =',shQuote(colourfill), ') + <br>'), ') + <br>'),
+                     paste0('geom_bar(stat="identity" , position = ',shQuote(position)), ifelse(colorby=="None",paste0(', fill =',shQuote(colourfill), ') + <br>'), ') + <br>'),
                      paste0(ifelse(Theme=="NULL" | is.null(Theme),'',paste0('&ensp;',Theme,'+ <br>'))),
                      ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('&ensp; labs(title = ','"',plotTitle,'"',') + <br>')),
                      ifelse(title_x=='' | is.null(title_x),'',paste0(' xlab(','"',title_x,'"',') + <br>')),

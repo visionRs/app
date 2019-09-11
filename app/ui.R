@@ -161,8 +161,12 @@ ui <- dashboardPage(
                                status = "primary",
                                circle = FALSE,
                                conditionalPanel(condition = "input.Bar",
-                                                selectInput(inputId = 'barplot_extra_param', label = 'Barplot specific Input', choices = c('None'))
-                               ),
+                                                box(id = 'bar_extra_params', width =12,
+                                                selectInput(inputId = "position_input",
+                                                            label = "Position",
+                                                            choices = c('fill',"dodge","stack"),selected = 'stack')
+                                      
+                               )),
                                conditionalPanel(condition = "input.Histogram",
                                                 materialSwitch(
                                                   inputId = "hist_density",

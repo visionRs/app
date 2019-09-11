@@ -282,7 +282,9 @@ server = function(input, output, session) {
                                hideAxis = input$hideAxisLabels,
                                axisAngle = input$axisLabelAngle,
                                facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
-                               facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
+                               facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol},
+                               position = input$position_input
+                               )$plot
     
     
     #______4.0.2 GGPLOT Code--------------------
@@ -302,7 +304,9 @@ server = function(input, output, session) {
                hideAxis = input$hideAxisLabels,
                axisAngle = input$axisLabelAngle,
                facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
-               facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
+               facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol},
+               position = input$position_input
+               )$code
     
     
     

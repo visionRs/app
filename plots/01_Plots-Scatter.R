@@ -45,14 +45,18 @@ scatter_plot <- function(data=dt,
                          facetCol) {
   
   
-  p <- ggplot(data, aes_string(x,y, color = ifelse(colorby == 'None','NULL',colorby), shape = ifelse(shapeby == 'None','NULL',shapeby)))
-  if(colorby == "None"){
-    p <- p + geom_point(size = dotSize, alpha = dotOpa, color=colourfill)
-      
-  } else{
-    p <- p + geom_point(size = dotSize, alpha = dotOpa)
-     
-  }
+  p <- ggplot(data, 
+              aes_string(x, y, color = ifelse(colorby == 'None','NULL',colorby), shape = ifelse(shapeby == 'None','NULL',shapeby))) +
+              if(colorby == "None") geom_point(size = dotSize, alpha = dotOpa, color=colourfill) else geom_point(size = dotSize, alpha = dotOpa) 
+  
+  
+  # if(colorby == "None"){
+  #   p <- p + geom_point(size = dotSize, alpha = dotOpa, color=colourfill)
+  #     
+  # } else{
+  #   p <- p + geom_point(size = dotSize, alpha = dotOpa)
+  #    
+  # }
   
   p <-  p + eval(parse(text=as.character(Theme))) +
     labs(title = plotTitle) +
