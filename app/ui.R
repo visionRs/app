@@ -164,7 +164,8 @@ ui <- dashboardPage(
                                                 box(id = 'bar_extra_params', width =12,
                                                 selectInput(inputId = "position_input",
                                                             label = "Position",
-                                                            choices = c('fill',"dodge","stack"),selected = 'stack')
+                                                            choices = c('fill',"dodge","stack"),selected = 'stack'),
+                                                checkboxInput(inputId='coorflip_input','CoordFlip',value = FALSE)
                                       
                                )),
                                conditionalPanel(condition = "input.Histogram",

@@ -36,6 +36,7 @@ bar_plot <- function(data=NULL,
                      hideAxis,
                      axisAngle=90,
                      position='',
+                     coorflip=FALSE,
                      interactive=FALSE) {
   if(interactive==FALSE){
     
@@ -46,18 +47,21 @@ bar_plot <- function(data=NULL,
     eval(parse(text=as.character(Theme))) +
     labs(title = plotTitle) +
     xlab(title_x) + ylab(title_y) +
+    {if(coorflip) { coord_flip() } } +
+    {if(colorby=='None') { scale_fill_manual(values = colourfill) } } +
     theme(axis.text = element_text(size = fontSize),
           axis.title.x = element_text(size = fontSize),
           axis.title.y = element_text(size = fontSize),
           plot.title = element_text(size = fontSize),
           legend.position = if (colorby=='None') 'none' else legendPos,
-          axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1))
+          axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1)) 
+          
 
-  if(colorby=='None'){
-    
-    p <- p + scale_fill_manual(values = colourfill)
-  }
-  
+  # if(colorby=='None'){
+  #   
+  #   p <- p + scale_fill_manual(values = colourfill)
+  # }
+  # 
 
   code <-HTML(paste0('<pre>ggplot(data = ',df_name, ' , aes(x=', x, ', y=', y, ifelse(colorby=="None",")) + <br> ",paste0(',' ,'fill = ',colorby, ')) + <br>')), 
                      paste0('geom_bar(stat="identity" , position = ',shQuote(position)), ifelse(colorby=="None",paste0(', fill =',shQuote(colourfill), ') + <br>'), ') + <br>'),
@@ -71,15 +75,15 @@ bar_plot <- function(data=NULL,
                                    paste0(' &emsp; &emsp; &emsp; axis.title.y = element_text(size = ', fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; plot.title = element_text(size = ',fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; legend.position = ','"',legendPos,'"',')<br>'),
-                                   paste0(' &emsp; &emsp; &emsp; axis.text.x = ', ifelse(hideAxis, 'element_blank()) <br>', paste0('element_text(angle = ', axisAngle, ', hjust = 1)) <br>')))
+                                   paste0(' &emsp; &emsp; &emsp; axis.text.x = ', ifelse(hideAxis, 'element_blank())', paste0('element_text(angle = ', axisAngle, ', hjust = 1))')))
                                    
                                    )
                               
                             ),
-                     ifelse(facetRow != 'None' & facetCol != 'None',paste0(" + <br> facet_grid(",as.formula(paste0(facetRow, "~", facetCol)),") <br>" ),''),
-                     ifelse(facetRow != 'None' & facetCol == 'None',paste0('+ <br> facet_grid(',facetRow,' ~ .) <br>'),'' ),
-                     ifelse(facetRow == 'None' & facetCol != 'None',paste0('+ <br> facet_grid(. ~ ',facetCol,') <br>') ,''),
-                     #ifelse(hideAxis==TRUE, paste0('+ <br> theme(axis.text.x = element_blank()) <br>'),paste0('+ <br> theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1)) <br>')),
+                     ifelse(facetRow != 'None' & facetCol != 'None',paste0(" + <br> facet_grid(",as.formula(paste0(facetRow, "~", facetCol)),") " ),''),
+                     ifelse(facetRow != 'None' & facetCol == 'None',paste0('+ <br> facet_grid(',facetRow,' ~ .) '),'' ),
+                     ifelse(facetRow == 'None' & facetCol != 'None',paste0('+ <br> facet_grid(. ~ ',facetCol,') ') ,''),
+                     ifelse(coorflip==TRUE, paste0('+ <br> coord_flip()'),paste0('')),
                      '</pre>'))
   
   # facet
