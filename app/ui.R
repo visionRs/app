@@ -264,14 +264,14 @@ ui <- dashboardPage(
                   #tabBox(status="info","Plot Output", withSpinner(plotOutput('basic_barplot',height = '600px'),color = '#3c8dbc'),value = 'basic_barplot')
                   box(width="9",height = '750px',
                       title = "",
-                      actionBttn(
+                      shinyjs::disabled(actionBttn(
                         inputId = "update_bttn",
                         label = "Update",
                         color = "success",
                         style = "material-flat",
                         icon = icon("sliders"),
                         block = TRUE
-                      ),
+                      )),
                       withSpinner(plotOutput('plot',height = '650px'),color = '#3c8dbc'),
                       
                       value = 'plot6',status = "primary"

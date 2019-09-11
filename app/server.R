@@ -239,6 +239,8 @@ server = function(input, output, session) {
   #___4.0 PLOTS CODE: Bar Plot Code-----------------
   observeEvent(input$Bar,{
     
+    shinyjs::enable(id='update_bttn')
+    
     if (input$Bar > 0 ) {
       rv$last_btn = "Bar"
     }
@@ -311,6 +313,9 @@ server = function(input, output, session) {
   #___4.1 PLOTS CODE: Histogram Plot Code--------------------
   
   observeEvent(input$Histogram,{
+    
+    shinyjs::enable(id='update_bttn')
+    
     
     if (input$Histogram > 0 ) {
       rv$last_btn = "Histogram"
