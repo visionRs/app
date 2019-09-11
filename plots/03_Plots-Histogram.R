@@ -41,7 +41,7 @@ histogram <- function(data=NULL,
           axis.title.x = element_text(size = fontSize),
           axis.title.y = element_text(size = fontSize),
           plot.title = element_text(size = fontSize),
-          legend.position = if (colorby=='None') 'none' else legendPos,
+          legend.position = if (density){ if (density_fill=='None') 'none' else legendPos} else {if (colorby=='None') 'none' else legendPos},
           axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1)) 
   
 

@@ -152,8 +152,18 @@ server = function(input, output, session) {
       updateSelectInput(session, inputId = "density_fill", choices=density_checkbox_choices, selected = 'None')
       
     }
-    shinyjs::disable("colorby")
-    shinyjs::disable("position_input")
+    if(input$density_checkbox){
+      shinyjs::disable("colorby") 
+      shinyjs::disable("position_input") 
+      
+      }
+    else 
+      {
+      shinyjs::enable("colorby")
+      shinyjs::enable("position_input") 
+      
+      }
+    
   })
   
   
@@ -270,6 +280,8 @@ server = function(input, output, session) {
     shinyjs::hide("dotLine")
     shinyjs::hide("lineSize")
     shinyjs::hide("addJitter")
+    shinyjs::hide("hist_extra_params")
+    
     #________4.0.0.2 Showing Bar specific advance options
     shinyjs::show("barplot_extra_param")
     
@@ -353,6 +365,7 @@ server = function(input, output, session) {
     shinyjs::hide("lineSize")
     shinyjs::hide("addJitter")
     shinyjs::hide("scatter_extra_params")
+    shinyjs::show("hist_extra_params")
     
     #______4.1.0 Plot Code--------------------
     
@@ -435,6 +448,7 @@ server = function(input, output, session) {
     shinyjs::hide("dotLine")
     shinyjs::hide("lineSize")
     shinyjs::hide("addJitter")
+    shinyjs::hide("hist_extra_param")
     #________4.2.0.2 Showing scatter specific advance options
     shinyjs::show("scatter_extra_params")
     
@@ -507,6 +521,8 @@ server = function(input, output, session) {
     shinyjs::hide("addJitter")
     shinyjs::hide("barplot_extra_param")
     shinyjs::hide("scatter_extra_params")
+    shinyjs::hide("hist_extra_param")
+    
     #________4.3.0.2 Show Line specific advance options
     shinyjs::show("lineplot_extra_param")
     shinyjs::show("dotLine")
@@ -578,6 +594,8 @@ server = function(input, output, session) {
     shinyjs::hide("dotLine")
     shinyjs::hide("lineSize")
     shinyjs::hide("scatter_extra_params")
+    shinyjs::hide("hist_extra_param")
+    
     #________4.4.0.2 Showing Box specific advance options
     shinyjs::show("addJitter")
     
