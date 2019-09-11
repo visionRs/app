@@ -390,6 +390,7 @@ server = function(input, output, session) {
   #___4.2 PLOTS CODE: Scatter Plot Code------------------
   
   observeEvent(input$Scatter,{
+    shinyjs::enable(id='update_bttn')
     
     if (input$Scatter > 0 ) {
       rv$last_btn = "Scatter"
@@ -463,6 +464,7 @@ server = function(input, output, session) {
   #___4.3 PLOTS CODE: Line Plot Code------------------
   
   observeEvent(input$Line,{
+    shinyjs::enable(id='update_bttn')
     
     if (input$Line > 0 ) {
       rv$last_btn = "Line"
@@ -529,6 +531,7 @@ server = function(input, output, session) {
   #___4.4 PLOTS CODE: Box Plot Code------------------
   
   observeEvent(input$Box,{
+    shinyjs::enable(id='update_bttn')
     
     if (input$Box > 0 ) {
       rv$last_btn = "Box"
