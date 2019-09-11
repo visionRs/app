@@ -152,6 +152,8 @@ server = function(input, output, session) {
       updateSelectInput(session, inputId = "density_fill", choices=density_checkbox_choices, selected = 'None')
       
     }
+    shinyjs::disable("colorby")
+    shinyjs::disable("position_input")
   })
   
   
@@ -373,7 +375,8 @@ server = function(input, output, session) {
                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                 facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol},
                 density=input$density_checkbox,
-                density_fill=input$density_fill
+                density_fill=input$density_fill,
+                alpha=input$alpha_input
                 
                 )$plot
     
@@ -400,7 +403,9 @@ server = function(input, output, session) {
                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                 facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol},
                 density=input$density_checkbox,
-                density_fill=input$density_fill
+                density_fill=input$density_fill,
+                alpha=input$alpha_input
+                
                 
                 )$code
     

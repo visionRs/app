@@ -160,7 +160,7 @@ ui <- dashboardPage(
                                icon = icon("sliders"),
                                status = "primary",
                                circle = FALSE,
-                               conditionalPanel(condition = "input.Bar",
+                               conditionalPanel(condition = "input.Bar || input.Histogram",
                                                 box(id = 'bar_extra_params', width =12,
                                                 selectInput(inputId = "position_input",
                                                             label = "Position",
@@ -175,7 +175,8 @@ ui <- dashboardPage(
                                                                      selectInput(inputId = "density_fill",
                                                                                  label = "Density Fill Column",
                                                                                  choices = 'None'
-                                                                     )
+                                                                     ),
+                                                                     numericInput(inputId="alpha_input",label = 'Alpha',value = 0.5,min=0,max=1)
                                                     )
                                                     
                                                 )
