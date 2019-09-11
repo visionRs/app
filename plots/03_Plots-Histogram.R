@@ -14,30 +14,48 @@ histogram <- function(data=NULL,
                       facetRow,
                       position = '',
                       coorflip=FALSE,
-                      # density=FALSE,
-                      # density_fill=NULL,
+                      density=FALSE,
+                      density_fill=NULL,
                       facetCol) {
   
   
-  p <-  ggplot(data, aes_string(x,fill =ifelse(colorby == 'None', shQuote("None"), colorby))) +
-          geom_histogram(position = position) +
-          eval(parse(text=as.character(Theme))) +
-          labs(title = plotTitle) +
-          xlab(title_x) +
-          ylab(title_y) +
-          {if(coorflip) { coord_flip() } } +
-          {if(colorby=='None') { scale_fill_manual(values = colourfill) } } +
-          {if(facetRow != 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(facetRow, "~", facetCol)))} 
-            else if(facetRow != 'None' & facetCol == 'None'){facet_grid(as.formula(paste0(facetRow, "~ .")))}
-            else if(facetRow == 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(". ~", facetCol)))}
-          } +
-          theme(axis.text = element_text(size = fontSize),
-                axis.title.x = element_text(size = fontSize),
-                axis.title.y = element_text(size = fontSize),
-                plot.title = element_text(size = fontSize),
-                legend.position = if (colorby=='None') 'none' else legendPos,
-                axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1))
+  # p <-  ggplot(data, aes_string(x,fill =ifelse(colorby == 'None', shQuote("None"), colorby))) +
+  #         geom_histogram(position = position) +
+  #         eval(parse(text=as.character(Theme))) +
+  #         labs(title = plotTitle) +
+  #         xlab(title_x) +
+  #         ylab(title_y) +
+  #         {if(coorflip) { coord_flip() } } +
+  #         {if(colorby=='None') { scale_fill_manual(values = colourfill) } } +
+  #         {if(facetRow != 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(facetRow, "~", facetCol)))} 
+  #           else if(facetRow != 'None' & facetCol == 'None'){facet_grid(as.formula(paste0(facetRow, "~ .")))}
+  #           else if(facetRow == 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(". ~", facetCol)))}
+  #         } +
+  #         theme(axis.text = element_text(size = fontSize),
+  #               axis.title.x = element_text(size = fontSize),
+  #               axis.title.y = element_text(size = fontSize),
+  #               plot.title = element_text(size = fontSize),
+  #               legend.position = if (colorby=='None') 'none' else legendPos,
+  #               axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1))
           
+  
+  p <- ggplot(data, aes_string(x, fill =ifelse(colorby == 'None', shQuote("None"), colorby) )) +
+    geom_histogram(position = position) +
+    eval(parse(text=as.character(Theme))) +
+    labs(title = plotTitle) +
+    xlab(title_x) + ylab(title_y) +
+    {if(coorflip) { coord_flip() } } +
+    {if(colorby=='None') { scale_fill_manual(values = colourfill) } } +
+    {if(facetRow != 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(facetRow, "~", facetCol)))} 
+      else if(facetRow != 'None' & facetCol == 'None'){facet_grid(as.formula(paste0(facetRow, "~ .")))}
+      else if(facetRow == 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(". ~", facetCol)))}
+    } +
+    theme(axis.text = element_text(size = fontSize),
+          axis.title.x = element_text(size = fontSize),
+          axis.title.y = element_text(size = fontSize),
+          plot.title = element_text(size = fontSize),
+          legend.position = if (colorby=='None') 'none' else legendPos,
+          axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1)) 
   
 
   

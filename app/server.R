@@ -145,6 +145,16 @@ server = function(input, output, session) {
   })
   
   
+  
+  observeEvent(input$density_checkbox, {
+    density_checkbox_choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
+    if(length(names(data())[ sapply(data(), is.factor)]) == 1){ # if only 1 factor variable present
+      updateSelectInput(session, inputId = "density_fill", choices=density_checkbox_choices, selected = 'None')
+      
+    }
+  })
+  
+  
   #___3.6 SERVER : Displaying Data (sanity check!) ---------
  
   output$tabout <- renderTable({
@@ -358,10 +368,14 @@ server = function(input, output, session) {
                 title_y = input$titleY,
                 hideAxis = input$hideAxisLabels,
                 axisAngle = input$axisLabelAngle,
-                bin=input$bin,
-                binwidth=input$binwidth,
+                position = input$position_input,
+                coorflip =input$coorflip_input,
                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
-                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$plot
+                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol},
+                density=input$density_checkbox,
+                density_fill=input$density_fill
+                
+                )$plot
     
     
     
@@ -381,10 +395,14 @@ server = function(input, output, session) {
                 title_y = input$titleY,
                 hideAxis = input$hideAxisLabels,
                 axisAngle = input$axisLabelAngle,
-                bin=input$bin,
-                binwidth=input$binwidth,
+                position = input$position_input,
+                coorflip =input$coorflip_input,
                 facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
-                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol})$code
+                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol},
+                density=input$density_checkbox,
+                density_fill=input$density_fill
+                
+                )$code
     
     
     

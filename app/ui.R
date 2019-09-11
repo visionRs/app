@@ -169,11 +169,15 @@ ui <- dashboardPage(
                                       
                                )),
                                conditionalPanel(condition = "input.Histogram",
-                                                materialSwitch(
-                                                  inputId = "hist_density",
-                                                  label = "Density", 
-                                                  value = FALSE,
-                                                  status = "primary"
+                                                box(id = 'hist_extra_params', width =12,
+                                                    checkboxInput(inputId='density_checkbox','Density Plot',value = FALSE),
+                                                    conditionalPanel(condition = "input.density_checkbox ==1",
+                                                                     selectInput(inputId = "density_fill",
+                                                                                 label = "Density Fill Column",
+                                                                                 choices = 'None'
+                                                                     )
+                                                    )
+                                                    
                                                 )
                                                 
                                                 
@@ -225,10 +229,11 @@ ui <- dashboardPage(
                       h4("Select input params:"),
                       
                       switchInput(inputId = "read_dt", 
-                                  value = TRUE,
+                                  value = FALSE,
                                   label = "Upload File",
                                   size = "mini",
                                   width = '100px'
+                                  
                       ),
                       
                       
