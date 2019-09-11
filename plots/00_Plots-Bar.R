@@ -49,6 +49,10 @@ bar_plot <- function(data=NULL,
     xlab(title_x) + ylab(title_y) +
     {if(coorflip) { coord_flip() } } +
     {if(colorby=='None') { scale_fill_manual(values = colourfill) } } +
+    {if(facetRow != 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(facetRow, "~", facetCol)))} 
+      else if(facetRow != 'None' & facetCol == 'None'){facet_grid(as.formula(paste0(facetRow, "~ .")))}
+      else if(facetRow == 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(". ~", facetCol)))}
+    } +
     theme(axis.text = element_text(size = fontSize),
           axis.title.x = element_text(size = fontSize),
           axis.title.y = element_text(size = fontSize),
@@ -86,20 +90,20 @@ bar_plot <- function(data=NULL,
                      ifelse(coorflip==TRUE, paste0('+ <br> coord_flip()'),paste0('')),
                      '</pre>'))
   
-  # facet
-  if(facetRow != 'None' & facetCol != 'None'){
-    p <-  p + facet_grid(as.formula(paste0(facetRow, "~", facetCol)))
-    #code <- paste0(code,'+ facet_grid(',facetRow,' ~ ',facetCol,')')
-  }
-  if(facetRow != 'None' & facetCol == 'None'){
-    p <-  p + facet_grid(as.formula(paste0(facetRow, "~ .")))
-   # code <- paste0(code,'+ facet_grid(',facetRow,' ~ .)')
-  }
-  if(facetRow == 'None' & facetCol != 'None'){
-    p <-  p + facet_grid(as.formula(paste0(". ~", facetCol)))
-    #code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
-  }
-  
+  # # facet
+  # if(facetRow != 'None' & facetCol != 'None'){
+  #   p <-  p + facet_grid(as.formula(paste0(facetRow, "~", facetCol)))
+  #   #code <- paste0(code,'+ facet_grid(',facetRow,' ~ ',facetCol,')')
+  # }
+  # if(facetRow != 'None' & facetCol == 'None'){
+  #   p <-  p + facet_grid(as.formula(paste0(facetRow, "~ .")))
+  #  # code <- paste0(code,'+ facet_grid(',facetRow,' ~ .)')
+  # }
+  # if(facetRow == 'None' & facetCol != 'None'){
+  #   p <-  p + facet_grid(as.formula(paste0(". ~", facetCol)))
+  #   #code <- paste0(code,'+ facet_grid(. ~ ',facetCol,')')
+  # }
+  # 
   
   #p <- p + ifelse(hideAxis==TRUE, theme(axis.text.x =element_blank()), theme(axis.text.x=element_text(angle = axisAngle, hjust = 1)))
   #code <- paste0(code, " + " ,ifelse(hideAxis==TRUE, 'theme(axis.text.x =element_blank())', 'theme(axis.text.x=element_text(angle = axisAngle, hjust = 1))'))
