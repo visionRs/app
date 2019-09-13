@@ -1,4 +1,3 @@
-# ggQuickPlot<img src="https://github.com/easy-plot/app/blob/master/hexsticker.png" width="180" height="200" align="right"/>
 
 
 This Repo contains R code for the app
