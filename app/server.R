@@ -13,6 +13,8 @@ server = function(input, output, session) {
     shinyjs::js$refresh()
   }) 
   
+  
+  
   #___3.1 SERVER: UPDATE Button Logic--------------
   
   rv <- reactiveValues(last_btn = character())
