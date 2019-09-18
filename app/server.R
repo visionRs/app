@@ -651,6 +651,18 @@ server = function(input, output, session) {
     })
   })
   
+  
+  output$plotly <- renderPlotly({
+    if (is.null(list_both$plot)) return()
+    isolate({
+      q <- ggplotly(list_both$plot)
+      q
+    })
+  })
+  
+  
+  
+  
   #6. Final RenderText Code for GGPLOT----------------------
   output$clip <- renderUI({
     rclipButton("clipbtn", "Copy", list_both$code, icon("clipboard"))

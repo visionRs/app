@@ -287,7 +287,17 @@ ui <- dashboardPage(
                         icon = icon("sliders"),
                         block = TRUE
                       )),
-                      withSpinner(plotOutput('plot',height = '650px'),color = '#3c8dbc'),
+                      #withSpinner(plotOutput('plot',height = '650px'),color = '#3c8dbc'),
+                      
+                      conditionalPanel(
+                        condition = 'input.interact == true',
+                        withSpinner(plotlyOutput('plotly',height = '650px'),color = '#3c8dbc')
+                      ),
+                      
+                      conditionalPanel(
+                        condition = 'input.interact == false',
+                        withSpinner(plotOutput('plot',height = '650px'),color = '#3c8dbc')
+                      ),
                       
                       value = 'plot6',status = "primary"
                       
