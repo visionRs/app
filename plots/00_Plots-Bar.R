@@ -29,7 +29,7 @@ bar_plot <- function(data=NULL,
                      legendPos='right',
                      title_x='',
                      title_y='',
-                     colourfill='#00FF0080',
+                     colourfill='#2219CCCC',
                      plotTitle='',
                      facetRow,
                      facetCol,
@@ -37,11 +37,9 @@ bar_plot <- function(data=NULL,
                      axisAngle=90,
                      position='',
                      coorflip=FALSE,
-                     interactive=FALSE) {
-  if(interactive==FALSE){
-    
-    
-    
+                     interactive) {
+  
+
   p <- ggplot(data, aes_string(x, y, fill =ifelse(colorby == 'None', shQuote("None"), colorby) )) +
     geom_bar(stat="identity" , position = position) + #if(position=='') {} else { paste0(',', position = position)} ) +
     eval(parse(text=as.character(Theme))) +
@@ -66,7 +64,8 @@ bar_plot <- function(data=NULL,
   #   p <- p + scale_fill_manual(values = colourfill)
   # }
   # 
-
+  
+    
   code <-HTML(paste0('<pre>ggplot(data = ',df_name, ' , aes(x=', x, ', y=', y, ifelse(colorby=="None",")) + <br> ",paste0(',' ,'fill = ',colorby, ')) + <br>')), 
                      paste0('geom_bar(stat="identity" , position = ',shQuote(position)), ifelse(colorby=="None",paste0(', fill =',shQuote(colourfill), ') + <br>'), ') + <br>'),
                      paste0(ifelse(Theme=="NULL" | is.null(Theme),'',paste0('&ensp;',Theme,'+ <br>'))),
@@ -88,7 +87,9 @@ bar_plot <- function(data=NULL,
                      ifelse(facetRow != 'None' & facetCol == 'None',paste0('+ <br> facet_grid(',facetRow,' ~ .) '),'' ),
                      ifelse(facetRow == 'None' & facetCol != 'None',paste0('+ <br> facet_grid(. ~ ',facetCol,') ') ,''),
                      ifelse(coorflip==TRUE, paste0('+ <br> coord_flip()'),paste0('')),
+                     ifelse(interactive == TRUE, paste0(' %>% ggplotly()'), paste0('')),
                      '</pre>'))
+  
   
   # # facet
   # if(facetRow != 'None' & facetCol != 'None'){
@@ -131,19 +132,12 @@ bar_plot <- function(data=NULL,
      # code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
     }
   }
+  
+
  
   ls <- list()
   ls[['plot']] <- p
   ls[['code']] <- code
   return(ls)
-  
-  } else {
-  
-    
-  #data %>% 
-  
-  
-} # else ends for Theme
-
 
 } #function ends here

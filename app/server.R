@@ -310,7 +310,8 @@ server = function(input, output, session) {
                                facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol},
                                position = input$position_input,
-                               coorflip =input$coorflip_input
+                               coorflip =input$coorflip_input,
+                               interactive = input$interact
                                )$plot
     
     
@@ -333,7 +334,8 @@ server = function(input, output, session) {
                facetRow = if(input$facetRow != 1){'None'}else{input$selectFacetRow},
                facetCol = if(input$facetCol != 1){'None'}else{input$selectFacetCol},
                position = input$position_input,
-               coorflip =input$coorflip_input
+               coorflip =input$coorflip_input,
+               interactive = input$interact
                )$code
     
     
@@ -677,8 +679,7 @@ server = function(input, output, session) {
       list_both$code
     })
   })
-  
-  
+
   
 } # server ends here
 
