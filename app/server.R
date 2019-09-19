@@ -285,7 +285,7 @@ server = function(input, output, session) {
     shinyjs::hide("hist_extra_params")
     
     #________4.0.0.2 Showing Bar specific advance options
-    shinyjs::show("barplot_extra_param")
+    shinyjs::show("bar_extra_params")
     
     
     
@@ -363,7 +363,7 @@ server = function(input, output, session) {
     updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
     
     #________4.1.0.1 hiding scatter specific advance options
-    shinyjs::hide("barplot_extra_param")
+    shinyjs::hide("bar_extra_params")
     shinyjs::hide("lineplot_extra_param")
     shinyjs::hide("dotLine")
     shinyjs::hide("lineSize")
@@ -447,7 +447,7 @@ server = function(input, output, session) {
     updateSelectInput(session, inputId = "colorby", choices=colorby.choices, selected = 'None')
     
     #________4.2.0.1 hiding scatter specific advance options
-    shinyjs::hide("barplot_extra_param")
+    shinyjs::hide("bar_extra_params")
     shinyjs::hide("lineplot_extra_param")
     shinyjs::hide("dotLine")
     shinyjs::hide("lineSize")
@@ -523,7 +523,7 @@ server = function(input, output, session) {
     
     #________4.3.0.1 hiding Line specific advance options
     shinyjs::hide("addJitter")
-    shinyjs::hide("barplot_extra_param")
+    shinyjs::hide("bar_extra_params")
     shinyjs::hide("scatter_extra_params")
     shinyjs::hide("hist_extra_param")
     
@@ -593,7 +593,7 @@ server = function(input, output, session) {
     
     
     #________4.4.0.1 hiding specific advance options
-    shinyjs::hide("barplot_extra_param")
+    shinyjs::hide("bar_extra_params")
     shinyjs::hide("lineplot_extra_param")
     shinyjs::hide("dotLine")
     shinyjs::hide("lineSize")
