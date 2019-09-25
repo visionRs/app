@@ -113,7 +113,7 @@ server = function(input, output, session) {
     
     # update plot parameter dropdowns
     colorby.choices <- append(colnames(data()),'None')
-    updateSelectInput(session, inputId = "colorby", choices=colorby.choices)
+    updateSelectInput(session, inputId = "colorby", choices=colorby.choices,selected = 'None')
     
     # # update facet row and col selectInputs (only factor vars)
     # facet.choices <- c(names(data())[ sapply(data(), is.factor)],  'None')
