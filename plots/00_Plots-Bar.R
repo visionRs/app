@@ -80,7 +80,7 @@ bar_plot <- function(data=NULL,
                                    paste0(' &emsp; &emsp; &emsp; axis.title.x = element_text(size = ', fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; axis.title.y = element_text(size = ', fontSize,'),<br>'),
                                    paste0(' &emsp; &emsp; &emsp; plot.title = element_text(size = ',fontSize,'),<br>'),
-                                   paste0(' &emsp; &emsp; &emsp; legend.position = ','"',legendPos,'"',')<br>'),
+                                   paste0(' &emsp; &emsp; &emsp; legend.position = ','"',legendPos,'"',', <br>'),
                                    paste0(' &emsp; &emsp; &emsp; axis.text.x = ', ifelse(hideAxis, 'element_blank())', paste0('element_text(angle = ', axisAngle, ', hjust = 1))')))
                                    
                                    )
@@ -126,16 +126,16 @@ bar_plot <- function(data=NULL,
   # }
   # 
   
-  if(hideAxis == TRUE){
-    p <-  p + theme(axis.text.x = element_blank())
-    #code <- paste0(code, '+ theme(axis.text.x = element_blank())')
-  } else{
-    if(axisAngle > 0){
-      p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
-     # code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
-    }
-  }
-  
+  # if(hideAxis == TRUE){
+  #   p <-  p + theme(axis.text.x = element_blank())
+  #   #code <- paste0(code, '+ theme(axis.text.x = element_blank())')
+  # } else{
+  #   if(axisAngle > 0){
+  #     p <-  p + theme(axis.text.x = element_text(angle = axisAngle, hjust = 1))
+  #    # code <- paste0(code, '+ theme(axis.text.x = element_text(angle = ', axisAngle, ', hjust = 1))')
+  #   }
+  # }
+  # 
 
  
   ls <- list()

@@ -454,6 +454,7 @@ server = function(input, output, session) {
     #______4.2.0 Plot Code--------------------
     list_both$plot <-
       scatter_plot(data = data(),
+                   df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                    x=input$selectX,
                    y=input$selectY,
                    Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
@@ -478,6 +479,7 @@ server = function(input, output, session) {
     #______4.2.1 GGPLOT Code--------------------
     list_both$code <-
       scatter_plot(data = data(),
+                   df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                    x=input$selectX,
                    y=input$selectY,
                    Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
@@ -528,6 +530,7 @@ server = function(input, output, session) {
     #______4.3.0 Plot Code--------------------
     list_both$plot <-
       line_plot(data = data(),
+                df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                 x=input$selectX,
                 y=input$selectY,
                 Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
@@ -550,6 +553,7 @@ server = function(input, output, session) {
     #______4.3.1 GGPLOT Code--------------------
     list_both$code <- 
       line_plot(data = data(),
+                df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                 x=input$selectX,
                 y=input$selectY,
                 Theme = if(input$themeSelect=='None'){"NULL"} else{input$themeSelect},
