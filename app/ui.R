@@ -86,7 +86,7 @@ ui <- dashboardPage(
                   circle = FALSE,
                   margin = '1px',
                   colourInput("colfill", "Color fill", "#2219CCCC", allowTransparent = TRUE),
-                  selectInput(inputId = 'colorby', label = 'Color by', choices = c('None')),
+                  selectInput(inputId = 'colorby', label = 'Color by', choices = c('None'),selected = 'None'),
                   selectInput(inputId = 'themeSelect', label = 'Choose Theme', choices = c('None'="NULL",
                                                                                            'theme_bw()',
                                                                                            'theme_gray()',

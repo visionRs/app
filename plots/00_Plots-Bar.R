@@ -23,7 +23,7 @@ bar_plot <- function(data=NULL,
                      df_name=NULL,
                      x=NULL,
                      y=NULL, 
-                     colorby="None",
+                     colorby='None',
                      Theme=NULL, 
                      fontSize=10,
                      legendPos='right',
@@ -40,7 +40,10 @@ bar_plot <- function(data=NULL,
                      interactive) {
   
 
-  p <- ggplot(data, aes_string(x, y, fill =ifelse(colorby == 'None', shQuote("None"), colorby) )) +
+  p <- 
+    {if(colorby == 'None'){ggplot(data,aes_string(x, y, fill =shQuote("None")))}
+      else {ggplot(data,aes_string(x, y, fill = colorby )) }
+    }+
     geom_bar(stat="identity" , position = position) + #if(position=='') {} else { paste0(',', position = position)} ) +
     eval(parse(text=as.character(Theme))) +
     labs(title = plotTitle) +

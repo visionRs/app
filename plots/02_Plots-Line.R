@@ -1,3 +1,26 @@
+#' @title Line Plot Code
+#' @description Helper function to generate Line plot based on different conditions.
+#' @param data data.frame - Passed from shiny enviornment
+#' @param x character- This is x variable for aesthitic, supplied from shiny enviornment.
+#' @param y character- This is y variable for aesthitic, supplied from shiny enviornment.
+#' @param colorby character - Parameter used to colorby plot. (defaults to None).
+#' @param colourfill character - Parameter used to colour plot.
+#' @param Theme character- parameter to change plot theme. (defaults to None).
+#' @param fontsize numeric- This parameter controls fontsize for x-y titles, x-y ticks labels. (defaults to 10).
+#' @param legendPos character- Adjust Legend position (defaults to right)
+#' @param title_x character- Set x axis title.
+#' @param title_y character- Set y axis title.
+#' @param plotTitle character- Set plot title.
+#' @param dotSize numeric- Set size of dots.
+#' @param facetRow character- facet column name, if faceted by Row
+#' @param facetCol character- facet column name, if faceted by Column
+#' @param hideAxis Logical - If we want to hide x Axis labels. (default: FALSE)
+#' @param axisAngle Numeric- change x tick labels angle. (default: 90)
+#' @return returns H2OFrame
+#' @export
+
+
+
 #1 PLOTS CODE: --------------------------------
 
 #1.1 PLOTS CODE: Line Plot---------------------
