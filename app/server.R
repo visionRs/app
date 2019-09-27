@@ -600,6 +600,7 @@ server = function(input, output, session) {
     #______4.4.0 Plot Code--------------------
     list_both$plot <-
       box_plot(data = data(),
+               df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                 x=input$selectX,
                 y=input$selectY,
                  plotTitle = input$titleTextBox,
@@ -620,6 +621,7 @@ server = function(input, output, session) {
     #______4.4.1 GGPLOT Code--------------------
     list_both$code <- 
       box_plot(data = data(),
+               df_name = if(input$tableName=='None'){"NULL"} else{input$tableName},
                 x=input$selectX,
                 y=input$selectY,
                  plotTitle = input$titleTextBox,
@@ -640,29 +642,74 @@ server = function(input, output, session) {
   
   
   #5. Final RenderPlot Code for GGPLOT----------------------
-  output$plot <- renderPlot({
+  # output$plot <- renderPlot({
+  #   if (is.null(list_both$plot)) return()
+  #   isolate({
+  #     list_both$plot
+  #   })
+  # })
+  # 
+  
+  plot_f <- function(){
     if (is.null(list_both$plot)) return()
     isolate({
       list_both$plot
     })
+  }
+  output$plot <- renderPlot({
+    plot_f()
   })
   
   
-  output$plotly <- renderPlotly({
+  
+  plotly_f <- function(){
     if (is.null(list_both$plot)) return()
     isolate({
-       ggplotly(list_both$plot)
+      ggplotly(list_both$plot)
       
     })
+  }
+  output$plotly <- renderPlotly({
+    plotly_f()
   })
   
+  
+  
+  # output$plotly <- renderPlotly({
+  #   if (is.null(list_both$plot)) return()
+  #   isolate({
+  #      ggplotly(list_both$plot)
+  #     
+  #   })
+  # })
+  # 
+  
+  
+  output$png = downloadHandler(
+    filename = 'plot.png',
+    content = function(file) {
+      device <- function(..., width, height) {
+        grDevices::png(..., width = width, height = height,
+                       res = 300, units = "in")
+      }
+      if(input$interact==T){
+      ggsave(file, plot = plotly_f(), device = device) 
+        
+      } else {
+        
+        ggsave(file, plot = plot_f(), device = device) 
+        
+      }
+    })
   
   
   
   #6. Final RenderText Code for GGPLOT----------------------
   output$clip <- renderUI({
     cleanFun <- function(htmlString) {
-      return(gsub("<.*?>", "", htmlString))
+      text <- gsub("<.*?>", "", htmlString)
+      text <- gsub('&emsp;','',text)
+      return(text)
     }
     
     rclipButton("clipbtn", "Copy", cleanFun(list_both$code), icon("clipboard"))

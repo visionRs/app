@@ -269,7 +269,8 @@ ui <- dashboardPage(
                       ),
                       
                       htmlOutput('code'),
-                      uiOutput("clip")
+                      uiOutput("clip"),
+                      downloadButton('png')
                       
                       )
                   

@@ -15,10 +15,11 @@ box_plot <- function(data=NULL,
                      title_y, 
                      plotTitle,
                      jitter,
-                     hideAxis = 0,
+                     hideAxis,
                      axisAngle = 0,
                      facetRow,
-                     facetCol) {
+                     facetCol
+                     ) {
   
   
   p <- ggplot(data, aes_string(paste0("factor(",x,")"),y, fill = ifelse(colorby == 'None','NULL', colorby) )) +
@@ -31,7 +32,7 @@ box_plot <- function(data=NULL,
             axis.title.y = element_text(size = fontSize),
             plot.title = element_text(size = fontSize),
             legend.position = legendPos,
-            axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1))+
+            axis.text.x = if(hideAxis==TRUE) element_blank() else element_text(angle =axisAngle,hjust = 1)) +
     {if(jitter == TRUE){ geom_jitter()}} +
     {if(facetRow != 'None' & facetCol != 'None'){facet_grid(as.formula(paste0(facetRow, "~", facetCol)))} 
       else if(facetRow != 'None' & facetCol == 'None'){facet_grid(as.formula(paste0(facetRow, "~ .")))}
@@ -66,7 +67,7 @@ box_plot <- function(data=NULL,
   # 
   
   
-  code <-HTML(paste0('<pre>ggplot(data = ',df_name, ' , aes(x=', x, ', y=', y, ifelse(colorby=="None",")) + <br> ",paste0(',' ,'fill = ',colorby, ')) + <br>')), 
+  code <-HTML(paste0('<pre>ggplot(data = ',df_name, ' , aes(x=factor(', x, '), y=', y, ifelse(colorby=="None",")) + <br> ",paste0(',' ,'fill = ',colorby, ')) + <br>')), 
                      paste0('geom_boxplot(', ifelse(colorby=="None",paste0(', fill = ',shQuote(colourfill), ') + <br>'), ') + <br>')),
                      paste0(ifelse(Theme=="NULL" | is.null(Theme),'',paste0('&ensp;',Theme,'+ <br>'))),
                      ifelse(plotTitle=='' | is.null(plotTitle),'',paste0('&ensp; labs(title = ','"',plotTitle,'"',') + <br>')),
@@ -83,11 +84,10 @@ box_plot <- function(data=NULL,
                             )
                             
                      ),
-                     ifelse(jitter , paste0('+ <br> geom_jitter() ','')),
+                     ifelse(jitter == TRUE , paste0('+ <br> geom_jitter() '),''),
                      ifelse(facetRow != 'None' & facetCol != 'None',paste0(" + <br> facet_grid(",as.formula(paste0(facetRow, "~", facetCol)),") " ),''),
                      ifelse(facetRow != 'None' & facetCol == 'None',paste0('+ <br> facet_grid(',facetRow,' ~ .) '),'' ),
                      ifelse(facetRow == 'None' & facetCol != 'None',paste0('+ <br> facet_grid(. ~ ',facetCol,') ') ,''),
-                     ifelse(interactive == TRUE, paste0(' %>% ggplotly()'), paste0('')),
                      '</pre>'))
   
   # facet
