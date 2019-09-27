@@ -661,7 +661,11 @@ server = function(input, output, session) {
   
   #6. Final RenderText Code for GGPLOT----------------------
   output$clip <- renderUI({
-    rclipButton("clipbtn", "Copy", list_both$code, icon("clipboard"))
+    cleanFun <- function(htmlString) {
+      return(gsub("<.*?>", "", htmlString))
+    }
+    
+    rclipButton("clipbtn", "Copy", cleanFun(list_both$code), icon("clipboard"))
     
   })
 
