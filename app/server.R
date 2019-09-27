@@ -651,8 +651,8 @@ server = function(input, output, session) {
   output$plotly <- renderPlotly({
     if (is.null(list_both$plot)) return()
     isolate({
-      q <- ggplotly(list_both$plot)
-      q
+       ggplotly(list_both$plot)
+      
     })
   })
   
