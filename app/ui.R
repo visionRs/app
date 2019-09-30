@@ -13,7 +13,7 @@ library(colourpicker)
 library(ggpubr)
 library(rclipboard)
 library(highcharter)
-
+library(plotly)
 ui <- dashboardPage(
   # 1. HEADER here----
   dashboardHeader(title = "ggQuickPlot",

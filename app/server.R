@@ -709,6 +709,8 @@ server = function(input, output, session) {
     cleanFun <- function(htmlString) {
       text <- gsub("<.*?>", "", htmlString)
       text <- gsub('&emsp;','',text)
+      text <- gsub('&ensp;','',text)
+      
       return(text)
     }
     
